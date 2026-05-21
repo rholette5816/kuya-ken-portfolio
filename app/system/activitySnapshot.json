@@ -1,0 +1,1663 @@
+{
+  "generatedAt": "2026-05-10T23:00:03.794Z",
+  "rootPath": "C:\\Users\\Donna Lim\\Desktop\\executive assistant",
+  "summary": {
+    "total": 10,
+    "active": 3,
+    "maintenance": 2,
+    "parked": 0,
+    "archived": 4,
+    "sandbox": 1,
+    "sopCount": 18,
+    "skillFolderCount": 41,
+    "trackedChanges": 21,
+    "untrackedChanges": 89
+  },
+  "analytics": {
+    "totalProjects": 10,
+    "activeProjects": 3,
+    "totalTasks": 40,
+    "completedTasks": 15,
+    "inProgressTasks": 6,
+    "blockedTasks": 4,
+    "todoTasks": 15,
+    "completionRate": 38,
+    "openBacklogItems": 19,
+    "activityItems": 24,
+    "weeklyActivityItems": 14,
+    "projectsNeedingDecision": 8,
+    "dailyWorkHours": [
+      {
+        "date": "2026-05-05",
+        "label": "05-05",
+        "hours": 0,
+        "activityCount": 0
+      },
+      {
+        "date": "2026-05-06",
+        "label": "05-06",
+        "hours": 0,
+        "activityCount": 0
+      },
+      {
+        "date": "2026-05-07",
+        "label": "05-07",
+        "hours": 0,
+        "activityCount": 0
+      },
+      {
+        "date": "2026-05-08",
+        "label": "05-08",
+        "hours": 0,
+        "activityCount": 0
+      },
+      {
+        "date": "2026-05-09",
+        "label": "05-09",
+        "hours": 0,
+        "activityCount": 0
+      },
+      {
+        "date": "2026-05-10",
+        "label": "05-10",
+        "hours": 0,
+        "activityCount": 0
+      },
+      {
+        "date": "2026-05-11",
+        "label": "05-11",
+        "hours": 10,
+        "activityCount": 14
+      }
+    ],
+    "todayWorkHours": 10,
+    "avgDailyWorkHours": 1.4
+  },
+  "skillsCatalog": [
+    {
+      "name": "Add Module",
+      "category": "SaaS / Web Build",
+      "purpose": "Scaffold a complete new AI module for web-hilas — page + API route + prompt + sidebar link all at once.",
+      "commands": [
+        "add-module"
+      ],
+      "source": ".claude/skills/add-module/SKILL.md"
+    },
+    {
+      "name": "Ads Report",
+      "category": "Ads / Reporting",
+      "purpose": "Pull live Meta Ads performance data and generate a weekly summary with recommendations.",
+      "commands": [
+        "ads-report",
+        "ads report",
+        "how are my ads doing",
+        "weekly ads performance"
+      ],
+      "source": ".claude/skills/ads-report/SKILL.md"
+    },
+    {
+      "name": "Assistant Tasklist",
+      "category": "Assistant / Operations",
+      "purpose": "Generate a clear, structured weekly task list for Ken's assistant.",
+      "commands": [
+        "assistant-tasklist",
+        "assistant tasks",
+        "what should my assistant do this week",
+        "generate assistant tasklist"
+      ],
+      "source": ".claude/skills/assistant-tasklist/SKILL.md"
+    },
+    {
+      "name": "Botcake Ecom",
+      "category": "Automation / Pipeline",
+      "purpose": "Generate a complete, high-converting Botcake system prompt for a Philippine eCommerce product using a COD funnel.",
+      "commands": [
+        "botcake-ecom"
+      ],
+      "source": ".claude/skills/botcake-ecom/SKILL.md"
+    },
+    {
+      "name": "Botcake Service",
+      "category": "Automation / Pipeline",
+      "purpose": "Generate a complete, high-converting Botcake system prompt for a Philippine service-based business. Goal is lead qualification and booking — NOT instant selling.",
+      "commands": [
+        "botcake-service"
+      ],
+      "source": ".claude/skills/botcake-service/SKILL.md"
+    },
+    {
+      "name": "Cinematic Story Engine",
+      "category": "Ads / Reporting",
+      "purpose": "Generate short-form cinematic stories for TikTok, Reels, and ads that feel like mini-movies, create emotional engagement, and convert naturally by integrating Hinilas Pro as the system behind the transformation.",
+      "commands": [
+        "cinematic-story-engine",
+        "cinematic-story-engine: create a story about [niche/problem]",
+        "write a cinematic episode funnel story for [offer]",
+        "make me a story-driven ad about [audience pain]",
+        "create a short-form story that sells Hinilas Pro",
+        "\"cinematic-story-engine: create a story about [niche/problem]\""
+      ],
+      "source": ".claude/skills/cinematic-story-engine/SKILL.md"
+    },
+    {
+      "name": "Codex Pair",
+      "category": "Other",
+      "purpose": "Pair Claude (Opus) as planner with Codex CLI as executor. Conserves Claude tokens by routing mechanical work to Codex while keeping judgment calls (architecture, copy, design tradeoffs, debugging unclear failures) with Claude.",
+      "commands": [
+        "codex-pair"
+      ],
+      "source": ".claude/skills/codex-pair/SKILL.md"
+    },
+    {
+      "name": "Content Calendar",
+      "category": "Content",
+      "purpose": "Generate a full month of content topics organized by funnel stage (TOF/MOF/BOF) for Ken's personal brand.",
+      "commands": [
+        "content-calendar",
+        "content calendar",
+        "plan next month's content",
+        "give me content topics for [month]"
+      ],
+      "source": ".claude/skills/content-calendar/SKILL.md"
+    },
+    {
+      "name": "Content Ideas",
+      "category": "Content",
+      "purpose": "Generate a batch of content ideas for Ken's personal brand using the 5 Core Content Pillars and Idea Generation Formula.",
+      "commands": [
+        "content-ideas",
+        "Give me content ideas",
+        "Give me 10 content ideas for [pillar]",
+        "\"Give me content ideas\" or \"content-ideas\"",
+        "Or specify: \"Give me 10 content ideas for [pillar]\""
+      ],
+      "source": ".claude/skills/content-ideas/SKILL.md"
+    },
+    {
+      "name": "Content Repurpose",
+      "category": "Content",
+      "purpose": "Take one blog post or written topic and generate all platform copy — no video needed.",
+      "commands": [
+        "content-repurpose",
+        "repurpose this blog",
+        "turn this into content",
+        "generate posts from this article [paste text or URL]"
+      ],
+      "source": ".claude/skills/content-repurpose/SKILL.md"
+    },
+    {
+      "name": "Content Script",
+      "category": "Content",
+      "purpose": "Generate a podcast-style script in Ken's voice using the Podcast Content Framework (Consultation Style).",
+      "commands": [
+        "content-script",
+        "Write a script about [topic or belief to break]",
+        "content-script: [topic]",
+        "\"Write a script about [topic or belief to break]\"",
+        "Or: \"content-script: [topic]\""
+      ],
+      "source": ".claude/skills/content-script/SKILL.md"
+    },
+    {
+      "name": "Credit Audit",
+      "category": "SaaS / Web Build",
+      "purpose": "Scan the entire web-hilas codebase and verify the credit system is correctly wired on every paid action.",
+      "commands": [
+        "credit-audit"
+      ],
+      "source": ".claude/skills/credit-audit/SKILL.md"
+    },
+    {
+      "name": "Daily Report",
+      "category": "Ads / Reporting",
+      "purpose": "Combined daily report — Pancake POS orders + Meta Ads performance + ROAS. Auto-sends to Messenger.",
+      "commands": [
+        "daily-report"
+      ],
+      "source": ".claude/skills/daily-report/SKILL.md"
+    },
+    {
+      "name": "Deploy Check",
+      "category": "SaaS / Web Build",
+      "purpose": "Run a full pre-deploy audit on the web-hilas project. Do all steps in order.",
+      "commands": [
+        "deploy-check"
+      ],
+      "source": ".claude/skills/deploy-check/SKILL.md"
+    },
+    {
+      "name": "Executive Assistant",
+      "category": "Content",
+      "purpose": "Operate as Ken's executive assistant and second brain. Use this for day-to-day planning, prioritization, content coordination, task triage, follow-through, and turning vague requests into clear next actions.",
+      "commands": [
+        "executive-assistant",
+        "handle this like my EA",
+        "be my executive assistant",
+        "what should we do next",
+        "organize this",
+        "prioritize this"
+      ],
+      "source": ".claude/skills/executive-assistant/SKILL.md"
+    },
+    {
+      "name": "Fb Full",
+      "category": "Content",
+      "purpose": "Transcribe a reel video, generate FB + IG + YouTube content, schedule all 16 FB posts, and immediately publish Blog + IG Reel + IG Feed + IG Carousels (TOF/MOF/BOF) + YouTube Short. 23 pieces of content per run.",
+      "commands": [
+        "fb-full",
+        "path/to/video.mp4",
+        "# Full run — generate + schedule",
+        "# Dry run — generate only, skip scheduling",
+        "# Skip image generation"
+      ],
+      "source": ".claude/skills/fb-full/SKILL.md"
+    },
+    {
+      "name": "Fb Piblish",
+      "category": "Content",
+      "purpose": "Publish and schedule all content from a prepped output folder — steps 5 to 10. Run this when you're ready to go live. Scheduling dates are calculated from the day you run this, not the day you prepped.",
+      "commands": [
+        "fb-piblish",
+        "c:/Users/Donna Lim/Desktop/executive assistant/content-engine",
+        "output/fb-reel_agent-2026-04-20",
+        "# Publish from a prepped folder"
+      ],
+      "source": ".claude/skills/fb-piblish/SKILL.md"
+    },
+    {
+      "name": "Fb Post",
+      "category": "Other",
+      "purpose": "---",
+      "commands": [
+        "fb-post"
+      ],
+      "source": ".claude/skills/fb-post/SKILL.md"
+    },
+    {
+      "name": "Fb Prep",
+      "category": "Content",
+      "purpose": "Generate all content assets from a video — steps 1 to 4 only. No posting, no scheduling, no dates locked in. Use this to prepare content in advance.",
+      "commands": [
+        "fb-prep",
+        "c:/Users/Donna Lim/Desktop/executive assistant/content-engine",
+        "path/to/video.mp4",
+        "# Prep all assets (transcribe + analyze + generate + images)",
+        "# Prep without image generation (faster, images generated later)"
+      ],
+      "source": ".claude/skills/fb-prep/SKILL.md"
+    },
+    {
+      "name": "Hinilas Post",
+      "category": "Other",
+      "purpose": "---",
+      "commands": [
+        "hinilas-post"
+      ],
+      "source": ".claude/skills/hinilas-post/SKILL.md"
+    },
+    {
+      "name": "Hook Generator",
+      "category": "Content",
+      "purpose": "Generate 10 scroll-stopping hook variations for a given topic in Ken's voice.",
+      "commands": [
+        "hook-generator",
+        "hooks for [topic]",
+        "give me hooks about [topic]",
+        "hook generator"
+      ],
+      "source": ".claude/skills/hook-generator/SKILL.md"
+    },
+    {
+      "name": "Kuya Content",
+      "category": "Content",
+      "purpose": "---",
+      "commands": [
+        "kuya-content"
+      ],
+      "source": ".claude/skills/kuya-content/SKILL.md"
+    },
+    {
+      "name": "Linkedin Double Downer",
+      "category": "Other",
+      "purpose": "---",
+      "commands": [
+        "linkedin-double-downer"
+      ],
+      "source": ".claude/skills/linkedin-double-downer/SKILL.md"
+    },
+    {
+      "name": "Linkedin Post",
+      "category": "Other",
+      "purpose": "---",
+      "commands": [
+        "linkedin-post"
+      ],
+      "source": ".claude/skills/linkedin-post/SKILL.md"
+    },
+    {
+      "name": "Meta Ads",
+      "category": "Ads / Reporting",
+      "purpose": "Pull live data from Ken's Meta Ads account via the Marketing API and display campaign performance metrics.",
+      "commands": [
+        "meta-ads"
+      ],
+      "source": ".claude/skills/meta-ads/SKILL.md"
+    },
+    {
+      "name": "New Api Route",
+      "category": "SaaS / Web Build",
+      "purpose": "Scaffold a new API route for web-hilas with the standard boilerplate.",
+      "commands": [
+        "new-api-route",
+        "Provide: route name, credit cost (0 = free), what it does."
+      ],
+      "source": ".claude/skills/new-api-route/SKILL.md"
+    },
+    {
+      "name": "New Page",
+      "category": "SaaS / Web Build",
+      "purpose": "Scaffold a new module page for web-hilas with the standard layout.",
+      "commands": [
+        "new-page",
+        "Provide: page name, route, what it does, credit cost.",
+        "Example: `new page — /competitor — competitor analysis — 1 credit`"
+      ],
+      "source": ".claude/skills/new-page/SKILL.md"
+    },
+    {
+      "name": "Omni Channel Plan",
+      "category": "Content",
+      "purpose": "Upload content engine output to Dropbox and log the 7-day posting schedule to Google Sheets.",
+      "commands": [
+        "omni-channel-plan"
+      ],
+      "source": ".claude/skills/omni-channel-plan/SKILL.md"
+    },
+    {
+      "name": "Pancake",
+      "category": "Ads / Reporting",
+      "purpose": "Extract and report order and inventory data from Pancake POS.",
+      "commands": [
+        "pancake"
+      ],
+      "source": ".claude/skills/pancake/SKILL.md"
+    },
+    {
+      "name": "Pipeline Run",
+      "category": "Content",
+      "purpose": "Run the content engine pipeline from a single command — local file or URL.",
+      "commands": [
+        "pipeline-run",
+        "run pipeline",
+        "run content engine",
+        "process this video [path or URL]"
+      ],
+      "source": ".claude/skills/pipeline-run/SKILL.md"
+    },
+    {
+      "name": "Saas Admin",
+      "category": "SaaS / Web Build",
+      "purpose": "Drop a complete owner-only admin dashboard into any Next.js + Supabase SaaS project.",
+      "commands": [
+        "saas-admin",
+        "Provide: owner email address.",
+        "Example: `saas-admin — owner is kevinrholette@gmail.com`"
+      ],
+      "source": ".claude/skills/saas-admin/SKILL.md"
+    },
+    {
+      "name": "Saas Ai Module",
+      "category": "SaaS / Web Build",
+      "purpose": "Scaffold one complete AI module for any Next.js + Supabase + Gemini SaaS project.",
+      "commands": [
+        "saas-ai-module"
+      ],
+      "source": ".claude/skills/saas-ai-module/SKILL.md"
+    },
+    {
+      "name": "Saas Auth Supabase",
+      "category": "SaaS / Web Build",
+      "purpose": "Set up complete Supabase Google OAuth authentication for a new Next.js project.",
+      "commands": [
+        "saas-auth-supabase",
+        "No arguments needed. Run at project start after `saas-init`.",
+        "Example: `saas-auth-supabase`"
+      ],
+      "source": ".claude/skills/saas-auth-supabase/SKILL.md"
+    },
+    {
+      "name": "Saas Credit System",
+      "category": "SaaS / Web Build",
+      "purpose": "Drop a complete credit system into any existing Next.js + Supabase project.",
+      "commands": [
+        "saas-credit-system",
+        "Provide: credit costs per action, signup credits amount."
+      ],
+      "source": ".claude/skills/saas-credit-system/SKILL.md"
+    },
+    {
+      "name": "Saas Feedback",
+      "category": "SaaS / Web Build",
+      "purpose": "Drop a complete user feedback system into any Next.js + Supabase SaaS project.",
+      "commands": [
+        "saas-feedback",
+        "No arguments needed. Just run it and it adds everything.",
+        "Example: `saas-feedback`"
+      ],
+      "source": ".claude/skills/saas-feedback/SKILL.md"
+    },
+    {
+      "name": "Saas Init",
+      "category": "SaaS / Web Build",
+      "purpose": "Bootstrap a full SaaS foundation for a new Next.js + Supabase project. Run this at the start of every new tool build.",
+      "commands": [
+        "saas-init",
+        "Provide: app name, what it does, currency (default PHP).",
+        "Example: `saas-init — AdTracker — track ad spend and ROAS — PHP`"
+      ],
+      "source": ".claude/skills/saas-init/SKILL.md"
+    },
+    {
+      "name": "Saas Payments Gcash",
+      "category": "SaaS / Web Build",
+      "purpose": "Add a manual GCash top-up payment flow to any Next.js + Supabase SaaS project.",
+      "commands": [
+        "saas-payments-gcash",
+        "Provide: credit packages and prices.",
+        "Example: `saas-payments-gcash — 50 credits for ₱249 — 150 credits for ₱499`"
+      ],
+      "source": ".claude/skills/saas-payments-gcash/SKILL.md"
+    },
+    {
+      "name": "Saas Referral",
+      "category": "SaaS / Web Build",
+      "purpose": "Add a complete referral system to any Next.js + Supabase SaaS project.",
+      "commands": [
+        "saas-referral",
+        "Provide: reward credits for referrer, reward credits for new user (if any)."
+      ],
+      "source": ".claude/skills/saas-referral/SKILL.md"
+    },
+    {
+      "name": "Veo Prompting",
+      "category": "Ads / Reporting",
+      "purpose": "Create short-form cinematic Veo prompts for TikTok, Reels, and Meta Ads. Use this when Ken wants story-driven video prompts that feel like a mini-movie, maintain retention, and still lead toward conversion.",
+      "commands": [
+        "veo-prompting",
+        "veo-prompting: make me a cinematic ad sequence for [offer]",
+        "write Veo prompts for this product",
+        "build a short-form story funnel",
+        "turn this offer into a cinematic episode sequence",
+        "\"veo-prompting: make me a cinematic ad sequence for [offer]\""
+      ],
+      "source": ".claude/skills/veo-prompting/SKILL.md"
+    },
+    {
+      "name": "Video Analysis",
+      "category": "Content",
+      "purpose": "Deep framework analysis of a video file using OpenAI. Whisper transcribes the audio, GPT-4o analyzes it against Ken's Podcast Content Framework and 5 Content Pillars.",
+      "commands": [
+        "video-analysis",
+        "Analyze this video: [path to video file]",
+        "\"Analyze this video: [path to video file]\"",
+        "Claude will run the Python script and return the full analysis."
+      ],
+      "source": ".claude/skills/video-analysis/SKILL.md"
+    },
+    {
+      "name": "Web Builder",
+      "category": "SaaS / Web Build",
+      "purpose": "Build, redesign, repair, or extend websites and frontend apps in this workspace. Use this skill when Ken says \"web builder\", asks to build a website, change an existing site, create a page, improve a UI, fix responsive layout, wire frontend behavior, or prepare a site for local testing/deploy.",
+      "commands": [
+        "web-builder",
+        "Provide the target site if known, plus the goal.",
+        "`web-builder - update kuya-ken-portfolio homepage to look more premium`",
+        "`web-builder - build a landing page for an automation offer`",
+        "`web-builder - fix mobile checkout layout in saiko_web`",
+        "`web-builder - add a pricing page to web-hilas`"
+      ],
+      "source": ".claude/skills/web-builder/SKILL.md"
+    }
+  ],
+  "projects": [
+    {
+      "slug": "content-engine-pipeline",
+      "name": "Content engine pipeline",
+      "description": "Automation pipeline for content production and publishing reliability across channels.",
+      "state": "Maintenance",
+      "owner": "Team",
+      "location": "`content-engine/`",
+      "nextAction": "Keep pipeline stable for weekly usage",
+      "nextReview": "2026-05-10",
+      "progressPct": 25,
+      "lastTouchedAt": "2026-05-11",
+      "lastTouchedSource": "git",
+      "lastTouchedNote": " M content-engine/config.py",
+      "lastTouchedPriority": 3,
+      "lastUpdated": "2026-05-05",
+      "counts": {
+        "total": 4,
+        "done": 1,
+        "inProgress": 1,
+        "blocked": 1,
+        "todo": 1
+      },
+      "buildNeeds": [
+        "Keep pipeline stable for weekly usage",
+        "Reduce failure points in publish automation",
+        "Improve weekly monitoring and retry workflow"
+      ],
+      "backlog": [
+        "Document failure taxonomy for faster triage",
+        "Create simple reliability dashboard for publish runs"
+      ],
+      "decision": {
+        "title": "Decide tolerance for manual intervention",
+        "impact": "No threshold means inconsistency in response time.",
+        "recommendedNextStep": "Define response SLA and weekly reliability target."
+      },
+      "skillsUsed": [
+        {
+          "name": "Pipeline Run",
+          "purpose": "Run the content engine pipeline from a single command — local file or URL."
+        },
+        {
+          "name": "Daily Report",
+          "purpose": "Combined daily report — Pancake POS orders + Meta Ads performance + ROAS. Auto-sends to Messenger."
+        }
+      ],
+      "tasks": [
+        {
+          "id": "content-engine-pipeline-1",
+          "title": "Check publish retry logs",
+          "status": "In Progress",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-05",
+          "notes": ""
+        },
+        {
+          "id": "content-engine-pipeline-2",
+          "title": "Patch unstable publisher edge case",
+          "status": "Blocked",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-04",
+          "notes": ""
+        },
+        {
+          "id": "content-engine-pipeline-3",
+          "title": "Document fallback procedure",
+          "status": "Todo",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-03",
+          "notes": ""
+        },
+        {
+          "id": "content-engine-pipeline-4",
+          "title": "Validate token refresh flow",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-02",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": []
+    },
+    {
+      "slug": "hinilas-pro-saas",
+      "name": "Hinilas Pro SaaS",
+      "description": "Core SaaS product execution for roadmap delivery, stability, and deployment quality.",
+      "state": "Active",
+      "owner": "Team",
+      "location": "`web-hilas/`",
+      "nextAction": "Maintain roadmap tasks and deploy checks",
+      "nextReview": "2026-05-10",
+      "progressPct": 25,
+      "lastTouchedAt": "2026-05-11",
+      "lastTouchedSource": "git",
+      "lastTouchedNote": "?? web-hilas/",
+      "lastTouchedPriority": 3,
+      "lastUpdated": "2026-05-09",
+      "counts": {
+        "total": 4,
+        "done": 1,
+        "inProgress": 1,
+        "blocked": 1,
+        "todo": 1
+      },
+      "buildNeeds": [
+        "Maintain roadmap tasks and deploy checks",
+        "Stabilize admin workflows and release cadence",
+        "Document feature acceptance criteria per sprint"
+      ],
+      "backlog": [
+        "Close pending UX cleanup items on core flows",
+        "Strengthen deployment rollback checklist"
+      ],
+      "decision": {
+        "title": "Prioritize feature velocity vs reliability hardening",
+        "impact": "Feature-heavy sprints may increase incident risk.",
+        "recommendedNextStep": "Allocate sprint capacity 70% reliability, 30% new features until defect rate drops."
+      },
+      "skillsUsed": [
+        {
+          "name": "Saas Init",
+          "purpose": "Bootstrap a full SaaS foundation for a new Next.js + Supabase project. Run this at the start of every new tool build."
+        },
+        {
+          "name": "Saas Admin",
+          "purpose": "Drop a complete owner-only admin dashboard into any Next.js + Supabase SaaS project."
+        },
+        {
+          "name": "Saas Ai Module",
+          "purpose": "Scaffold one complete AI module for any Next.js + Supabase + Gemini SaaS project."
+        },
+        {
+          "name": "Deploy Check",
+          "purpose": "Run a full pre-deploy audit on the web-hilas project. Do all steps in order."
+        },
+        {
+          "name": "New Api Route",
+          "purpose": "Scaffold a new API route for web-hilas with the standard boilerplate."
+        }
+      ],
+      "tasks": [
+        {
+          "id": "hinilas-pro-saas-1",
+          "title": "Review sprint backlog health",
+          "status": "In Progress",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-09",
+          "notes": ""
+        },
+        {
+          "id": "hinilas-pro-saas-2",
+          "title": "Fix deployment regression checklist gaps",
+          "status": "Todo",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-08",
+          "notes": ""
+        },
+        {
+          "id": "hinilas-pro-saas-3",
+          "title": "Finalize monitoring alerts",
+          "status": "Blocked",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-07",
+          "notes": ""
+        },
+        {
+          "id": "hinilas-pro-saas-4",
+          "title": "Ship minor UX fixes",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-06",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": []
+    },
+    {
+      "slug": "historical-project-copy",
+      "name": "Historical project copy",
+      "description": "Archived reference material retained for context and historical lookup only.",
+      "state": "Archived",
+      "owner": "Team",
+      "location": "`archives/saiko_menu_duplicate_2026-04-24/`",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "progressPct": 50,
+      "lastTouchedAt": "2026-05-11",
+      "lastTouchedSource": "git",
+      "lastTouchedNote": "?? archives/saiko_menu_duplicate_2026-04-24/",
+      "lastTouchedPriority": 3,
+      "lastUpdated": "2026-05-02",
+      "counts": {
+        "total": 4,
+        "done": 2,
+        "inProgress": 0,
+        "blocked": 0,
+        "todo": 2
+      },
+      "buildNeeds": [
+        "No active routing",
+        "Ensure read-only archival discipline",
+        "Retain only files with reference value"
+      ],
+      "backlog": [
+        "Prune duplicated historical artifacts",
+        "Add archive notes for future lookup"
+      ],
+      "decision": {
+        "title": "Keep archive as-is or compress further",
+        "impact": "Unmaintained archive can grow clutter over time.",
+        "recommendedNextStep": "Maintain minimal archive with a short index file."
+      },
+      "skillsUsed": [],
+      "tasks": [
+        {
+          "id": "historical-project-copy-1",
+          "title": "Confirm archive boundaries",
+          "status": "Done",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-02",
+          "notes": ""
+        },
+        {
+          "id": "historical-project-copy-2",
+          "title": "Annotate historical context",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-01",
+          "notes": ""
+        },
+        {
+          "id": "historical-project-copy-3",
+          "title": "Compress nonessential copies",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-04-30",
+          "notes": ""
+        },
+        {
+          "id": "historical-project-copy-4",
+          "title": "Verify no active links depend on archive",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-04-29",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": []
+    },
+    {
+      "slug": "portfolio",
+      "name": "Portfolio",
+      "description": "Public-facing KRA Digital portfolio used to position offers, showcase proof, and drive inquiries.",
+      "state": "Maintenance",
+      "owner": "Team",
+      "location": "`kuya-ken-portfolio/`",
+      "nextAction": "Refresh proof and offer positioning",
+      "nextReview": "2026-05-10",
+      "progressPct": 25,
+      "lastTouchedAt": "2026-05-11",
+      "lastTouchedSource": "git",
+      "lastTouchedNote": " M kuya-ken-portfolio/app/components/AnimatedBackground.tsx",
+      "lastTouchedPriority": 3,
+      "lastUpdated": "2026-05-07",
+      "counts": {
+        "total": 4,
+        "done": 1,
+        "inProgress": 1,
+        "blocked": 0,
+        "todo": 2
+      },
+      "buildNeeds": [
+        "Refresh proof and offer positioning",
+        "Keep offer narrative current with latest proof",
+        "Maintain streamlined conversion flow"
+      ],
+      "backlog": [
+        "Refresh selected case evidence sections",
+        "Tune CTA placements using current analytics"
+      ],
+      "decision": {
+        "title": "Approve next portfolio proof set to feature",
+        "impact": "Outdated proof lowers conversion confidence.",
+        "recommendedNextStep": "Update proof modules tied to active offers first."
+      },
+      "skillsUsed": [
+        {
+          "name": "Web Builder",
+          "purpose": "Build, redesign, repair, or extend websites and frontend apps in this workspace. Use this skill when Ken says \"web builder\", asks to build a website, change an existing site, create a page, improve a UI, fix responsive layout, wire frontend behavior, or prepare a site for local testing/deploy."
+        },
+        {
+          "name": "New Page",
+          "purpose": "Scaffold a new module page for web-hilas with the standard layout."
+        },
+        {
+          "name": "Deploy Check",
+          "purpose": "Run a full pre-deploy audit on the web-hilas project. Do all steps in order."
+        }
+      ],
+      "tasks": [
+        {
+          "id": "portfolio-1",
+          "title": "Review homepage messaging",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-07",
+          "notes": ""
+        },
+        {
+          "id": "portfolio-2",
+          "title": "Update case-study proof blocks",
+          "status": "In Progress",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-06",
+          "notes": ""
+        },
+        {
+          "id": "portfolio-3",
+          "title": "Add latest client outcomes",
+          "status": "Todo",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-05",
+          "notes": ""
+        },
+        {
+          "id": "portfolio-4",
+          "title": "Benchmark bounce rate by section",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-04",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": []
+    },
+    {
+      "slug": "saiko-web-app",
+      "name": "Saiko web app",
+      "description": "Web app operations and feature delivery for admin workflow, order flow, and reporting visibility.",
+      "state": "Active",
+      "owner": "Team",
+      "location": "`saiko_web/`",
+      "nextAction": "Keep admin/orders workstream current",
+      "nextReview": "2026-05-10",
+      "progressPct": 25,
+      "lastTouchedAt": "2026-05-11",
+      "lastTouchedSource": "git",
+      "lastTouchedNote": "?? saiko_web/",
+      "lastTouchedPriority": 3,
+      "lastUpdated": "2026-05-08",
+      "counts": {
+        "total": 4,
+        "done": 1,
+        "inProgress": 1,
+        "blocked": 1,
+        "todo": 1
+      },
+      "buildNeeds": [
+        "Keep admin/orders workstream current",
+        "Finish remaining admin and order management polish",
+        "Improve operational reporting visibility"
+      ],
+      "backlog": [
+        "Align dashboard reporting widgets with operations needs",
+        "Reduce manual reconciliation steps for orders"
+      ],
+      "decision": {
+        "title": "Approve final scope for admin reporting upgrade",
+        "impact": "Unclear scope can delay release and cause rework.",
+        "recommendedNextStep": "Freeze must-have reporting items for the next release cycle."
+      },
+      "skillsUsed": [
+        {
+          "name": "Saas Admin",
+          "purpose": "Drop a complete owner-only admin dashboard into any Next.js + Supabase SaaS project."
+        },
+        {
+          "name": "Saas Auth Supabase",
+          "purpose": "Set up complete Supabase Google OAuth authentication for a new Next.js project."
+        },
+        {
+          "name": "Saas Feedback",
+          "purpose": "Drop a complete user feedback system into any Next.js + Supabase SaaS project."
+        },
+        {
+          "name": "Deploy Check",
+          "purpose": "Run a full pre-deploy audit on the web-hilas project. Do all steps in order."
+        }
+      ],
+      "tasks": [
+        {
+          "id": "saiko-web-app-1",
+          "title": "Audit admin order workflow",
+          "status": "Done",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-08",
+          "notes": ""
+        },
+        {
+          "id": "saiko-web-app-2",
+          "title": "Implement reporting summary panels",
+          "status": "In Progress",
+          "priority": "High",
+          "owner": "Team",
+          "updatedAt": "2026-05-07",
+          "notes": ""
+        },
+        {
+          "id": "saiko-web-app-3",
+          "title": "Backfill missing order event data",
+          "status": "Todo",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-06",
+          "notes": ""
+        },
+        {
+          "id": "saiko-web-app-4",
+          "title": "Validate mobile admin screens",
+          "status": "Blocked",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-05",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": []
+    },
+    {
+      "slug": "static-spa-landing-sets",
+      "name": "Static spa landing sets",
+      "description": "Collection of landing page templates kept for reuse experiments and creative testing.",
+      "state": "Sandbox",
+      "owner": "Team",
+      "location": "`aloha-mana-spa-cafe-premium/`, `ezzense-wellness-spa-premium/`, `lynn-spa-premium/`, `sage-health-spa-premium/`, `treeshade-spa-premium/`",
+      "nextAction": "Keep isolated from core weekly queue",
+      "nextReview": "2026-05-17",
+      "progressPct": 25,
+      "lastTouchedAt": "2026-05-11",
+      "lastTouchedSource": "git",
+      "lastTouchedNote": "?? aloha-mana-spa-cafe-premium/",
+      "lastTouchedPriority": 3,
+      "lastUpdated": "2026-05-03",
+      "counts": {
+        "total": 4,
+        "done": 1,
+        "inProgress": 1,
+        "blocked": 0,
+        "todo": 2
+      },
+      "buildNeeds": [
+        "Keep isolated from core weekly queue",
+        "Define reuse strategy vs archive strategy",
+        "Tag templates by quality and readiness"
+      ],
+      "backlog": [
+        "Review template quality consistency",
+        "Create clear naming taxonomy for reuse"
+      ],
+      "decision": {
+        "title": "Select keep/rework/archive candidates",
+        "impact": "Unsorted assets add noise to production priorities.",
+        "recommendedNextStep": "Keep only templates that support active offer themes."
+      },
+      "skillsUsed": [
+        {
+          "name": "Web Builder",
+          "purpose": "Build, redesign, repair, or extend websites and frontend apps in this workspace. Use this skill when Ken says \"web builder\", asks to build a website, change an existing site, create a page, improve a UI, fix responsive layout, wire frontend behavior, or prepare a site for local testing/deploy."
+        },
+        {
+          "name": "New Page",
+          "purpose": "Scaffold a new module page for web-hilas with the standard layout."
+        }
+      ],
+      "tasks": [
+        {
+          "id": "static-spa-landing-sets-1",
+          "title": "Inventory all landing variants",
+          "status": "In Progress",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-03",
+          "notes": ""
+        },
+        {
+          "id": "static-spa-landing-sets-2",
+          "title": "Tag production-worthy templates",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-02",
+          "notes": ""
+        },
+        {
+          "id": "static-spa-landing-sets-3",
+          "title": "Archive low-value variants",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-01",
+          "notes": ""
+        },
+        {
+          "id": "static-spa-landing-sets-4",
+          "title": "Draft reuse checklist",
+          "status": "Done",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-04-30",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": []
+    },
+    {
+      "slug": "automation-offer-assets",
+      "name": "Automation offer assets",
+      "description": "Sales and delivery assets for the automation offer, from outreach to onboarding.",
+      "state": "Active",
+      "owner": "Ken",
+      "location": "`docs/automation-offer.md` + proposal files",
+      "nextAction": "Package outreach-ready service summary",
+      "nextReview": "2026-05-10",
+      "progressPct": 25,
+      "lastTouchedAt": "2026-05-06",
+      "lastTouchedSource": "task",
+      "lastTouchedNote": "Package outreach-ready service summary",
+      "lastTouchedPriority": 1,
+      "lastUpdated": "2026-05-06",
+      "counts": {
+        "total": 4,
+        "done": 1,
+        "inProgress": 1,
+        "blocked": 0,
+        "todo": 2
+      },
+      "buildNeeds": [
+        "Package outreach-ready service summary",
+        "Package service ladder with clear entry offer",
+        "Define repeatable lead handoff and onboarding flow"
+      ],
+      "backlog": [
+        "Finalize outreach script variants by industry",
+        "Set acceptance criteria for audit delivery quality"
+      ],
+      "decision": {
+        "title": "Choose dominant offer entrypoint (audit vs blueprint)",
+        "impact": "Entry offer drives lead quality and close speed.",
+        "recommendedNextStep": "Lead with audit as low-friction entry then upsell blueprint."
+      },
+      "skillsUsed": [
+        {
+          "name": "Pipeline Run",
+          "purpose": "Run the content engine pipeline from a single command — local file or URL."
+        },
+        {
+          "name": "Assistant Tasklist",
+          "purpose": "Generate a clear, structured weekly task list for Ken's assistant."
+        },
+        {
+          "name": "Credit Audit",
+          "purpose": "Scan the entire web-hilas codebase and verify the credit system is correctly wired on every paid action."
+        },
+        {
+          "name": "Daily Report",
+          "purpose": "Combined daily report — Pancake POS orders + Meta Ads performance + ROAS. Auto-sends to Messenger."
+        }
+      ],
+      "tasks": [
+        {
+          "id": "automation-offer-assets-1",
+          "title": "Refine service ladder packaging",
+          "status": "In Progress",
+          "priority": "High",
+          "owner": "Ken",
+          "updatedAt": "2026-05-06",
+          "notes": ""
+        },
+        {
+          "id": "automation-offer-assets-2",
+          "title": "Finalize outreach-ready one-pager",
+          "status": "Todo",
+          "priority": "High",
+          "owner": "Ken",
+          "updatedAt": "2026-05-05",
+          "notes": ""
+        },
+        {
+          "id": "automation-offer-assets-3",
+          "title": "Prepare lead qualification checklist",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Ken",
+          "updatedAt": "2026-05-04",
+          "notes": ""
+        },
+        {
+          "id": "automation-offer-assets-4",
+          "title": "Map retainer conversion path",
+          "status": "Todo",
+          "priority": "Medium",
+          "owner": "Ken",
+          "updatedAt": "2026-05-03",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": []
+    },
+    {
+      "slug": "hilas-program",
+      "name": "Hilas Program",
+      "description": "Archived education product reference for curriculum, launch planning, and enrollment ideas.",
+      "state": "Archived",
+      "owner": "Ken",
+      "location": "`archives/hilas_program_meta_ads_course_2026-05-03/`",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "progressPct": 75,
+      "lastTouchedAt": "2026-05-03",
+      "lastTouchedSource": "activity",
+      "lastTouchedNote": "Archive the Hilas Program / Meta Ads course project folder.",
+      "lastTouchedPriority": 2,
+      "lastUpdated": "2026-05-10",
+      "counts": {
+        "total": 4,
+        "done": 3,
+        "inProgress": 0,
+        "blocked": 0,
+        "todo": 1
+      },
+      "buildNeeds": [
+        "No active routing",
+        "Keep course planning notes available as reference",
+        "Do not route weekly execution capacity here"
+      ],
+      "backlog": [
+        "Retain archive notes for future lookup",
+        "Only reactivate after an explicit project-state decision"
+      ],
+      "decision": {
+        "title": "Keep Hilas Program archived",
+        "impact": "Treating archived work as active can split focus from current content, automation offer, and product work.",
+        "recommendedNextStep": "Keep in archives unless Ken explicitly reactivates the course project."
+      },
+      "skillsUsed": [],
+      "tasks": [
+        {
+          "id": "hilas-program-1",
+          "title": "Move Hilas project folder to archives",
+          "status": "Done",
+          "priority": "High",
+          "owner": "Ken",
+          "updatedAt": "2026-05-10",
+          "notes": ""
+        },
+        {
+          "id": "hilas-program-2",
+          "title": "Mark Hilas as archived in operating docs",
+          "status": "Done",
+          "priority": "High",
+          "owner": "Ken",
+          "updatedAt": "2026-05-09",
+          "notes": ""
+        },
+        {
+          "id": "hilas-program-3",
+          "title": "Preserve course notes for future reference",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Ken",
+          "updatedAt": "2026-05-08",
+          "notes": ""
+        },
+        {
+          "id": "hilas-program-4",
+          "title": "Reassess only if reactivated",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Ken",
+          "updatedAt": "2026-05-07",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": [
+        {
+          "date": "2026-05-03",
+          "type": "Decision",
+          "title": "Archive the Hilas Program / Meta Ads course project folder.",
+          "detail": "Ken clarified the intent was to store the project in archives, not merely park it in planning status.",
+          "source": "decisions/log.md"
+        },
+        {
+          "date": "2026-05-03",
+          "type": "Decision",
+          "title": "Park the Hilas Program / Meta Ads course workstream.",
+          "detail": "Ken confirmed this project is not currently being used, and it should not consume weekly execution focus until explicitly reactivated.",
+          "source": "decisions/log.md"
+        }
+      ]
+    },
+    {
+      "slug": "personal-brand",
+      "name": "Personal brand",
+      "description": "Archived personal brand reference for content output, audience development, and lead conversion ideas.",
+      "state": "Archived",
+      "owner": "Ken",
+      "location": "`archives/personal_brand_2026-05-03/`",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "progressPct": 75,
+      "lastTouchedAt": "2026-05-03",
+      "lastTouchedSource": "activity",
+      "lastTouchedNote": "Archive the Personal Brand project folder.",
+      "lastTouchedPriority": 2,
+      "lastUpdated": "2026-05-11",
+      "counts": {
+        "total": 4,
+        "done": 3,
+        "inProgress": 0,
+        "blocked": 0,
+        "todo": 1
+      },
+      "buildNeeds": [
+        "No active routing",
+        "Keep prior personal brand notes available as reference",
+        "Do not route weekly execution capacity here"
+      ],
+      "backlog": [
+        "Retain archive notes for future lookup",
+        "Only reactivate after an explicit project-state decision"
+      ],
+      "decision": {
+        "title": "Keep Personal Brand archived",
+        "impact": "Treating archived brand work as active can split focus from current revenue, automation offer, and product work.",
+        "recommendedNextStep": "Keep in archives unless Ken explicitly reactivates the personal brand project."
+      },
+      "skillsUsed": [],
+      "tasks": [
+        {
+          "id": "personal-brand-1",
+          "title": "Move Personal Brand project folder to archives",
+          "status": "Done",
+          "priority": "High",
+          "owner": "Ken",
+          "updatedAt": "2026-05-11",
+          "notes": ""
+        },
+        {
+          "id": "personal-brand-2",
+          "title": "Mark Personal Brand as archived in operating docs",
+          "status": "Done",
+          "priority": "High",
+          "owner": "Ken",
+          "updatedAt": "2026-05-10",
+          "notes": ""
+        },
+        {
+          "id": "personal-brand-3",
+          "title": "Preserve notes for future reference",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Ken",
+          "updatedAt": "2026-05-09",
+          "notes": ""
+        },
+        {
+          "id": "personal-brand-4",
+          "title": "Reassess only if reactivated",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Ken",
+          "updatedAt": "2026-05-08",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": [
+        {
+          "date": "2026-05-03",
+          "type": "Decision",
+          "title": "Archive the Personal Brand project folder.",
+          "detail": "Ken confirmed the project has not been an active focus and should be stored in archives rather than treated as active weekly work.",
+          "source": "decisions/log.md"
+        }
+      ]
+    },
+    {
+      "slug": "base-dashboard-app",
+      "name": "Base dashboard app",
+      "description": "Parked dashboard concept awaiting re-scope and reactivation decision.",
+      "state": "Archived",
+      "owner": "Team",
+      "location": "`archives/base_dashboard_app_2026-05-02/`",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "progressPct": 25,
+      "lastTouchedAt": "2026-05-02",
+      "lastTouchedSource": "activity",
+      "lastTouchedNote": "Archive the parked base dashboard app.",
+      "lastTouchedPriority": 2,
+      "lastUpdated": "2026-05-04",
+      "counts": {
+        "total": 4,
+        "done": 1,
+        "inProgress": 0,
+        "blocked": 1,
+        "todo": 2
+      },
+      "buildNeeds": [
+        "No active routing",
+        "Re-scope product fit and feature direction",
+        "Define criteria to reactivate roadmap"
+      ],
+      "backlog": [
+        "Capture open product assumptions before restart",
+        "Set revive date based on core portfolio priorities"
+      ],
+      "decision": {
+        "title": "Keep parked or reactivate this quarter",
+        "impact": "Premature reactivation could dilute current execution focus.",
+        "recommendedNextStep": "Reassess only after active workstreams hit planned milestones."
+      },
+      "skillsUsed": [],
+      "tasks": [
+        {
+          "id": "base-dashboard-app-1",
+          "title": "Document parked reasons",
+          "status": "Done",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-04",
+          "notes": ""
+        },
+        {
+          "id": "base-dashboard-app-2",
+          "title": "Identify must-have MVP features",
+          "status": "Todo",
+          "priority": "Medium",
+          "owner": "Team",
+          "updatedAt": "2026-05-03",
+          "notes": ""
+        },
+        {
+          "id": "base-dashboard-app-3",
+          "title": "Estimate restart effort",
+          "status": "Todo",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-02",
+          "notes": ""
+        },
+        {
+          "id": "base-dashboard-app-4",
+          "title": "Assign future owner",
+          "status": "Blocked",
+          "priority": "Low",
+          "owner": "Team",
+          "updatedAt": "2026-05-01",
+          "notes": ""
+        }
+      ],
+      "relatedActivity": [
+        {
+          "date": "2026-05-02",
+          "type": "Decision",
+          "title": "Archive the parked base dashboard app.",
+          "detail": "The `web/` folder was an unused Jarvis-style Next.js prototype and should not receive active routing while `web-hilas/` and other active workstreams take priority.",
+          "source": "decisions/log.md"
+        }
+      ]
+    }
+  ],
+  "projectProgress": [
+    {
+      "workArea": "Personal brand",
+      "state": "Archived",
+      "owner": "Ken",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "location": "`archives/personal_brand_2026-05-03/`"
+    },
+    {
+      "workArea": "Hilas Program",
+      "state": "Archived",
+      "owner": "Ken",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "location": "`archives/hilas_program_meta_ads_course_2026-05-03/`"
+    },
+    {
+      "workArea": "Hinilas Pro SaaS",
+      "state": "Active",
+      "owner": "Team",
+      "nextAction": "Maintain roadmap tasks and deploy checks",
+      "nextReview": "2026-05-10",
+      "location": "`web-hilas/`"
+    },
+    {
+      "workArea": "Saiko web app",
+      "state": "Active",
+      "owner": "Team",
+      "nextAction": "Keep admin/orders workstream current",
+      "nextReview": "2026-05-10",
+      "location": "`saiko_web/`"
+    },
+    {
+      "workArea": "Portfolio",
+      "state": "Maintenance",
+      "owner": "Team",
+      "nextAction": "Refresh proof and offer positioning",
+      "nextReview": "2026-05-10",
+      "location": "`kuya-ken-portfolio/`"
+    },
+    {
+      "workArea": "Automation offer assets",
+      "state": "Active",
+      "owner": "Ken",
+      "nextAction": "Package outreach-ready service summary",
+      "nextReview": "2026-05-10",
+      "location": "`docs/automation-offer.md` + proposal files"
+    },
+    {
+      "workArea": "Content engine pipeline",
+      "state": "Maintenance",
+      "owner": "Team",
+      "nextAction": "Keep pipeline stable for weekly usage",
+      "nextReview": "2026-05-10",
+      "location": "`content-engine/`"
+    },
+    {
+      "workArea": "Base dashboard app",
+      "state": "Archived",
+      "owner": "Team",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "location": "`archives/base_dashboard_app_2026-05-02/`"
+    },
+    {
+      "workArea": "Static spa landing sets",
+      "state": "Sandbox",
+      "owner": "Team",
+      "nextAction": "Keep isolated from core weekly queue",
+      "nextReview": "2026-05-17",
+      "location": "`aloha-mana-spa-cafe-premium/`, `ezzense-wellness-spa-premium/`, `lynn-spa-premium/`, `sage-health-spa-premium/`, `treeshade-spa-premium/`"
+    },
+    {
+      "workArea": "Historical project copy",
+      "state": "Archived",
+      "owner": "Team",
+      "nextAction": "No active routing",
+      "nextReview": "2026-05-31",
+      "location": "`archives/saiko_menu_duplicate_2026-04-24/`"
+    }
+  ],
+  "activityFeed": [
+    {
+      "date": "2026-05-03",
+      "type": "Decision",
+      "title": "Archive the Personal Brand project folder.",
+      "detail": "Ken confirmed the project has not been an active focus and should be stored in archives rather than treated as active weekly work.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-03",
+      "type": "Decision",
+      "title": "Archive the Hilas Program / Meta Ads course project folder.",
+      "detail": "Ken clarified the intent was to store the project in archives, not merely park it in planning status.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-03",
+      "type": "Decision",
+      "title": "Park the Hilas Program / Meta Ads course workstream.",
+      "detail": "Ken confirmed this project is not currently being used, and it should not consume weekly execution focus until explicitly reactivated.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-02",
+      "type": "Decision",
+      "title": "Archive the parked base dashboard app.",
+      "detail": "The `web/` folder was an unused Jarvis-style Next.js prototype and should not receive active routing while `web-hilas/` and other active workstreams take priority.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-02",
+      "type": "Decision",
+      "title": "Mark OS build phase as complete and add full cadence coverage from daily to quarterly.",
+      "detail": "The system now has command center routing, weekly controls, dashboard refresh loops, revenue pipeline tracking, and governance SOPs across weekly/monthly/quarterly cycles.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-02",
+      "type": "Decision",
+      "title": "Add automation-offer and lead-pipeline execution cadence as a tracked weekly revenue system.",
+      "detail": "Offer and lead docs existed, but execution was not enforced with daily actions, stage movement, and weekly conversion tracking.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-02",
+      "type": "Decision",
+      "title": "Add a CEO dashboard execution layer as a weekly operating requirement.",
+      "detail": "A dashboard doc existed, but there was no enforced refresh workflow tied to weekly review and decision-making cadence.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-02",
+      "type": "Decision",
+      "title": "Add explicit project-state governance with an active-work registry.",
+      "detail": "Weekly priorities improved, but active vs parked work was still implicit and caused routing drift risk.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-02",
+      "type": "Decision",
+      "title": "Add a formal priority-refresh workflow with weekly history snapshots.",
+      "detail": "Weekly execution was defined, but there was no standardized handoff between old and new weeks.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-02",
+      "type": "Decision",
+      "title": "Use weekly review as the control rhythm for the operating system.",
+      "detail": "The system already has execution tools, but needs a recurring cadence to keep priorities, decisions, SOPs, and active projects current.",
+      "source": "decisions/log.md"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "Priority",
+      "title": "Top Priority 1",
+      "detail": "Build the operating layer: command center, SOPs, weekly review, and dashboards.",
+      "source": "context/weekly-command-center.md"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "Priority",
+      "title": "Top Priority 2",
+      "detail": "Keep content production aligned with active revenue and offer priorities.",
+      "source": "context/weekly-command-center.md"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "Priority",
+      "title": "Top Priority 3",
+      "detail": "Turn automation work into a repeatable service offer and lead pipeline.",
+      "source": "context/weekly-command-center.md"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M .claude/settings.json",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " D .claude/skills/content-prep/SKILL.md",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " D .claude/skills/content-publish/SKILL.md",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " D .claude/skills/fb-page-post/SKILL.md",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M CLAUDE.md",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M content-engine/config.py",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M content-engine/engine.py",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M content-engine/fb_engine.py",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M content-engine/google_services.py",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M content-engine/publish/fb_page.py",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    },
+    {
+      "date": "2026-05-11",
+      "type": "File Update",
+      "title": " M content-engine/publish/uploader.py",
+      "detail": "Detected in workspace git status snapshot.",
+      "source": "git status --short"
+    }
+  ]
+}

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Rholette Allego — AI-Powered Web Developer</title>
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --muted: #555;
+    --line: #e5e5e5;
+    --accent: #e87722;
+    --bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #f2f2f2;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.45;
+    font-size: 10.5pt;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    padding: 16mm 16mm 14mm;
+    background: var(--bg);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  /* Header */
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .name {
+    font-size: 26pt;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.05;
+  }
+
+  .title {
+    font-size: 11pt;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contact {
+    margin-top: 8px;
+    font-size: 9.5pt;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .contact a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px dotted #bbb;
+  }
+
+  .photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--ink);
+  }
+
+  .photo-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 2px dashed #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    color: #aaa;
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 12px;
+    page-break-inside: avoid;
+  }
+
+  h2 {
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+
+  .profile {
+    font-size: 10.5pt;
+    color: #222;
+    line-height: 1.55;
+  }
+
+  .profile .edge {
+    display: block;
+    margin-top: 6px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Tech Stack */
+  .stack {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    row-gap: 4px;
+    column-gap: 12px;
+    font-size: 9.5pt;
+  }
+  .stack dt {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .stack dd {
+    color: #333;
+  }
+
+  /* Project / Job entry */
+  .entry {
+    margin-bottom: 9px;
+  }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .entry-title {
+    font-weight: 700;
+    font-size: 10.5pt;
+    color: var(--ink);
+  }
+
+  .entry-title .accent {
+    color: var(--accent);
+  }
+
+  .entry-meta {
+    font-size: 9pt;
+    color: var(--muted);
+    white-space: nowrap;
+    font-style: italic;
+  }
+
+  .entry-sub {
+    font-size: 9.5pt;
+    color: #444;
+    margin-top: 1px;
+    margin-bottom: 3px;
+  }
+
+  .entry-body {
+    font-size: 9.75pt;
+    color: #2a2a2a;
+    line-height: 1.5;
+  }
+
+  .entry-body ul {
+    margin-left: 16px;
+  }
+  .entry-body li {
+    margin-bottom: 2px;
+  }
+
+  /* Footer line */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+  }
+
+  /* Print */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    html, body { background: #fff; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      width: 210mm;
+      min-height: 297mm;
+    }
+    .no-print { display: none !important; }
+  }
+
+  .no-print {
+    max-width: 210mm;
+    margin: 0 auto 14px;
+    padding: 10px 14px;
+    background: #111;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .no-print button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <a href="/" style="color:#fff;text-decoration:none;font-weight:600;">&larr; Back to Portfolio</a>
+  <span>Press the button to export as PDF (Save as PDF in the print dialog).</span>
+  <button onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<div class="page">
+
+  <header>
+    <div>
+      <div class="name">Kevin Rholette Allego</div>
+      <div class="title">AI-Powered Web Developer · Full-Stack Builder</div>
+      <div class="contact">
+        +63 961 832 1310 &nbsp;·&nbsp;
+        <a href="mailto:kevinrholette@gmail.com">kevinrholette@gmail.com</a> &nbsp;·&nbsp;
+        Bohol, Philippines (GMT+8)<br>
+        Portfolio: <a href="https://www.kradigital.site/" target="_blank">kradigital.site</a> &nbsp;·&nbsp;
+        GitHub: <a href="https://github.com/rholette5816" target="_blank">github.com/rholette5816</a> &nbsp;·&nbsp;
+        Brand: <a href="https://www.facebook.com/bstamagadshilas" target="_blank">Basta Mag Ads, Hilas</a>
+      </div>
+    </div>
+    <img src="/resume/photo.png" alt="Kevin Rholette Allego" class="photo"
+         onerror="this.outerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;Photo unavailable&lt;/div&gt;'">
+  </header>
+
+  <section>
+    <h2>Profile</h2>
+    <p class="profile">
+      Self-taught full-stack developer building production web apps with AI-assisted workflows.
+      I ship Next.js, Vite/React, Supabase, and Python apps using Claude Code, Codex CLI, and local LLMs.
+      Five years of performance marketing background means I don't just build features. I build products
+      that convert, retain, and generate revenue.
+      <span class="edge">Edge: Most devs can't run an ad to the app they built. I can.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2>Tech Stack</h2>
+    <dl class="stack">
+      <dt>Frontend</dt><dd>Next.js 15, React, Vite, TypeScript, Tailwind CSS, Radix UI, framer-motion</dd>
+      <dt>Backend</dt><dd>Node.js, Express, Python, Supabase, PostgreSQL</dd>
+      <dt>AI / LLM</dt><dd>Claude API, OpenAI, Ollama (local), Whisper, GPT-4o, DeepSeek-Coder, Kimi</dd>
+      <dt>AI Dev Flow</dt><dd>Claude Code (planner), Codex CLI (executor), Cursor, VS Code, MCP servers</dd>
+      <dt>Infra</dt><dd>Vercel, Supabase, GCash payments, Meta CAPI, Google Workspace APIs, Telegram Bot API</dd>
+      <dt>Marketing</dt><dd>Meta Pixel, CAPI, Botcake, Webhooks, GA4</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Built &amp; Shipped</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"><span class="accent">Hinilas Pro</span> — Multi-tier SaaS for eCommerce operators</span>
+      </div>
+      <div class="entry-body">
+        Solo-built Next.js + Supabase + GCash subscription app. Credit system, referral engine,
+        admin dashboard, AI content module. End-to-end ownership: schema, auth, payments, UI, AI integration.
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"><span class="accent">Saiko</span> — Restaurant menu &amp; ordering web app</span>
+      </div>
+      <div class="entry-body">
+        Full-stack Vite + React + TypeScript + Express + Supabase build with Radix UI and framer-motion.
+        Production-ready ordering flow, menu management, and admin panel. Built using AI-paired workflow
+        (Claude planner + Codex executor).
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"><span class="accent">Content Engine</span> — 10-step content automation pipeline (Python)</span>
+      </div>
+      <div class="entry-body">
+        Video in, multi-platform content out (FB, IG, YouTube, blog). Whisper transcription, GPT-4o analysis,
+        image generation, automated scheduling across 4+ platforms. Telegram bot interface and SQLite-backed
+        LLM response cache for cost reduction on retries.
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"><span class="accent">Kuya Ken Portfolio</span> — Next.js 15 site with live audit funnel</span>
+      </div>
+      <div class="entry-body">
+        Animated hero, integrated audit modal, conversion-optimized flow. Designed and shipped end-to-end.
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"><span class="accent">Executive Assistant System</span> — AI-augmented operating system</span>
+      </div>
+      <div class="entry-body">
+        CLAUDE.md-driven assistant orchestrating 30+ custom skills, MCP integrations, and a planner/executor
+        workflow that routes mechanical work to Codex CLI and judgment work to Claude Opus.
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title"><span class="accent">Local Agent</span> — Free LLM fallback layer</span>
+      </div>
+      <div class="entry-body">
+        DeepSeek-Coder running locally via Ollama with SQLite response cache. Eliminates token cost on retries.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Teaching &amp; Personal Brand</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Founder — Kuya Ken (Personal Brand)</span>
+        <span class="entry-meta">2024 – Present</span>
+      </div>
+      <div class="entry-body">
+        1-on-1 Meta Ads coaching and a public builder journal documenting the journey from marketer to
+        AI-powered developer. Content across short-form video, blog, and social. Demonstrates the ability
+        to teach, communicate, and build in public.
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Instructor — JBI Community</span>
+        <span class="entry-meta">2024 – Present</span>
+      </div>
+      <div class="entry-body">
+        Teach basic Meta Ads and digital marketing to local business owners. Curriculum design, live
+        workshops, and 1-on-1 follow-ups. Translates technical ad systems into practical action for
+        non-technical owners.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Work Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Founder &amp; Lead Developer — KRA28C / Multi-Brand Operator</span>
+        <span class="entry-meta">2024 – Present</span>
+      </div>
+      <div class="entry-body">
+        <ul>
+          <li>Build and operate the technical and marketing infrastructure for 7 revenue streams (ecom, services, SaaS, affiliate)</li>
+          <li>Ship custom landing pages, funnels, and SaaS dashboards in-house instead of using Webflow or ClickFunnels</li>
+          <li>Architect Meta Pixel and CAPI integrations across all properties for first-party data accuracy</li>
+          <li>Use Claude Code + Codex CLI to ship at solo-founder velocity</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Head of Advertising Media — IGBoss Ecom</span>
+        <span class="entry-meta">2022 – 2024</span>
+      </div>
+      <div class="entry-body">
+        <ul>
+          <li>Scaled product launches from zero to PHP 100M+ gross revenue in 12 months</li>
+          <li>Built end-to-end systems: product research, creative briefs, funnel architecture, analytics dashboards</li>
+          <li>Worked daily with developers and creatives, learning the systems thinking that powers what I build today</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Junior Paid Media Specialist — Kynship (USA)</span>
+        <span class="entry-meta">2020 – 2022</span>
+      </div>
+      <div class="entry-body">
+        <ul>
+          <li>Managed multi-million USD/EUR ad budgets for international DTC brands</li>
+          <li>Built reporting systems, pixel implementations, and CAPI integrations across client accounts</li>
+          <li>Trained under Kynship growth frameworks (Co-CEO Taylor Lagace, Growth Strategist Nick Bauer)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-grid">
+    <div>
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-title">Bachelor of Science in Nursing</span>
+          <span class="entry-meta">2009 – 2014</span>
+        </div>
+        <div class="entry-sub">Holy Name University</div>
+      </div>
+    </div>
+    <div>
+      <h2>Languages</h2>
+      <div class="entry-body">English &nbsp;·&nbsp; Tagalog &nbsp;·&nbsp; Bisaya</div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

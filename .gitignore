@@ -1,0 +1,11 @@
+.vercel
+.next
+node_modules
+
+# local env files (never commit real secrets)
+.env
+.env.local
+.env*.local
+
+# typescript build cache
+tsconfig.tsbuildinfo

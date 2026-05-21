@@ -1,0 +1,1979 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lakatan Saha Pitch Deck</title>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --slide-bg: #141414;
+      --gold: #c9a84c;
+      --text: #ffffff;
+      --muted: #999999;
+      --divider: #2a2a2a;
+      --soft: #1d1d1d;
+      --frame-bg: #f0f0f0;
+      --frame-text: #4d4d4d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .deck {
+      min-height: 100vh;
+      position: relative;
+      background:
+        radial-gradient(circle at top left, rgba(201, 168, 76, 0.12), transparent 34%),
+        linear-gradient(145deg, #0a0a0a 0%, #0d0d0d 48%, #17120a 100%);
+    }
+
+    .slide {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
+      padding: 5.25rem 1.5rem 5.75rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .slide-inner {
+      width: min(900px, 100%);
+      max-height: calc(100vh - 11rem);
+      overflow: auto;
+      background: var(--slide-bg);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    .slide-inner::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    .slide-inner::-webkit-scrollbar-thumb {
+      background: rgba(201, 168, 76, 0.45);
+      border-radius: 999px;
+    }
+
+    .compact-slide {
+      padding: clamp(1rem, 2.2vw, 2rem);
+    }
+
+    .compact-slide h2 {
+      margin-bottom: 0.85rem;
+      font-size: clamp(1.55rem, 3vw, 2rem);
+    }
+
+    .compact-slide .section-label {
+      margin-bottom: 0.55rem;
+    }
+
+    .compact-slide .subheadline {
+      margin-bottom: 0.85rem;
+      font-size: 0.92rem;
+      line-height: 1.36;
+    }
+
+    .compact-slide .note {
+      margin-top: 0.7rem;
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .slide-inner.cover {
+      min-height: min(620px, calc(100vh - 11rem));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(201, 168, 76, 0.08), transparent 46%),
+        #141414;
+    }
+
+    .section-label {
+      margin: 0 0 0.8rem;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      color: var(--gold);
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 800;
+    }
+
+    h2 {
+      color: var(--text);
+      font-size: clamp(1.85rem, 4vw, 2.2rem);
+      font-weight: 760;
+      margin-bottom: 1.35rem;
+    }
+
+    .subheadline {
+      margin: 0 0 1.35rem;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .slide-inner.cover .subheadline {
+      color: var(--text);
+      font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+      max-width: 720px;
+      margin: 1.35rem 0 4rem;
+    }
+
+    .bottom-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 1.3rem;
+      color: var(--text);
+      font-size: 1.1rem;
+      line-height: 1.48;
+    }
+
+    li + li {
+      margin-top: 0.56rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .who-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+      align-items: center;
+    }
+
+    .who-layout ul {
+      font-size: 1rem;
+      line-height: 1.42;
+    }
+
+    .who-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .who-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border: 1px solid rgba(201, 168, 76, 0.48);
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--soft);
+    }
+
+    .placeholder-frame {
+      min-height: 200px;
+      border: 2px dashed #b8b8b8;
+      background: var(--frame-bg);
+      color: var(--frame-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .product-frame {
+      width: 300px;
+      height: 300px;
+      margin-left: auto;
+    }
+
+    .image-frame {
+      border: 1px solid rgba(201, 168, 76, 0.48);
+      background: #0a0a0a;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .buyer-image-frame {
+      width: min(320px, 100%);
+      aspect-ratio: 1 / 1;
+      margin-left: auto;
+      border: 1px solid rgba(201, 168, 76, 0.48);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .slide-side-image {
+      width: min(320px, 100%);
+      aspect-ratio: 1 / 1;
+      margin-left: auto;
+      border: 1px solid rgba(201, 168, 76, 0.48);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .screen-share-box {
+      border: 1px solid rgba(201, 168, 76, 0.6);
+      border-radius: 8px;
+      background: rgba(201, 168, 76, 0.08);
+      padding: clamp(1.4rem, 4vw, 2.5rem);
+      text-align: center;
+    }
+
+    .screen-share-box p {
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.35;
+      font-weight: 760;
+    }
+
+    .live-proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .live-proof-frame {
+      border: 1px solid rgba(201, 168, 76, 0.48);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0a0a0a;
+      margin: 0;
+    }
+
+    .live-proof-frame img {
+      width: 100%;
+      height: min(54vh, 430px);
+      display: block;
+      object-fit: contain;
+      background: #050505;
+      cursor: zoom-in;
+    }
+
+    .live-proof-caption {
+      margin: 0;
+      padding: 0.7rem 0.85rem;
+      border-top: 1px solid var(--divider);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 760;
+      line-height: 1.3;
+    }
+
+    .proof-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(0, 0, 0, 0.88);
+    }
+
+    .proof-modal[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .proof-modal-inner {
+      width: min(1180px, 100%);
+      max-height: 94svh;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .proof-modal-img {
+      width: 100%;
+      max-height: 86svh;
+      object-fit: contain;
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      border-radius: 8px;
+      background: #050505;
+    }
+
+    .proof-modal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text);
+    }
+
+    .proof-modal-title {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.3;
+    }
+
+    .proof-modal-close {
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      background: rgba(20, 20, 20, 0.9);
+      color: var(--gold);
+      padding: 0.65rem 1rem;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pitch-photo {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 0.7rem;
+    }
+
+    .proof-frame {
+      min-height: 310px;
+    }
+
+    .point-list {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      gap: 1.15rem;
+      counter-reset: point;
+    }
+
+    .point-list li {
+      margin: 0;
+      padding-left: 3.4rem;
+      position: relative;
+      font-size: 1.12rem;
+      line-height: 1.48;
+    }
+
+    .point-list li::before {
+      counter-increment: point;
+      content: counter(point);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .strong-line {
+      color: var(--text);
+      font-weight: 760;
+    }
+
+    .grid-6 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.9rem;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .system-box,
+    .stat-box,
+    .deal-box {
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .system-box h3,
+    .deal-box h3 {
+      margin: 0 0 0.45rem;
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    .system-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.4;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.3rem 0 1rem;
+    }
+
+    .stat-box {
+      text-align: center;
+      min-height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stat-number {
+      color: var(--gold);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1;
+      font-weight: 820;
+    }
+
+    .stat-label {
+      color: var(--text);
+      margin-top: 0.65rem;
+      font-size: 0.98rem;
+      line-height: 1.32;
+    }
+
+    .big-money {
+      color: var(--gold);
+      font-size: clamp(3rem, 8vw, 5.6rem);
+      line-height: 1;
+      font-weight: 840;
+      margin: 0 0 0.9rem;
+    }
+
+    .table-wrap {
+      overflow: hidden;
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      line-height: 1.18;
+    }
+
+    th {
+      background: var(--gold);
+      color: #141414;
+      font-weight: 800;
+      text-align: left;
+      padding: 0.46rem 0.5rem;
+      white-space: nowrap;
+    }
+
+    td {
+      border-top: 1px solid var(--divider);
+      color: var(--text);
+      padding: 0.43rem 0.5rem;
+      white-space: nowrap;
+    }
+
+    tr.total-row td {
+      color: var(--gold);
+      font-weight: 800;
+      background: rgba(201, 168, 76, 0.08);
+    }
+
+    .note {
+      margin: 1rem 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .check-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 1.18rem;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .check-list li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .deal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .deal-box ul {
+      font-size: 1.05rem;
+    }
+
+    .validation-panel {
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .validation-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .proof-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.9rem;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      padding: 0.72rem 1rem;
+      background: var(--gold);
+      color: #141414;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .proof-button.secondary {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .projection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      align-items: start;
+    }
+
+    .projection-card {
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+
+    .projection-card h3 {
+      margin: 0 0 0.55rem;
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    .projection-card p {
+      margin: 0;
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.42;
+    }
+
+    .assumption-sheet {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+      line-height: 1.14;
+    }
+
+    .assumption-sheet th {
+      padding: 0.3rem 0.34rem;
+    }
+
+    .assumption-sheet td {
+      padding: 0.3rem 0.34rem;
+      white-space: normal;
+    }
+
+    .assumption-sheet .sheet-section td {
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--gold);
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      padding-top: 0.42rem;
+      padding-bottom: 0.42rem;
+    }
+
+    .assumption-sheet .sheet-input-row td {
+      background: rgba(201, 168, 76, 0.05);
+    }
+
+    .assumption-sheet .sheet-output-row td {
+      background: rgba(45, 160, 92, 0.08);
+    }
+
+    .sheet-input {
+      width: 6.6rem;
+      border: 1px solid rgba(201, 168, 76, 0.75);
+      border-radius: 6px;
+      background: #0d0d0d;
+      color: var(--text);
+      padding: 0.36rem 0.45rem;
+      font: inherit;
+      font-weight: 760;
+    }
+
+    .formula-text {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .projection-table {
+      font-size: 0.8rem;
+    }
+
+    .projection-table th,
+    .projection-table td {
+      padding: 0.36rem 0.38rem;
+    }
+
+    .projection-summary {
+      overflow: hidden;
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+
+    .summary-group {
+      padding: 0.7rem;
+    }
+
+    .summary-group + .summary-group {
+      border-top: 1px solid var(--divider);
+    }
+
+    .summary-title {
+      margin: 0 0 0.45rem;
+      font-size: 0.78rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.3;
+    }
+
+    .summary-row + .summary-row {
+      margin-top: 0.34rem;
+    }
+
+    .summary-row strong {
+      white-space: nowrap;
+    }
+
+    .summary-revenue {
+      background: rgba(45, 160, 92, 0.12);
+    }
+
+    .summary-revenue .summary-title,
+    .summary-revenue strong {
+      color: #67d391;
+    }
+
+    .summary-deductions {
+      background: rgba(210, 82, 75, 0.12);
+    }
+
+    .summary-deductions .summary-title,
+    .summary-deductions strong {
+      color: #ff8a80;
+    }
+
+    .summary-profit {
+      background: rgba(201, 168, 76, 0.16);
+    }
+
+    .summary-profit .summary-title,
+    .summary-profit strong {
+      color: var(--gold);
+    }
+
+    .province-insights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .insight-card {
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 0.85rem;
+    }
+
+    .insight-label {
+      margin: 0 0 0.35rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .insight-value {
+      margin: 0;
+      color: var(--gold);
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.1;
+      font-weight: 850;
+    }
+
+    .insight-note {
+      margin: 0.35rem 0 0;
+      color: var(--text);
+      font-size: 0.86rem;
+      line-height: 1.32;
+    }
+
+    .trend-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .trend-chart {
+      min-height: 300px;
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 0.9rem 0.9rem 0.75rem;
+    }
+
+    .trend-legend {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 760;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 999px;
+      margin-right: 0.35rem;
+      vertical-align: -0.05rem;
+    }
+
+    .legend-dot.revenue {
+      background: #67d391;
+    }
+
+    .legend-dot.profit {
+      background: #ff8a80;
+    }
+
+    .trend-line-chart {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .trend-axis,
+    .trend-grid-line {
+      stroke: rgba(255, 255, 255, 0.12);
+      stroke-width: 1;
+    }
+
+    .trend-revenue-line {
+      fill: none;
+      stroke: #67d391;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .trend-profit-line {
+      fill: none;
+      stroke: #ff8a80;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .trend-point-revenue {
+      fill: #67d391;
+      stroke: #141414;
+      stroke-width: 3;
+    }
+
+    .trend-point-profit {
+      fill: #ff8a80;
+      stroke: #141414;
+      stroke-width: 3;
+    }
+
+    .trend-svg-label {
+      fill: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .trend-svg-value {
+      fill: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .factor-list {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .factor-card {
+      border: 1px solid rgba(201, 168, 76, 0.45);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 0.82rem;
+    }
+
+    .factor-card h3 {
+      margin: 0 0 0.25rem;
+      color: var(--gold);
+      font-size: 0.96rem;
+    }
+
+    .factor-card p {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+
+    .closing-line {
+      margin: 2rem 0 0;
+      color: var(--gold);
+      text-align: center;
+      font-size: clamp(1.7rem, 4vw, 2.25rem);
+      font-weight: 800;
+    }
+
+    .contact-line {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .quote-line {
+      margin: 1.6rem auto 0;
+      max-width: 760px;
+      color: var(--text);
+      text-align: center;
+      font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+      line-height: 1.36;
+      font-weight: 760;
+    }
+
+    .nav {
+      position: fixed;
+      inset: auto 0 0;
+      height: 4.75rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 1.5rem 1.2rem;
+      pointer-events: none;
+    }
+
+    .nav button {
+      pointer-events: auto;
+      justify-self: start;
+      min-width: 6.5rem;
+      border: 1px solid var(--gold);
+      background: rgba(20, 20, 20, 0.86);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 0.78rem 1.1rem;
+      font: inherit;
+      font-weight: 760;
+      cursor: pointer;
+    }
+
+    .nav button:hover,
+    .nav button:focus-visible {
+      background: var(--gold);
+      color: #141414;
+      outline: none;
+    }
+
+    .nav button[hidden] {
+      display: none;
+    }
+
+    #nextBtn {
+      justify-self: end;
+    }
+
+    .counter {
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 780px) {
+      body {
+        overflow: auto;
+      }
+
+      .slide {
+        min-height: 100svh;
+        padding: 0.75rem 0.75rem 5.9rem;
+      }
+
+      .slide-inner {
+        max-height: none;
+        padding: 1.15rem;
+      }
+
+      .part-four-slide .slide-inner {
+        width: 100%;
+      }
+
+      .part-four-slide h2 {
+        font-size: clamp(1.35rem, 7vw, 1.8rem);
+        margin-bottom: 0.75rem;
+      }
+
+      .part-four-slide .subheadline {
+        font-size: 0.88rem;
+        line-height: 1.38;
+        margin-bottom: 0.75rem;
+      }
+
+      .part-four-slide .big-money {
+        font-size: clamp(2rem, 11vw, 3.1rem);
+        overflow-wrap: anywhere;
+      }
+
+      .part-four-slide .stats-row {
+        gap: 0.65rem;
+        margin: 0.9rem 0 0;
+      }
+
+      .part-four-slide .stat-box {
+        min-height: auto;
+        padding: 0.85rem;
+      }
+
+      .part-four-slide .stat-number {
+        font-size: clamp(1.7rem, 8vw, 2.25rem);
+      }
+
+      .two-col,
+      .who-layout,
+      .who-images,
+      .value-grid,
+      .projection-grid,
+      .grid-6,
+      .stats-row,
+      .province-insights,
+      .trend-grid,
+      .live-proof-grid,
+      .proof-grid,
+      .deal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-frame {
+        width: min(300px, 100%);
+        margin: 0;
+      }
+
+      .buyer-image-frame {
+        width: 100%;
+        margin: 0;
+      }
+
+      .slide-side-image {
+        width: 100%;
+        margin: 0;
+      }
+
+      ul,
+      ol {
+        font-size: 1rem;
+      }
+
+      .system-box p,
+      .note,
+      .stat-label {
+        font-size: 0.9rem;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        min-width: 780px;
+      }
+
+      .part-four-slide .table-wrap {
+        overflow: visible;
+        border: 0;
+      }
+
+      .part-four-slide table,
+      .part-four-slide thead,
+      .part-four-slide tbody,
+      .part-four-slide tr,
+      .part-four-slide td {
+        display: block;
+        min-width: 0;
+        width: 100%;
+      }
+
+      .part-four-slide thead {
+        display: none;
+      }
+
+      .part-four-slide tr {
+        border: 1px solid var(--divider);
+        border-radius: 8px;
+        background: var(--soft);
+        overflow: hidden;
+      }
+
+      .part-four-slide tr + tr {
+        margin-top: 0.55rem;
+      }
+
+      .part-four-slide td {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.85rem;
+        border-top: 1px solid var(--divider);
+        padding: 0.52rem 0.65rem;
+        white-space: normal;
+        text-align: right;
+        font-size: 0.9rem;
+        line-height: 1.25;
+      }
+
+      .part-four-slide td:first-child {
+        border-top: 0;
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--gold);
+        font-weight: 850;
+      }
+
+      .part-four-slide td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      .part-four-slide .sheet-section {
+        border-color: rgba(201, 168, 76, 0.35);
+      }
+
+      .part-four-slide .sheet-section td {
+        display: block;
+        text-align: left;
+        border-top: 0;
+      }
+
+      .part-four-slide .sheet-section td::before {
+        content: "";
+      }
+
+      .part-four-slide .sheet-input-row td {
+        align-items: center;
+      }
+
+      .part-four-slide .sheet-input {
+        width: min(7rem, 42vw);
+      }
+
+      .part-four-slide .summary-row {
+        align-items: flex-start;
+        font-size: 0.9rem;
+      }
+
+      .part-four-slide .live-proof-frame img {
+        height: min(72vw, 330px);
+      }
+
+      .proof-modal {
+        padding: 0.7rem;
+      }
+
+      .proof-modal-inner {
+        max-height: 96svh;
+      }
+
+      .proof-modal-img {
+        max-height: 82svh;
+      }
+
+      .proof-modal-bar {
+        align-items: flex-start;
+      }
+      }
+
+      .validation-actions {
+        display: grid;
+      }
+
+      .part-four-slide .province-insights {
+        gap: 0.55rem;
+      }
+
+      .part-four-slide .insight-card {
+        padding: 0.75rem;
+      }
+
+      .part-four-slide .trend-chart {
+        min-height: 250px;
+        padding: 0.75rem;
+      }
+
+      .part-four-slide .trend-revenue-line,
+      .part-four-slide .trend-profit-line {
+        stroke-width: 3;
+      }
+
+      .part-four-slide .trend-svg-label,
+      .part-four-slide .trend-svg-value {
+        font-size: 12px;
+      }
+
+      .nav {
+        height: 4.8rem;
+        gap: 0.55rem;
+        padding: 0 0.75rem 0.9rem;
+        background: linear-gradient(180deg, transparent, rgba(13, 13, 13, 0.94) 38%);
+      }
+
+      .nav button {
+        min-width: 5.4rem;
+        padding: 0.74rem 0.85rem;
+      }
+
+      .counter {
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Lakatan Saha Pitch Deck">
+    <section class="slide" aria-hidden="false">
+      <div class="slide-inner cover">
+        <h1>LAKATAN SAHA</h1>
+        <p class="subheadline">A Proven System. A Scalable Product. The Right Partner.</p>
+        <p class="bottom-label">Presented by Kevin Rholette Allego</p>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 1</p>
+        <h2>Who Am I</h2>
+        <div class="who-layout">
+          <ul>
+            <li>eCommerce operator since 2021</li>
+            <li>2023 was the breakthrough year. Ads were working, orders were coming in, revenue was scaling.</li>
+            <li>2024 was a reset. The business slowed. I went back to zero.</li>
+            <li>No shortcuts. No excuses. Started over.</li>
+            <li>Spent months looking for the right product. Testing. Experimenting.</li>
+            <li>Found Lakatan Saha. A product with real demand, strong profit potential, and a market no one was reaching the right way.</li>
+            <li>8 months later: PHP 1.17M in revenue. PHP 333K net profit. One operator.</li>
+            <li>Now it is time to scale. And scaling requires the right partner.</li>
+          </ul>
+          <div class="who-images" aria-label="Founder and operations photos">
+            <img class="who-photo" src="/winningprod/images/pitch/who-am-i-1.jpg" alt="Founder business journey collage">
+            <img class="who-photo" src="/winningprod/images/pitch/who-am-i-2.jpg" alt="Lakatan operations collage">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 2</p>
+        <h2>What is Lakatan Saha?</h2>
+        <div class="two-col">
+          <ul>
+            <li>Premium Lakatan banana bulbs</li>
+            <li>Ready-to-plant, sourced directly from Central Visayas Lakatan Farms</li>
+            <li>Retail price: PHP 499 for B1T1</li>
+            <li>Recent exact AOV: PHP 836</li>
+            <li>Nationwide shipping with door-to-door fulfillment</li>
+          </ul>
+          <div class="media-frame product-frame image-frame">
+            <img class="pitch-photo" src="/winningprod/images/pitch/lakatan-saha.jpg" alt="Fresh Lakatan Saha planting material">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 2</p>
+        <h2>Why This Product Works</h2>
+        <div class="two-col">
+          <ol class="point-list">
+            <li><span class="strong-line">Clear practical value.</span> Buyers are not just receiving a parcel. They are receiving planting material they can grow.</li>
+            <li><span class="strong-line">Excitement after delivery.</span> The product creates anticipation because the buyer can plant it, care for it, and watch results come out over time.</li>
+            <li><span class="strong-line">Less like ordinary products.</span> General products are easy to reject when delivered. This has a stronger reason to accept because it carries future value.</li>
+          </ol>
+          <div class="slide-side-image">
+            <img class="pitch-photo" src="/winningprod/images/pitch/why-product-works.jpg" alt="Filipino buyers value Lakatan banana seedlings">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 2</p>
+        <h2>Who is Buying This</h2>
+        <div class="two-col">
+          <ul>
+            <li>Home gardeners and backyard farmers</li>
+            <li>Plant hobbyists and collectors</li>
+            <li>Small-scale agricultural entrepreneurs</li>
+            <li>Buyers from 80+ provinces nationwide</li>
+            <li>Average buyer pays PHP 836 per order</li>
+            <li>Repeat buyers documented across multiple provinces</li>
+          </ul>
+          <div class="buyer-image-frame">
+            <img class="pitch-photo" src="/winningprod/images/pitch/who-is-buying.jpg" alt="Lakatan Saha online buyer profile image">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 2</p>
+        <h2>Repeat Demand Exists</h2>
+        <p class="subheadline">Pancake buyer data shows this is not only a one-time impulse product. Some buyers come back and order again.</p>
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-number">178</div><div class="stat-label">Repeat buyers identified</div></div>
+          <div class="stat-box"><div class="stat-number">386</div><div class="stat-label">Repeat orders recorded</div></div>
+          <div class="stat-box"><div class="stat-number">PHP 147,073</div><div class="stat-label">Delivered repeat-buyer revenue</div></div>
+        </div>
+        <div class="value-grid">
+          <div class="system-box"><h3>8.0% repeat buyer rate</h3><p>178 repeat buyers out of 2,228 unique buyers.</p></div>
+          <div class="system-box"><h3>193 repeat delivered orders</h3><p>Repeat buyers still generated delivered COD revenue.</p></div>
+          <div class="system-box"><h3>12.5% revenue share</h3><p>Repeat buyers produced PHP 147,073 of delivered revenue.</p></div>
+        </div>
+        <p class="note">Source: Pancake buyer phone matching, Sep 2025-Apr 2026. Repeat means more than one order from the same buyer phone number.</p>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 3</p>
+        <h2>What Makes This Different</h2>
+        <p class="subheadline">This is not a low-value impulse item. It gives the buyer something useful, visible, and worth waiting for.</p>
+        <div class="value-grid">
+          <div class="system-box"><h3>Higher Perceived Value</h3><p>The buyer sees it as a planting asset, not a disposable product.</p></div>
+          <div class="system-box"><h3>Future Result</h3><p>They get excited because they can plant it and watch growth happen.</p></div>
+          <div class="system-box"><h3>Stronger Delivery Intent</h3><p>Compared with generic items, there is a real reason to accept the parcel.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 3</p>
+        <h2>Validated</h2>
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-number">39</div><div class="stat-label">Sales-objective campaigns analyzed</div></div>
+          <div class="stat-box"><div class="stat-number">2,416</div><div class="stat-label">Purchases tracked via Meta Ads</div></div>
+          <div class="stat-box"><div class="stat-number">PHP 188</div><div class="stat-label">Cost per purchase</div></div>
+        </div>
+        <p class="note">3.51x ROAS. USD 7,716 total ad spend. Sales-objective campaigns from Sep 2025 to Apr 2026.</p>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner compact-slide">
+        <p class="section-label">PART 3</p>
+        <h2>Meta Ads Monthly Performance</h2>
+        <p class="subheadline">Sales-objective campaigns only. Dollar metrics converted at PHP 59.</p>
+        <div class="province-insights">
+          <div class="insight-card">
+            <p class="insight-label">Best Efficiency</p>
+            <p class="insight-value">Jan 2026</p>
+            <p class="insight-note">PHP 130 cost per purchase and 4.94x ROAS.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-label">Highest Scale</p>
+            <p class="insight-value">Oct 2025</p>
+            <p class="insight-note">USD 2,873 spend, 821 purchases, 2.97x ROAS.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-label">Watchout</p>
+            <p class="insight-value">Apr 2026</p>
+            <p class="insight-note">CTR softened to 2.82% and CPP rose to PHP 277.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="projection-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Ad Spend</th>
+                <th>CPM</th>
+                <th>Unique Link CTR</th>
+                <th>Hook Rate</th>
+                <th>Hold Rate</th>
+                <th>Cost / LPV</th>
+                <th>Cost / Purchase</th>
+                <th>ROAS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Month">Sep 2025</td><td data-label="Ad Spend">PHP 141,689</td><td data-label="CPM">PHP 156</td><td data-label="Unique Link CTR">6.09%</td><td data-label="Hook Rate">29.6%</td><td data-label="Hold Rate">39.9%</td><td data-label="Cost / LPV">PHP 5</td><td data-label="Cost / Purchase">PHP 175</td><td data-label="ROAS">3.66x</td></tr>
+              <tr><td data-label="Month">Oct 2025</td><td data-label="Ad Spend">PHP 169,533</td><td data-label="CPM">PHP 199</td><td data-label="Unique Link CTR">6.31%</td><td data-label="Hook Rate">35.1%</td><td data-label="Hold Rate">41.0%</td><td data-label="Cost / LPV">PHP 8</td><td data-label="Cost / Purchase">PHP 206</td><td data-label="ROAS">2.97x</td></tr>
+              <tr><td data-label="Month">Nov 2025</td><td data-label="Ad Spend">PHP 9,649</td><td data-label="CPM">PHP 174</td><td data-label="Unique Link CTR">3.93%</td><td data-label="Hook Rate">40.2%</td><td data-label="Hold Rate">42.3%</td><td data-label="Cost / LPV">PHP 7</td><td data-label="Cost / Purchase">PHP 214</td><td data-label="ROAS">2.87x</td></tr>
+              <tr><td data-label="Month">Dec 2025</td><td data-label="Ad Spend">PHP 27,866</td><td data-label="CPM">PHP 174</td><td data-label="Unique Link CTR">5.40%</td><td data-label="Hook Rate">44.7%</td><td data-label="Hold Rate">44.9%</td><td data-label="Cost / LPV">PHP 7</td><td data-label="Cost / Purchase">PHP 150</td><td data-label="ROAS">4.22x</td></tr>
+              <tr><td data-label="Month">Jan 2026</td><td data-label="Ad Spend">PHP 13,243</td><td data-label="CPM">PHP 164</td><td data-label="Unique Link CTR">4.30%</td><td data-label="Hook Rate">47.1%</td><td data-label="Hold Rate">46.2%</td><td data-label="Cost / LPV">PHP 7</td><td data-label="Cost / Purchase">PHP 130</td><td data-label="ROAS">4.94x</td></tr>
+              <tr><td data-label="Month">Feb 2026</td><td data-label="Ad Spend">PHP 18,237</td><td data-label="CPM">PHP 137</td><td data-label="Unique Link CTR">3.52%</td><td data-label="Hook Rate">30.9%</td><td data-label="Hold Rate">51.6%</td><td data-label="Cost / LPV">PHP 7</td><td data-label="Cost / Purchase">PHP 153</td><td data-label="ROAS">4.57x</td></tr>
+              <tr><td data-label="Month">Mar 2026</td><td data-label="Ad Spend">PHP 44,280</td><td data-label="CPM">PHP 139</td><td data-label="Unique Link CTR">3.37%</td><td data-label="Hook Rate">21.0%</td><td data-label="Hold Rate">42.0%</td><td data-label="Cost / LPV">PHP 8</td><td data-label="Cost / Purchase">PHP 199</td><td data-label="ROAS">4.23x</td></tr>
+              <tr><td data-label="Month">Apr 2026</td><td data-label="Ad Spend">PHP 30,774</td><td data-label="CPM">PHP 181</td><td data-label="Unique Link CTR">2.82%</td><td data-label="Hook Rate">21.5%</td><td data-label="Hold Rate">36.8%</td><td data-label="Cost / LPV">PHP 11</td><td data-label="Cost / Purchase">PHP 277</td><td data-label="ROAS">3.11x</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Source: Meta account 1058096206259175, 39 sales-objective campaigns, Sep 2025-Apr 2026. Hook rate uses video views divided by impressions. Hold rate uses thruplay or 25% watch depth divided by video views.</p>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 4</p>
+        <div class="big-money">PHP 1,174,269</div>
+        <p class="subheadline">Gross Revenue. 8 Months. One Operator.</p>
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-number">PHP 336,523</div><div class="stat-label">Net Profit</div></div>
+          <div class="stat-box"><div class="stat-number">1,587</div><div class="stat-label">Delivered Orders</div></div>
+          <div class="stat-box"><div class="stat-number">80+</div><div class="stat-label">Provinces Reached</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner compact-slide">
+        <p class="section-label">PART 4</p>
+        <h2>Province Order Insights</h2>
+        <p class="subheadline">Pancake order data shows the strongest demand is concentrated in major Luzon markets, with clear expansion signals across Visayas.</p>
+        <div class="province-insights">
+          <div class="insight-card">
+            <p class="insight-label">Highest Volume</p>
+            <p class="insight-value">Metro Manila</p>
+            <p class="insight-note">136 delivered orders, 62 failed, 31% fail rate.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-label">Top 10 Share</p>
+            <p class="insight-value">631 orders</p>
+            <p class="insight-note">Top 10 provinces generated about 40% of delivered orders.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-label">Best High-Volume Fail Rate</p>
+            <p class="insight-value">Laguna, 15%</p>
+            <p class="insight-note">50 delivered orders with only 9 failed parcels.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="projection-table">
+            <thead>
+              <tr>
+                <th>Province</th>
+                <th>Delivered</th>
+                <th>Failed</th>
+                <th>Fail Rate</th>
+                <th>Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Province">Metro Manila</td><td data-label="Delivered">136</td><td data-label="Failed">62</td><td data-label="Fail Rate">31%</td><td data-label="Revenue">PHP 103,674</td></tr>
+              <tr><td data-label="Province">Cavite</td><td data-label="Delivered">65</td><td data-label="Failed">25</td><td data-label="Fail Rate">28%</td><td data-label="Revenue">PHP 45,576</td></tr>
+              <tr><td data-label="Province">Pangasinan</td><td data-label="Delivered">63</td><td data-label="Failed">22</td><td data-label="Fail Rate">26%</td><td data-label="Revenue">PHP 46,238</td></tr>
+              <tr><td data-label="Province">Batangas</td><td data-label="Delivered">58</td><td data-label="Failed">29</td><td data-label="Fail Rate">33%</td><td data-label="Revenue">PHP 43,436</td></tr>
+              <tr><td data-label="Province">Bulacan</td><td data-label="Delivered">57</td><td data-label="Failed">25</td><td data-label="Fail Rate">30%</td><td data-label="Revenue">PHP 43,547</td></tr>
+              <tr><td data-label="Province">Pampanga</td><td data-label="Delivered">56</td><td data-label="Failed">21</td><td data-label="Fail Rate">27%</td><td data-label="Revenue">PHP 36,683</td></tr>
+              <tr><td data-label="Province">Cebu</td><td data-label="Delivered">55</td><td data-label="Failed">25</td><td data-label="Fail Rate">31%</td><td data-label="Revenue">PHP 41,370</td></tr>
+              <tr><td data-label="Province">Laguna</td><td data-label="Delivered">50</td><td data-label="Failed">9</td><td data-label="Fail Rate">15%</td><td data-label="Revenue">PHP 35,303</td></tr>
+              <tr><td data-label="Province">Iloilo</td><td data-label="Delivered">47</td><td data-label="Failed">20</td><td data-label="Fail Rate">30%</td><td data-label="Revenue">PHP 33,802</td></tr>
+              <tr><td data-label="Province">Ilocos Sur</td><td data-label="Delivered">44</td><td data-label="Failed">12</td><td data-label="Fail Rate">21%</td><td data-label="Revenue">PHP 34,158</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Source: Pancake orders from Aug 01, 2025 to May 03, 2026. Fail rate means returned or returning orders divided by delivered plus failed orders in that province.</p>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner compact-slide">
+        <p class="section-label">PART 4</p>
+        <h2>Month by Month Performance</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Revenue</th>
+                <th>Courier</th>
+                <th>COGS</th>
+                <th>Ad Spend</th>
+                <th>Net Profit</th>
+                <th>Profit Rate</th>
+                <th>Fail Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td data-label="Month">Sep 2025</td><td data-label="Revenue">PHP 353,750</td><td data-label="Courier">PHP 55,022</td><td data-label="COGS">PHP 66,154</td><td data-label="Ad Spend">PHP 141,689</td><td data-label="Net Profit">PHP 90,885</td><td data-label="Profit Rate">25.7%</td><td data-label="Fail Rate">24.6%</td></tr>
+              <tr><td data-label="Month">Oct 2025</td><td data-label="Revenue">PHP 348,270</td><td data-label="Courier">PHP 57,318</td><td data-label="COGS">PHP 64,543</td><td data-label="Ad Spend">PHP 169,533</td><td data-label="Net Profit">PHP 56,876</td><td data-label="Profit Rate">16.3%</td><td data-label="Fail Rate">25.8%</td></tr>
+              <tr><td data-label="Month">Nov 2025</td><td data-label="Revenue">PHP 29,554</td><td data-label="Courier">PHP 4,391</td><td data-label="COGS">PHP 5,331</td><td data-label="Ad Spend">PHP 9,649</td><td data-label="Net Profit">PHP 10,183</td><td data-label="Profit Rate">34.5%</td><td data-label="Fail Rate">15.9%</td></tr>
+              <tr><td data-label="Month">Dec 2025</td><td data-label="Revenue">PHP 75,574</td><td data-label="Courier">PHP 10,255</td><td data-label="COGS">PHP 13,614</td><td data-label="Ad Spend">PHP 27,866</td><td data-label="Net Profit">PHP 23,838</td><td data-label="Profit Rate">31.5%</td><td data-label="Fail Rate">37.8%</td></tr>
+              <tr><td data-label="Month">Jan 2026</td><td data-label="Revenue">PHP 43,574</td><td data-label="Courier">PHP 6,120</td><td data-label="COGS">PHP 7,823</td><td data-label="Ad Spend">PHP 13,243</td><td data-label="Net Profit">PHP 16,387</td><td data-label="Profit Rate">37.6%</td><td data-label="Fail Rate">28.9%</td></tr>
+              <tr><td data-label="Month">Feb 2026</td><td data-label="Revenue">PHP 75,913</td><td data-label="Courier">PHP 8,063</td><td data-label="COGS">PHP 14,113</td><td data-label="Ad Spend">PHP 18,237</td><td data-label="Net Profit">PHP 35,500</td><td data-label="Profit Rate">46.8%</td><td data-label="Fail Rate">24.5%</td></tr>
+              <tr><td data-label="Month">Mar 2026</td><td data-label="Revenue">PHP 164,009</td><td data-label="Courier">PHP 15,005</td><td data-label="COGS">PHP 31,102</td><td data-label="Ad Spend">PHP 44,280</td><td data-label="Net Profit">PHP 73,623</td><td data-label="Profit Rate">44.9%</td><td data-label="Fail Rate">23.0%</td></tr>
+              <tr><td data-label="Month">Apr 2026</td><td data-label="Revenue">PHP 83,625</td><td data-label="Courier">PHP 7,093</td><td data-label="COGS">PHP 16,529</td><td data-label="Ad Spend">PHP 30,774</td><td data-label="Net Profit">PHP 29,229</td><td data-label="Profit Rate">35.0%</td><td data-label="Fail Rate">14.5%</td></tr>
+              <tr class="total-row"><td data-label="Month">TOTAL</td><td data-label="Revenue">PHP 1,174,269</td><td data-label="Courier">PHP 163,267</td><td data-label="COGS">PHP 219,209</td><td data-label="Ad Spend">PHP 455,271</td><td data-label="Net Profit">PHP 336,523</td><td data-label="Profit Rate">28.7%</td><td data-label="Fail Rate">25.3%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">COGS fixed at PHP 38.35/unit. Profit Rate means net profit divided by delivered revenue, after courier, COGS, and ad spend.</p>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner compact-slide">
+        <p class="section-label">PART 4</p>
+        <h2>Delivery Success vs Failed Orders</h2>
+        <p class="subheadline">The line graph shows exact Pancake counts per month. Green is delivered orders, red is returned or returning orders.</p>
+        <div class="trend-grid">
+          <div class="trend-chart" aria-label="Monthly delivered and failed order trend chart">
+            <div class="trend-legend">
+              <span><span class="legend-dot revenue"></span>Delivered orders</span>
+              <span><span class="legend-dot profit"></span>Failed orders</span>
+            </div>
+            <svg class="trend-line-chart" viewBox="0 0 760 270" role="img" aria-label="Line graph of monthly delivered and failed orders from September 2025 to April 2026">
+              <line class="trend-grid-line" x1="50" y1="36" x2="720" y2="36"></line>
+              <line class="trend-grid-line" x1="50" y1="104" x2="720" y2="104"></line>
+              <line class="trend-grid-line" x1="50" y1="172" x2="720" y2="172"></line>
+              <line class="trend-axis" x1="50" y1="224" x2="720" y2="224"></line>
+
+              <polyline class="trend-revenue-line" points="50,41 146,37 241,208 337,183 433,200 529,185 624,154 720,188"></polyline>
+              <polyline class="trend-profit-line" points="50,157 146,148 241,220 337,195 433,212 529,210 624,201 720,217"></polyline>
+
+              <circle class="trend-point-revenue" cx="50" cy="41" r="6"></circle>
+              <circle class="trend-point-revenue" cx="146" cy="37" r="6"></circle>
+              <circle class="trend-point-revenue" cx="241" cy="208" r="6"></circle>
+              <circle class="trend-point-revenue" cx="337" cy="183" r="6"></circle>
+              <circle class="trend-point-revenue" cx="433" cy="200" r="6"></circle>
+              <circle class="trend-point-revenue" cx="529" cy="185" r="6"></circle>
+              <circle class="trend-point-revenue" cx="624" cy="154" r="6"></circle>
+              <circle class="trend-point-revenue" cx="720" cy="188" r="6"></circle>
+
+              <circle class="trend-point-profit" cx="50" cy="157" r="6"></circle>
+              <circle class="trend-point-profit" cx="146" cy="148" r="6"></circle>
+              <circle class="trend-point-profit" cx="241" cy="220" r="6"></circle>
+              <circle class="trend-point-profit" cx="337" cy="195" r="6"></circle>
+              <circle class="trend-point-profit" cx="433" cy="212" r="6"></circle>
+              <circle class="trend-point-profit" cx="529" cy="210" r="6"></circle>
+              <circle class="trend-point-profit" cx="624" cy="201" r="6"></circle>
+              <circle class="trend-point-profit" cx="720" cy="217" r="6"></circle>
+
+              <text class="trend-svg-value" x="50" y="27" text-anchor="middle">487 / 178</text>
+              <text class="trend-svg-value" x="146" y="23" text-anchor="middle">497 / 202</text>
+              <text class="trend-svg-value" x="241" y="196" text-anchor="middle">43 / 11</text>
+              <text class="trend-svg-value" x="337" y="169" text-anchor="middle">110 / 76</text>
+              <text class="trend-svg-value" x="433" y="188" text-anchor="middle">63 / 33</text>
+              <text class="trend-svg-value" x="529" y="171" text-anchor="middle">105 / 37</text>
+              <text class="trend-svg-value" x="624" y="140" text-anchor="middle">187 / 62</text>
+              <text class="trend-svg-value" x="720" y="174" text-anchor="middle">95 / 18</text>
+
+              <text class="trend-svg-label" x="50" y="252" text-anchor="middle">Sep</text>
+              <text class="trend-svg-label" x="146" y="252" text-anchor="middle">Oct</text>
+              <text class="trend-svg-label" x="241" y="252" text-anchor="middle">Nov</text>
+              <text class="trend-svg-label" x="337" y="252" text-anchor="middle">Dec</text>
+              <text class="trend-svg-label" x="433" y="252" text-anchor="middle">Jan</text>
+              <text class="trend-svg-label" x="529" y="252" text-anchor="middle">Feb</text>
+              <text class="trend-svg-label" x="624" y="252" text-anchor="middle">Mar</text>
+              <text class="trend-svg-label" x="720" y="252" text-anchor="middle">Apr</text>
+            </svg>
+          </div>
+          <div class="factor-list">
+            <div class="factor-card">
+              <h3>Peak volume created the most failures</h3>
+              <p>September and October had the most delivered orders, but also the most failed parcels because order volume was highest.</p>
+            </div>
+            <div class="factor-card">
+              <h3>December had the weakest fail rate</h3>
+              <p>Only 110 orders were delivered, but 76 failed. That is the clearest month where fulfillment and COD follow-up hurt collection.</p>
+            </div>
+            <div class="factor-card">
+              <h3>No dedicated CX support</h3>
+              <p>Limited confirmation, address validation, and delivery follow-up allowed weak COD orders to enter shipping.</p>
+            </div>
+            <div class="factor-card">
+              <h3>April improved the failure ratio</h3>
+              <p>April had 95 delivered and 18 failed orders, the best failure rate in this period at 14.5%.</p>
+            </div>
+          </div>
+        </div>
+        <p class="note">Format: delivered / failed. Failed means returned or returning Pancake orders. Partner opportunity: add CX filtering and fulfillment control to protect COD delivery success.</p>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner compact-slide">
+        <p class="section-label">PART 4</p>
+        <h2>1000 pcs Partner Projection</h2>
+        <p class="subheadline">Scenario: partner buys 1000 pcs, one inbound shipment from Visayas to partner warehouse is already included in the PHP 40/pc cost, and inventory is consumed in around 15 days. Projection uses exact Pancake order data from Feb, Mar, Apr.</p>
+        <div class="projection-grid">
+          <div class="projection-card">
+            <h3>Baseline Assumptions</h3>
+            <table class="assumption-sheet" aria-label="Projection assumptions calculator">
+              <thead>
+                <tr><th>Item</th><th>Value</th><th>Formula</th></tr>
+              </thead>
+              <tbody>
+                <tr class="sheet-section"><td colspan="3">Inventory</td></tr>
+                <tr><td data-label="Item">Assumed inventory</td><td data-label="Value">1000 pcs</td><td data-label="Formula" class="formula-text">Fixed stock</td></tr>
+                <tr><td data-label="Item">COGS per piece</td><td data-label="Value">PHP 40.00</td><td data-label="Formula" class="formula-text">Fixed cost per inventory piece</td></tr>
+                <tr><td data-label="Item">Total COGS</td><td data-label="Value">PHP 40,000</td><td data-label="Formula" class="formula-text">1000 pcs x PHP 40</td></tr>
+                <tr class="sheet-section"><td colspan="3">Order Baseline</td></tr>
+                <tr><td data-label="Item">AOV per order</td><td data-label="Value">PHP 836.04</td><td data-label="Formula" class="formula-text">Feb-Apr exact</td></tr>
+                <tr><td data-label="Item">Pieces per order</td><td data-label="Value">4.16 pcs</td><td data-label="Formula" class="formula-text">AOV / revenue per piece</td></tr>
+                <tr><td data-label="Item">Projected delivered orders</td><td data-label="Value" id="projectedOrdersCell">240</td><td data-label="Formula" class="formula-text">Revenue / AOV</td></tr>
+                <tr><td data-label="Item">Courier fee per order</td><td data-label="Value">PHP 77.94</td><td data-label="Formula" class="formula-text">Feb-Apr exact courier / delivered orders</td></tr>
+                <tr><td data-label="Item">COGS per order</td><td data-label="Value">PHP 166.40</td><td data-label="Formula" class="formula-text">4.16 pcs x PHP 40</td></tr>
+                <tr class="sheet-section"><td colspan="3">Adjustable Inputs</td></tr>
+                <tr class="sheet-input-row"><td data-label="Item">Assumed fail rate</td><td data-label="Value"><input class="sheet-input" id="failRateInput" type="number" value="21.5" min="0" max="80" step="0.1">%</td><td data-label="Formula" class="formula-text">Adjustable</td></tr>
+                <tr class="sheet-input-row"><td data-label="Item">Ad spend per order</td><td data-label="Value"><input class="sheet-input" id="adPerOrderInput" type="number" value="241.06" min="0" step="0.01"></td><td data-label="Formula" class="formula-text">Adjustable</td></tr>
+                <tr class="sheet-section"><td colspan="3">Calculated Result</td></tr>
+                <tr><td data-label="Item">Net profit per delivered order</td><td data-label="Value" id="netPerOrderCell">PHP 350.63</td><td data-label="Formula" class="formula-text">Net profit / delivered orders</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="projection-summary" aria-label="Projection calculation summary">
+            <div class="summary-group summary-revenue">
+              <p class="summary-title">Revenue</p>
+              <div class="summary-row"><span>Projected collected revenue</span><strong id="projectionRevenueCell">PHP 200,961</strong></div>
+            </div>
+            <div class="summary-group summary-deductions">
+              <p class="summary-title">Deductions</p>
+              <div class="summary-row"><span>COGS</span><strong>PHP 40,000</strong></div>
+              <div class="summary-row"><span>Ad spend</span><strong id="projectionAdSpendCell">PHP 57,945</strong></div>
+              <div class="summary-row"><span>Customer courier</span><strong id="projectionCourierCell">PHP 18,734</strong></div>
+            </div>
+            <div class="summary-group summary-profit">
+              <p class="summary-title">Projected Profit</p>
+              <div class="summary-row"><span>Net profit</span><strong id="projectionNetCell">PHP 84,283</strong></div>
+            </div>
+          </div>
+        </div>
+        <p class="note">Feb-Apr exact baseline: PHP 323,547 revenue, 387 delivered orders, 1,610 delivered pieces, PHP 93,291 Meta ad spend, and PHP 30,161 customer courier. Simple formula: revenue minus COGS minus ad spend minus customer courier.</p>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner compact-slide">
+        <p class="section-label">PART 4</p>
+        <h2>Worst Case Sensitivity</h2>
+        <div class="projection-grid">
+          <div>
+            <p class="subheadline">If return or failed parcel rate increases, delivered revenue drops while COGS, ads, and customer courier still need to be covered.</p>
+            <div class="table-wrap">
+              <table class="projection-table">
+                <thead>
+                  <tr><th>Fail Rate</th><th>Revenue</th><th>Net Profit</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td data-label="Fail Rate">25%</td><td data-label="Revenue">PHP 192,001</td><td data-label="Net Profit">PHP 78,741</td></tr>
+                  <tr><td data-label="Fail Rate">30%</td><td data-label="Revenue">PHP 179,201</td><td data-label="Net Profit">PHP 70,825</td></tr>
+                  <tr><td data-label="Fail Rate">35%</td><td data-label="Revenue">PHP 166,401</td><td data-label="Net Profit">PHP 62,909</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <p class="subheadline">If cost per purchase increases, ad spend rises while revenue, COGS, and customer courier stay the same.</p>
+            <div class="table-wrap">
+              <table class="projection-table">
+                <thead>
+                  <tr><th>CPP Increase</th><th>CPP</th><th>Ad Spend</th><th>Net Profit</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td data-label="CPP Increase">+15%</td><td data-label="CPP">PHP 277</td><td data-label="Ad Spend">PHP 66,636</td><td data-label="Net Profit">PHP 75,591</td></tr>
+                  <tr><td data-label="CPP Increase">+30%</td><td data-label="CPP">PHP 313</td><td data-label="Ad Spend">PHP 75,328</td><td data-label="Net Profit">PHP 66,899</td></tr>
+                  <tr><td data-label="CPP Increase">+50%</td><td data-label="CPP">PHP 362</td><td data-label="Ad Spend">PHP 86,917</td><td data-label="Net Profit">PHP 55,310</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p class="note">Baseline projected net profit: PHP 84,283. These are stress tests, not the expected case.</p>
+      </div>
+    </section>
+
+    <section class="slide part-four-slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 4</p>
+        <h2>Live Proof</h2>
+        <div class="screen-share-box">
+          <p>I will share my screen for Pancake POS orders and Meta Ads Manager proof during the presentation.</p>
+        </div>
+        <p class="note">If live screen share is not available, these screenshots serve as backup proof.</p>
+        <div class="live-proof-grid">
+          <figure class="live-proof-frame">
+            <img src="/winningprod/images/pitch/live-proof-pancake.jpg" alt="Meta Ads Manager performance proof screenshot" data-proof-title="Meta Ads Manager proof">
+            <figcaption class="live-proof-caption">Meta Ads Manager proof</figcaption>
+          </figure>
+          <figure class="live-proof-frame">
+            <img src="/winningprod/images/pitch/live-proof-meta.jpg" alt="Pancake POS order proof screenshot" data-proof-title="Pancake POS order proof">
+            <figcaption class="live-proof-caption">Pancake POS order proof</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 5</p>
+        <h2>What I Bring to the Table</h2>
+        <div class="two-col">
+          <ul class="check-list">
+            <li>Ready-to-use video and image ads</li>
+            <li>High-converting landing page (Webcake)</li>
+            <li>AI chat automation (Botcake)</li>
+            <li>POS system (Pancake), fully configured</li>
+            <li>Established Facebook pages</li>
+            <li>Reliable product supply from Central Visayas Lakatan Farms</li>
+            <li>The entire system is already built and proven</li>
+          </ul>
+          <div class="slide-side-image">
+            <img class="pitch-photo" src="/winningprod/images/pitch/what-i-bring.jpg" alt="Lakatan banana seedling ecommerce system">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 5</p>
+        <h2>Your Role</h2>
+        <div class="two-col">
+          <ol class="point-list">
+            <li>Run and manage the eCommerce side</li>
+            <li>Handle fulfillment and operations</li>
+            <li>Fund the ad spend</li>
+            <li>Help scale. This is your business now.</li>
+          </ol>
+          <div class="slide-side-image">
+            <img class="pitch-photo" src="/winningprod/images/pitch/your-role.jpg" alt="Filipino business partners discussing Lakatan">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 5</p>
+        <h2>The Deal</h2>
+        <div class="deal-grid">
+          <div class="deal-box">
+            <h3>Net Profit Share</h3>
+            <ul>
+              <li>Split is after deduction of OPEX</li>
+              <li><strong>80%</strong> goes to the partner</li>
+              <li><strong>20%</strong> goes to Ken</li>
+              <li>OPEX includes COGS, ads, courier, and operating costs</li>
+            </ul>
+          </div>
+          <div class="deal-box">
+            <h3>Entry Cost</h3>
+            <ul>
+              <li>Minimum order: 1000 pcs</li>
+              <li>Cost: PHP 40/pc</li>
+              <li>Total COGS: PHP 40,000</li>
+              <li>1 shipment from Visayas to your warehouse</li>
+              <li>Door to door shipping included</li>
+              <li>Ad spend budget: separate, managed by you</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 5</p>
+        <h2>Validate Before You Start</h2>
+        <p class="subheadline">Before committing, you can validate the opportunity using the exact ads we use, the landing page, and the Pancake setup file.</p>
+        <ol class="point-list">
+          <li>Review the Meta ads and creatives already used to generate tracked purchases.</li>
+          <li>Open the landing page and check how the offer, COD flow, proof, and order form are structured.</li>
+          <li>Download the PKE file from Google Drive so the setup can be reviewed or imported before launch.</li>
+        </ol>
+        <div class="validation-panel">
+          <p class="insight-label">Validation Assets</p>
+          <p class="insight-note">Use these before launch to confirm the ads, page, and order workflow are ready for your operation.</p>
+          <div class="validation-actions">
+            <a class="proof-button" href="https://drive.google.com/drive/folders/1fV-IhnaV5wE2kw2Unx68s3dWzgRuW7Yy?usp=sharing" target="_blank" rel="noopener" aria-label="Open validation assets in Google Drive">Open Validation Assets</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-hidden="true">
+      <div class="slide-inner">
+        <p class="section-label">PART 5</p>
+        <h2>How to Start</h2>
+        <ol>
+          <li>Buy your COGS. Minimum 1000 pcs at PHP 40/pc.</li>
+          <li>Ken sets up your full conversion system. Ads, landing page, POS, chatbot, SMS.</li>
+          <li>Prepare your ad spend budget.</li>
+          <li>Wait for 1 shipment from Visayas to arrive at your warehouse, door to door.</li>
+          <li>Go live. Ads launch, orders come in, you pack and ship.</li>
+        </ol>
+        <p class="closing-line">Ready to build this together?</p>
+        <p class="quote-line">"Opportunity is wasted only when the right person sees it and waits too long to act."</p>
+        <p class="contact-line">WhatsApp: +63 961 832 1310</p>
+      </div>
+    </section>
+
+    <nav class="nav" aria-label="Pitch deck navigation">
+      <button type="button" id="prevBtn">Prev</button>
+      <div class="counter" id="counter" aria-live="polite">1 / 21</div>
+      <button type="button" id="nextBtn">Next</button>
+    </nav>
+
+    <div class="proof-modal" id="proofModal" aria-hidden="true" role="dialog" aria-label="Expanded proof screenshot">
+      <div class="proof-modal-inner">
+        <div class="proof-modal-bar">
+          <p class="proof-modal-title" id="proofModalTitle">Proof screenshot</p>
+          <button class="proof-modal-close" id="proofModalClose" type="button">Close</button>
+        </div>
+        <img class="proof-modal-img" id="proofModalImg" src="" alt="">
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('counter');
+    const proofModal = document.getElementById('proofModal');
+    const proofModalImg = document.getElementById('proofModalImg');
+    const proofModalTitle = document.getElementById('proofModalTitle');
+    const proofModalClose = document.getElementById('proofModalClose');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+
+      slides.forEach((slide, slideIndex) => {
+        slide.setAttribute('aria-hidden', String(slideIndex !== currentSlide));
+      });
+
+      prevBtn.hidden = currentSlide === 0;
+      nextBtn.hidden = currentSlide === slides.length - 1;
+      counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+      if (window.matchMedia('(max-width: 780px)').matches) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        nextSlide();
+      }
+
+      if (event.key === 'ArrowLeft') {
+        prevSlide();
+      }
+
+      if (event.key === 'Escape' && proofModal.getAttribute('aria-hidden') === 'false') {
+        closeProofModal();
+      }
+    });
+
+    function openProofModal(image) {
+      proofModalImg.src = image.src;
+      proofModalImg.alt = image.alt;
+      proofModalTitle.textContent = image.dataset.proofTitle || image.alt || 'Proof screenshot';
+      proofModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeProofModal() {
+      proofModal.setAttribute('aria-hidden', 'true');
+      proofModalImg.src = '';
+      proofModalImg.alt = '';
+    }
+
+    document.querySelectorAll('.live-proof-frame img').forEach((image) => {
+      image.addEventListener('click', () => openProofModal(image));
+    });
+
+    proofModalClose.addEventListener('click', closeProofModal);
+    proofModal.addEventListener('click', (event) => {
+      if (event.target === proofModal) {
+        closeProofModal();
+      }
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    document.addEventListener('touchstart', (event) => {
+      if (event.target.closest('input, button')) return;
+      touchStartX = event.changedTouches[0].clientX;
+      touchStartY = event.changedTouches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (event) => {
+      if (event.target.closest('input, button')) return;
+      const diffX = event.changedTouches[0].clientX - touchStartX;
+      const diffY = event.changedTouches[0].clientY - touchStartY;
+
+      if (Math.abs(diffX) < 70 || Math.abs(diffX) < Math.abs(diffY) * 1.4) return;
+      if (diffX < 0) nextSlide();
+      if (diffX > 0) prevSlide();
+    }, { passive: true });
+
+    const projectionModel = {
+      baseRevenue: 200961,
+      baseFailRate: 21.5,
+      cogs: 40000,
+      aov: 836.0387596899225,
+      courierPerOrder: 30161 / 387
+    };
+
+    const failRateInput = document.getElementById('failRateInput');
+    const adPerOrderInput = document.getElementById('adPerOrderInput');
+    const projectedOrdersCell = document.getElementById('projectedOrdersCell');
+    const netPerOrderCell = document.getElementById('netPerOrderCell');
+    const projectionRevenueCell = document.getElementById('projectionRevenueCell');
+    const projectionAdSpendCell = document.getElementById('projectionAdSpendCell');
+    const projectionCourierCell = document.getElementById('projectionCourierCell');
+    const projectionNetCell = document.getElementById('projectionNetCell');
+
+    function peso(value) {
+      return `PHP ${Math.round(value).toLocaleString('en-US')}`;
+    }
+
+    function pesoCentavos(value) {
+      return `PHP ${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function updateProjectionSheet() {
+      const failRate = Math.min(80, Math.max(0, Number(failRateInput.value) || 0));
+      const adPerOrder = Math.max(0, Number(adPerOrderInput.value) || 0);
+      const revenue = projectionModel.baseRevenue * ((100 - failRate) / (100 - projectionModel.baseFailRate));
+      const deliveredOrders = revenue / projectionModel.aov;
+      const adSpend = deliveredOrders * adPerOrder;
+      const courier = deliveredOrders * projectionModel.courierPerOrder;
+      const netProfit = revenue - projectionModel.cogs - adSpend - courier;
+      const netPerOrder = netProfit / deliveredOrders;
+
+      projectedOrdersCell.textContent = Math.round(deliveredOrders).toLocaleString('en-US');
+      netPerOrderCell.textContent = pesoCentavos(netPerOrder);
+      projectionRevenueCell.textContent = peso(revenue);
+      projectionAdSpendCell.textContent = peso(adSpend);
+      projectionCourierCell.textContent = peso(courier);
+      projectionNetCell.textContent = peso(netProfit);
+    }
+
+    failRateInput.addEventListener('input', updateProjectionSheet);
+    adPerOrderInput.addEventListener('input', updateProjectionSheet);
+    updateProjectionSheet();
+
+    showSlide(0);
+  </script>
+</body>
+</html>
+

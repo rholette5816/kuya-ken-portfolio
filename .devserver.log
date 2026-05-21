@@ -1,0 +1,83 @@
+
+> kuya-ken-portfolio@2.0.0 dev
+> next dev --port 3000
+
+   ▲ Next.js 15.5.15
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.4:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 7.3s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 711ms (114 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 5.5s (629 modules)
+ HEAD / 200 in 8828ms
+ GET / 200 in 1385ms
+ GET / 200 in 948ms
+ GET / 200 in 3191ms
+ GET / 200 in 102ms
+ GET / 200 in 2313ms
+ HEAD / 200 in 609ms
+ GET / 200 in 1866ms
+ ✓ Compiled in 3s (613 modules)
+ GET / 200 in 2206ms
+ ✓ Compiled in 2.8s (611 modules)
+ GET / 500 in 6641ms
+ ✓ Compiled in 9.6s (615 modules)
+ GET / 200 in 2628ms
+ GET / 200 in 185ms
+ ✓ Compiled in 981ms (383 modules)
+ ✓ Compiled in 417ms (383 modules)
+ ✓ Compiled in 524ms (615 modules)
+ ✓ Compiled in 1369ms (629 modules)
+ ✓ Compiled in 4.7s (631 modules)
+ HEAD / 200 in 4020ms
+ GET / 200 in 950ms
+ GET / 200 in 60ms
+ GET / 200 in 1516ms
+ ✓ Compiled in 4.3s (631 modules)
+ HEAD / 200 in 3885ms
+ GET / 200 in 6633ms
+ GET / 200 in 8413ms
+ GET / 200 in 378ms
+ GET / 200 in 3233ms
+ ✓ Compiled in 1546ms (384 modules)
+ ✓ Compiled in 2.4s (631 modules)
+ ✓ Compiled in 2.4s (631 modules)
+ ✓ Compiled in 2.3s (631 modules)
+ ✓ Compiled in 2.1s (631 modules)
+ ✓ Compiled in 3.1s (631 modules)
+ ✓ Compiled in 1312ms (631 modules)
+ ✓ Compiled in 4s (631 modules)
+ ✓ Compiled in 1678ms (631 modules)
+ ✓ Compiled in 1791ms (631 modules)
+ ✓ Compiled in 1824ms (631 modules)
+ ✓ Compiled in 3s (631 modules)
+ ✓ Compiled in 2.8s (631 modules)
+ ✓ Compiled in 2.2s (384 modules)
+ ✓ Compiled in 1685ms (631 modules)
+ ✓ Compiled in 395ms (384 modules)
+ ✓ Compiled in 3.7s (631 modules)
+ ✓ Compiled in 1599ms (617 modules)
+ ✓ Compiled in 1542ms (631 modules)
+ ✓ Compiled in 1615ms (631 modules)
+ ✓ Compiled in 2.8s (631 modules)
+ GET / 200 in 1165ms
+ GET / 200 in 392ms
+ GET / 200 in 1384ms
+ ✓ Compiled in 1464ms (384 modules)
+ ✓ Compiled in 1151ms (631 modules)
+ ✓ Compiled in 3.6s (631 modules)
+ ✓ Compiled in 1872ms (631 modules)
+ HEAD / 200 in 1491ms
+ GET / 200 in 9177ms
+ GET / 200 in 2603ms
+ ✓ Compiled in 3.1s (631 modules)
+ ✓ Compiled in 1251ms (631 modules)
+ ✓ Compiled in 3s (631 modules)
+ ✓ Compiled in 7.2s (631 modules)
+ ✓ Compiled in 3s (631 modules)
+ ✓ Compiled in 5.2s (384 modules)
+ ✓ Compiled in 2.6s (731 modules)

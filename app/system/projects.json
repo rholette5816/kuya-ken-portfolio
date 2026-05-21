@@ -1,0 +1,261 @@
+[
+  {
+    "slug": "hinilas-pro-saas",
+    "name": "Hinilas Pro SaaS",
+    "description": "AI-powered Meta Ads copy and creative generator for Filipino marketers. Credit-based SaaS.",
+    "state": "Active",
+    "owner": "Team",
+    "location": "web-hilas/",
+    "progressPct": 72,
+    "lastTouchedAt": "2026-04-28",
+    "lastTouchedNote": "Feature-complete MVP deployed. Credit system live.",
+    "nextAction": "Automate PayMongo webhook for credit top-ups",
+    "nextReview": "2026-05-10",
+    "counts": { "total": 8, "done": 5, "inProgress": 1, "blocked": 0, "todo": 2 },
+    "tasks": [
+      { "id": "hilas-1", "title": "Deploy MVP to Vercel", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-28", "notes": "" },
+      { "id": "hilas-2", "title": "Credit system implementation", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-28", "notes": "" },
+      { "id": "hilas-3", "title": "Ad angles generator", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-28", "notes": "" },
+      { "id": "hilas-4", "title": "Sales copy generator", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-28", "notes": "" },
+      { "id": "hilas-5", "title": "Admin dashboard", "status": "Done", "priority": "Medium", "owner": "Team", "updatedAt": "2026-04-28", "notes": "" },
+      { "id": "hilas-6", "title": "PayMongo webhook automation", "status": "In Progress", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Manual GCash top-up only right now" },
+      { "id": "hilas-7", "title": "Referral tracking system", "status": "Todo", "priority": "Medium", "owner": "Team", "updatedAt": "2026-05-05", "notes": "" },
+      { "id": "hilas-8", "title": "Expand AI modules", "status": "Todo", "priority": "Low", "owner": "Team", "updatedAt": "2026-05-05", "notes": "" }
+    ],
+    "buildNeeds": ["PayMongo webhook for automated credit top-ups", "Referral tracking rollout"],
+    "backlog": ["Expand AI modules", "International payment support (Stripe)"],
+    "decision": {
+      "title": "Prioritize PayMongo automation before expanding features",
+      "impact": "Manual top-up creates friction and limits conversion. Delays revenue automation.",
+      "recommendedNextStep": "Build PayMongo webhook — auto-credit on payment confirmation"
+    },
+    "skillsUsed": [
+      { "name": "saas-payments-gcash", "purpose": "GCash and PayMongo payment integration for PH SaaS" },
+      { "name": "saas-credit-system", "purpose": "Credit system implementation and management" }
+    ],
+    "relatedActivity": []
+  },
+  {
+    "slug": "saiko-web-app",
+    "name": "Saiko Web App",
+    "description": "React 19 + Vite marketing and ordering site for Saiko Ramen and Sushi. Active sprint execution.",
+    "state": "Active",
+    "owner": "Team",
+    "location": "saiko_web/",
+    "progressPct": 60,
+    "lastTouchedAt": "2026-04-29",
+    "lastTouchedNote": "Active sprint — task specs being executed via Codex.",
+    "nextAction": "Complete remaining task specs in saiko_web/tasks/",
+    "nextReview": "2026-05-10",
+    "counts": { "total": 6, "done": 3, "inProgress": 2, "blocked": 0, "todo": 1 },
+    "tasks": [
+      { "id": "saiko-1", "title": "Brand system implementation (colors, typography)", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-29", "notes": "" },
+      { "id": "saiko-2", "title": "Marketing site pages", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-29", "notes": "" },
+      { "id": "saiko-3", "title": "Vercel deployment", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-29", "notes": "" },
+      { "id": "saiko-4", "title": "Active task specs execution", "status": "In Progress", "priority": "High", "owner": "Team", "updatedAt": "2026-04-29", "notes": "Multiple specs in tasks/ folder" },
+      { "id": "saiko-5", "title": "Admin and orders workstream", "status": "In Progress", "priority": "Medium", "owner": "Team", "updatedAt": "2026-04-29", "notes": "" },
+      { "id": "saiko-6", "title": "Final QA and brand verification", "status": "Todo", "priority": "Medium", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "" }
+    ],
+    "buildNeeds": ["Complete remaining Codex task specs", "Admin and orders workstream"],
+    "backlog": ["Final QA pass against brand guidelines"],
+    "decision": {
+      "title": "Keep sprint execution moving — clear task specs before adding new scope",
+      "impact": "Unfinished specs block a clean handoff and delay the project reaching maintenance state.",
+      "recommendedNextStep": "Run Codex on remaining task specs in saiko_web/tasks/"
+    },
+    "skillsUsed": [
+      { "name": "codex-pair", "purpose": "Claude plans, Codex executes bulk multi-file edits" }
+    ],
+    "relatedActivity": []
+  },
+  {
+    "slug": "kuya-ken-portfolio",
+    "name": "Kuya Ken Portfolio",
+    "description": "Next.js 15 portfolio site showcasing Meta Ads, AI systems, and automation work. Live at kradigital.site.",
+    "state": "Maintenance",
+    "owner": "Team",
+    "location": "kuya-ken-portfolio/",
+    "progressPct": 85,
+    "lastTouchedAt": "2026-05-05",
+    "lastTouchedNote": "Dashboard renovated — journal log, real project registry, skills KPI.",
+    "nextAction": "Keep proof and offer positioning current as new client work is completed",
+    "nextReview": "2026-05-17",
+    "counts": { "total": 7, "done": 6, "inProgress": 1, "blocked": 0, "todo": 0 },
+    "tasks": [
+      { "id": "portfolio-1", "title": "Portfolio launch (Next.js 15)", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-28", "notes": "" },
+      { "id": "portfolio-2", "title": "Presentation deck page", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-29", "notes": "" },
+      { "id": "portfolio-3", "title": "Resume page", "status": "Done", "priority": "Medium", "owner": "Team", "updatedAt": "2026-04-29", "notes": "" },
+      { "id": "portfolio-4", "title": "System page (OS architecture)", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-30", "notes": "" },
+      { "id": "portfolio-5", "title": "Full funnel builder repositioning", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-05-04", "notes": "" },
+      { "id": "portfolio-6", "title": "OS Portal dashboard", "status": "Done", "priority": "Medium", "owner": "Team", "updatedAt": "2026-05-05", "notes": "Journal + real project registry live" },
+      { "id": "portfolio-7", "title": "Case studies with real client results", "status": "In Progress", "priority": "Medium", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Need real case study content from client work" }
+    ],
+    "buildNeeds": ["Real case study content from client results"],
+    "backlog": ["Add testimonials section", "Refresh offer copy as services evolve"],
+    "decision": {
+      "title": "Add real case study content as client results come in",
+      "impact": "Portfolio without proof is weaker for conversion. Each client result is a case study.",
+      "recommendedNextStep": "Document first completed client automation engagement as a case study"
+    },
+    "skillsUsed": [
+      { "name": "web-builder", "purpose": "Build and maintain web projects" }
+    ],
+    "relatedActivity": []
+  },
+  {
+    "slug": "automation-offer",
+    "name": "Automation Offer (Webcake Mechanic)",
+    "description": "Productized automation consulting offer — Audit, Blueprint, CRM setup, Dashboard, Retainer. Under Webcake Mechanic brand.",
+    "state": "Active",
+    "owner": "Ken",
+    "location": "docs/automation-offer.md",
+    "progressPct": 40,
+    "lastTouchedAt": "2026-05-02",
+    "lastTouchedNote": "Offer ladder defined. Audit, Blueprint, and Retainer tiers documented.",
+    "nextAction": "Execute outreach cadence — start sending audits to warm leads",
+    "nextReview": "2026-05-10",
+    "counts": { "total": 5, "done": 2, "inProgress": 1, "blocked": 0, "todo": 2 },
+    "tasks": [
+      { "id": "offer-1", "title": "Define offer ladder (Audit to Retainer)", "status": "Done", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-02", "notes": "" },
+      { "id": "offer-2", "title": "Write client automation proposal SOP", "status": "Done", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-02", "notes": "" },
+      { "id": "offer-3", "title": "Build lead outreach cadence", "status": "In Progress", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "SOP exists, execution not started" },
+      { "id": "offer-4", "title": "Send first 5 outreach audits", "status": "Todo", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "" },
+      { "id": "offer-5", "title": "Close first paid automation client", "status": "Todo", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "" }
+    ],
+    "buildNeeds": ["First 5 outreach audits sent", "First paid client closed"],
+    "backlog": ["Build automation audit template", "Create outreach-ready one-pager"],
+    "decision": {
+      "title": "Start outreach execution now — offer is ready, leads are not being contacted",
+      "impact": "Every week without outreach is revenue not in the pipeline. Offer is defined and ready.",
+      "recommendedNextStep": "Send 3 free automation audits this week to warm business contacts"
+    },
+    "skillsUsed": [
+      { "name": "executive-assistant", "purpose": "Triage, prioritize, and route outreach tasks" }
+    ],
+    "relatedActivity": []
+  },
+  {
+    "slug": "content-engine",
+    "name": "Content Engine Pipeline",
+    "description": "10-step Python pipeline: video in, multi-platform content out. Facebook, Instagram, YouTube, Google Drive.",
+    "state": "Maintenance",
+    "owner": "Team",
+    "location": "content-engine/",
+    "progressPct": 80,
+    "lastTouchedAt": "2026-04-30",
+    "lastTouchedNote": "Config and engine updates. Pipeline stable and in active use.",
+    "nextAction": "Keep pipeline stable — run weekly content via fb_engine.py",
+    "nextReview": "2026-05-17",
+    "counts": { "total": 5, "done": 4, "inProgress": 0, "blocked": 0, "todo": 1 },
+    "tasks": [
+      { "id": "engine-1", "title": "10-step pipeline (transcribe to publish)", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-24", "notes": "" },
+      { "id": "engine-2", "title": "Facebook and Instagram publishing", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-24", "notes": "" },
+      { "id": "engine-3", "title": "Google Drive and Sheets integration", "status": "Done", "priority": "High", "owner": "Team", "updatedAt": "2026-04-24", "notes": "" },
+      { "id": "engine-4", "title": "LLM response cache for free retries", "status": "Done", "priority": "Medium", "owner": "Team", "updatedAt": "2026-04-25", "notes": "" },
+      { "id": "engine-5", "title": "YouTube publishing integration", "status": "Todo", "priority": "Low", "owner": "Team", "updatedAt": "2026-05-05", "notes": "Auth setup exists, needs testing" }
+    ],
+    "buildNeeds": ["YouTube publishing end-to-end test"],
+    "backlog": ["TikTok publishing integration"],
+    "decision": {
+      "title": "Keep pipeline in maintenance — do not add features until YouTube is verified",
+      "impact": "Adding scope to a working system risks breaking stable publish flows.",
+      "recommendedNextStep": "Test YouTube publishing end-to-end with one real video"
+    },
+    "skillsUsed": [
+      { "name": "fb-prep", "purpose": "Steps 1-4: transcribe, analyze, generate copy, generate images" },
+      { "name": "fb-piblish", "purpose": "Steps 5-10: blog, schedule, IG posts, YouTube Short" },
+      { "name": "pipeline-run", "purpose": "Trigger and monitor content pipeline runs" }
+    ],
+    "relatedActivity": []
+  },
+  {
+    "slug": "tsc-case-study",
+    "name": "TSC Case Study Submission",
+    "description": "Case study for The Sourcing Co AI Specialist role. 3 automation opportunities + working POC for quotation intake system. Deadline: 2026-05-12.",
+    "state": "Active",
+    "owner": "Ken",
+    "location": "projects/tsc-case-study/",
+    "progressPct": 40,
+    "lastTouchedAt": "2026-05-05",
+    "lastTouchedNote": "Project created. Part 1 and Part 2 written. POC not yet built. Loom not yet recorded.",
+    "nextAction": "Build POC on Make.com, record Loom, send submission email to sid@thesourcing.co",
+    "nextReview": "2026-05-12",
+    "counts": { "total": 5, "done": 2, "inProgress": 0, "blocked": 0, "todo": 3 },
+    "tasks": [
+      { "id": "tsc-1", "title": "Write Part 1 (3 automation opportunities)", "status": "Done", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "See part-1-automations.md" },
+      { "id": "tsc-2", "title": "Write Part 2 (POC plan + Loom script)", "status": "Done", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "See part-2-poc.md" },
+      { "id": "tsc-3", "title": "Build working POC on Make.com", "status": "Todo", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Tally form + Make.com + Google Sheets + WhatsApp + Gmail" },
+      { "id": "tsc-4", "title": "Record Loom walkthrough (5 min max)", "status": "Todo", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Script in part-2-poc.md" },
+      { "id": "tsc-5", "title": "Send submission email to sid@thesourcing.co", "status": "Todo", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Email ready in submission-email.md — add Loom link before sending" }
+    ],
+    "buildNeeds": ["Make.com POC scenario built", "Loom recorded", "Submission email sent"],
+    "backlog": [],
+    "decision": {
+      "title": "Lead with quotation intake system as the POC — highest impact, fastest to demo",
+      "impact": "Best chance to win TSC as a client. Demonstrates real build capability, not just theory.",
+      "recommendedNextStep": "Build Make.com scenario using Tally + Google Sheets + WhatsApp. Record Loom. Submit by 2026-05-12."
+    },
+    "skillsUsed": [],
+    "relatedActivity": []
+  },
+  {
+    "slug": "tsc-full-plan",
+    "name": "TSC Full Automation Plan",
+    "description": "Full 6-phase automation engagement plan for The Sourcing Co — Odoo CRM, Trello, G Suite, WhatsApp/WeChat, Xero, marketing. Ready to execute if client is won.",
+    "state": "Sandbox",
+    "owner": "Ken",
+    "location": "projects/tsc-full-plan/",
+    "progressPct": 10,
+    "lastTouchedAt": "2026-05-05",
+    "lastTouchedNote": "Project scaffolded. README and source strategy doc linked. Phases not yet detailed.",
+    "nextAction": "Win the case study first. Then detail Phase 1 implementation plan.",
+    "nextReview": "2026-05-17",
+    "counts": { "total": 2, "done": 0, "inProgress": 0, "blocked": 0, "todo": 2 },
+    "tasks": [
+      { "id": "tscplan-1", "title": "Detail Phase 1 implementation plan", "status": "Todo", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Only after case study is won" },
+      { "id": "tscplan-2", "title": "Get TSC tool access for onboarding", "status": "Todo", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Need: Odoo access, Trello board, lead spreadsheet, WhatsApp Business API status" }
+    ],
+    "buildNeeds": ["Win the case study", "Client onboarding info from TSC"],
+    "backlog": ["Phase 2-6 detailed implementation plans"],
+    "decision": {
+      "title": "Park this until case study is won — do not invest build time yet",
+      "impact": "Full plan is ready conceptually. Execution starts only when TSC commits.",
+      "recommendedNextStep": "Submit case study. Follow up with Sid. Move this to Active once engaged."
+    },
+    "skillsUsed": [],
+    "relatedActivity": []
+  },
+  {
+    "slug": "outreach-ai",
+    "name": "OutreachAI (Job Outreach SaaS)",
+    "description": "Planned SaaS for PH freelancers — scrapes job listings, generates AI outreach emails, CRM. Target: 2-week MVP.",
+    "state": "Sandbox",
+    "owner": "Ken",
+    "location": "projects/job-outreach-saas/",
+    "progressPct": 15,
+    "lastTouchedAt": "2026-05-05",
+    "lastTouchedNote": "Full product spec and tech stack defined. 5 build phases mapped.",
+    "nextAction": "Start Phase 1 MVP — auth, profile, OnlineJobs scraper, AI email, leads table",
+    "nextReview": "2026-05-17",
+    "counts": { "total": 5, "done": 1, "inProgress": 0, "blocked": 0, "todo": 4 },
+    "tasks": [
+      { "id": "outreach-1", "title": "Product spec and tech stack definition", "status": "Done", "priority": "High", "owner": "Ken", "updatedAt": "2026-05-05", "notes": "Full README with 5 phases" },
+      { "id": "outreach-2", "title": "Phase 1: MVP (auth, scraper, AI email, leads table)", "status": "Todo", "priority": "High", "owner": "Team", "updatedAt": "2026-05-05", "notes": "Existing scraper + Gemini = 80% of Phase 1 done" },
+      { "id": "outreach-3", "title": "Phase 2: PayMongo subscriptions and credits", "status": "Todo", "priority": "High", "owner": "Team", "updatedAt": "2026-05-05", "notes": "" },
+      { "id": "outreach-4", "title": "Phase 3: Multi-platform (Mynimo, We Work Remotely)", "status": "Todo", "priority": "Medium", "owner": "Team", "updatedAt": "2026-05-05", "notes": "" },
+      { "id": "outreach-5", "title": "Phase 4: Gmail API send integration", "status": "Todo", "priority": "Medium", "owner": "Team", "updatedAt": "2026-05-05", "notes": "" }
+    ],
+    "buildNeeds": ["Phase 1 MVP scaffold", "Wire existing scraper into Next.js app"],
+    "backlog": ["Stripe international payments", "Follow-up sequence automation"],
+    "decision": {
+      "title": "Start Phase 1 when capacity opens — spec is complete and 80% of the scraper work is done",
+      "impact": "Leaving a fully-specced product unstarted means zero revenue from a ready concept.",
+      "recommendedNextStep": "Use saas-init skill to scaffold Phase 1, then wire in existing scraper"
+    },
+    "skillsUsed": [
+      { "name": "saas-init", "purpose": "Scaffold new SaaS app with auth, dashboard, and base structure" },
+      { "name": "saas-payments-gcash", "purpose": "PayMongo integration for PH subscriptions" }
+    ],
+    "relatedActivity": []
+  }
+]

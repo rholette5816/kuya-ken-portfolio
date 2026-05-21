@@ -1,0 +1,86 @@
+[
+  {
+    "date": "2026-04-10",
+    "type": "Journal",
+    "title": "Initial system setup, video-analysis skill, content-script, content-ideas",
+    "detail": "Built the executive assistant second brain from scratch. Added video-analysis skill using Gemini transcription and framework scoring. Switched video-analysis to OpenAI Whisper + GPT-4o. Added content-script and content-ideas skills.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-04-17",
+    "type": "Journal",
+    "title": "Added 13 skills: 5 Hinilas-specific + 8 reusable SaaS patterns",
+    "detail": "Major skills batch. Built out Hinilas Pro-specific skills and SaaS scaffolding patterns including saas-init, saas-admin, saas-ai-module, saas-auth-supabase, saas-credit-system, saas-payments-gcash, saas-feedback, saas-referral.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-04-24",
+    "type": "Journal",
+    "title": "Full sync: skills, scripts, content-engine, web app pushed to remote",
+    "detail": "Synced all accumulated work to remote — skills library, scripts, content pipeline, and web app. Cleaned up and committed pending changes across the full repo.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-04-25",
+    "type": "Journal",
+    "title": "Local agent, LLM response cache, Codex executor workflow, codex-pair skill",
+    "detail": "Added local-agent using Ollama + DeepSeek as free fallback for mechanical tasks. Built LLM response cache (SQLite-backed) wired into content pipeline for free retries. Added Codex executor workflow with token-conservation rules. Built codex-pair skill for Claude-plans / Codex-executes pattern.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-04-26",
+    "type": "Journal",
+    "title": "Added static portfolio site",
+    "detail": "Built and deployed initial static portfolio site.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-04-28",
+    "type": "Journal",
+    "title": "Kuya Ken portfolio (Next 15) — hero polish, live audit funnel",
+    "detail": "Built full Kuya Ken portfolio using Next.js 15. Added hero section polish and wired up the live audit funnel (AuditPopup). First version of the portfolio live.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-04-29",
+    "type": "Journal",
+    "title": "Resume page, presentation deck upgrade, audit modal centralized",
+    "detail": "Added /resume page and density-tuned animated background. Upgraded presentation deck visuals. Centralized audit modal into a shared AuditPopup component used across pages.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-04-30",
+    "type": "Journal",
+    "title": "System page architecture diagram, flowchart animation, hero brightness fix",
+    "detail": "Added /system page showcasing the operating system architecture with native HTML/CSS diagram. Redesigned system page flowchart with network animation. Fixed uneven hero brightness by pinning body gradients to viewport.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-05-02",
+    "type": "Journal",
+    "title": "OS command center, weekly cadence, CEO dashboard, automation offer, project governance",
+    "detail": "Major OS build day. Created START_HERE.md as front door, weekly-command-center, CEO dashboard, active-work-registry, and full SOP set (weekly-review, priority-refresh, ceo-dashboard-refresh, project-state-governance, automation-offer-pipeline-cadence, end-of-week-closeout, monthly-business-review, quarterly-goals-refresh). Marked OS build phase complete. Archived unused base dashboard app. Improved portfolio landing page conversion.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-05-03",
+    "type": "Journal",
+    "title": "Archived Hilas Program, personal brand, fixed dashboard sync timestamp, committed pending portfolio work",
+    "detail": "Archived Hilas Program / Meta Ads course and personal brand projects — both confirmed as not active. Fixed dashboard last sync timestamp formatting. Committed and pushed pending kuya-ken-portfolio work.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-05-04",
+    "type": "Journal",
+    "title": "Portfolio redesign: full funnel builder positioning, hero video portrait, aurora gradient, lazy-load",
+    "detail": "Repositioned portfolio as full funnel builder covering ads, AI systems, and automation. Added hero video portrait. Replaced hero window with animated funnel flow diagram and renamed section to Your Future Operating System. Replaced animated canvas with aurora CSS gradient. Added lazy-loading for below-fold video and images.",
+    "source": "journal"
+  },
+  {
+    "date": "2026-05-05",
+    "type": "Journal",
+    "title": "System page sync check, snapshot refresh, auto-deploy setup, dashboard renovation",
+    "detail": "Reviewed kuya-ken-portfolio system page against task spec — implementation was ahead of spec with a cleaner centralized nav approach. Refreshed activitySnapshot.json which was 3 days stale (skill folders grew from 36 to 41). Set up daily auto-refresh via Windows Task Scheduler + batch script that regenerates snapshot, commits, and deploys to Vercel. Renovated dashboard: replaced auto-generated activity feed with real journal log, removed estimated work hours chart, replaced work hours KPI with skills count.",
+    "source": "journal"
+  }
+]
