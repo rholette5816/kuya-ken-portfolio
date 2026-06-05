@@ -158,8 +158,8 @@ export default function WorkshopBookingModal({ open, onClose, defaultCity = "" }
               <p className="wb-gcash-amount">₱999</p>
               <p className="wb-gcash-label">Downpayment via GCash</p>
               <div className="wb-gcash-details">
-                <span className="wb-gcash-number">GCash: <strong>09XX-XXX-XXXX</strong></span>
-                <span className="wb-gcash-name">Account Name: <strong>Kevin R. Allego</strong></span>
+                <span className="wb-gcash-number">GCash: <strong>0956 160 3751</strong></span>
+                <span className="wb-gcash-name">Account Name: <strong>Donna Lim</strong></span>
               </div>
             </div>
 
@@ -168,7 +168,7 @@ export default function WorkshopBookingModal({ open, onClose, defaultCity = "" }
             </p>
 
             <a
-              href="https://m.me/kuyaken"
+              href="https://www.facebook.com/bstamagadshilas"
               target="_blank"
               rel="noopener noreferrer"
               className="btn primary wb-submit"
