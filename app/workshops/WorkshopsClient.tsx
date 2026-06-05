@@ -9,13 +9,13 @@ import WorkshopStickyBar from "../components/WorkshopStickyBar";
 
 const sessions = [
   {
-    time: "8:00 AM — 12:00 NN",
+    time: "8:00 AM12:00 NN",
     label: "Meta Ads Deep Dive",
     accent: "blue",
     items: ["Campaign Structure", "Targeting Strategy", "Scaling Techniques"],
   },
   {
-    time: "1:00 PM — 5:00 PM",
+    time: "1:00 PM5:00 PM",
     label: "AI Creatives Generation",
     accent: "amber",
     items: ["Scroll-Stopping Creatives", "AI Prompting System", "High-Converting Ad Designs"],
@@ -40,9 +40,9 @@ const speakers = [
 ];
 
 const dates = [
-  { city: "Cebu", date: "June 13", accent: "blue", target: "2026-06-13", slots: 3 },
-  { city: "Iloilo", date: "June 19", accent: "mint", target: "2026-06-19", slots: 3 },
-  { city: "Bacolod", date: "June 21", accent: "amber", target: "2026-06-21", slots: 3 },
+  { city: "Cebu", date: "June 13", accent: "blue", target: "2026-06-13", slots: 8 },
+  { city: "Iloilo", date: "June 19", accent: "mint", target: "2026-06-19", slots: 5 },
+  { city: "Bacolod", date: "June 21", accent: "amber", target: "2026-06-21", slots: 11 },
 ];
 
 const painPoints = [
@@ -52,10 +52,10 @@ const painPoints = [
 ];
 
 const faqs = [
-  { q: "Is this for beginners?", a: "Yes. Whether you have zero experience or have been running ads for a while, the workshop is structured so you walk out with a working system — not just theory." },
+  { q: "Is this for beginners?", a: "Yes. Whether you have zero experience or have been running ads for a while, the workshop is structured so you walk out with a working systemnot just theory." },
   { q: "Do I need to bring a laptop?", a: "Yes. This is a hands-on workshop. Bring your laptop so you can apply what you learn in real time." },
-  { q: "What if I can't attend the full day?", a: "We recommend attending the full day. Both sessions build on each other — Meta Ads in the morning, AI Creatives in the afternoon. Missing one weakens the other." },
-  { q: "Will there be recordings?", a: "No recordings will be released. The live workshop format is intentional — you get direct access to the speakers and real-time Q&A." },
+  { q: "What if I can't attend the full day?", a: "We recommend attending the full day. Both sessions build on each otherMeta Ads in the morning, AI Creatives in the afternoon. Missing one weakens the other." },
+  { q: "Will there be recordings?", a: "No recordings will be released. The live workshop format is intentionalyou get direct access to the speakers and real-time Q&A." },
   { q: "Is the ₱999 downpayment refundable?", a: "Slots are transferable but non-refundable. If you can't make it, you can transfer your slot to someone else." },
   { q: "What's included in the ₱1,999?", a: "Full-day access, AM snacks, and lunch. Everything you need for the day is covered." },
 ];
@@ -101,7 +101,7 @@ export default function WorkshopsClient() {
           <section className="ws-hero">
             <p className="eyebrow">Meta & AI Intensive Workshop</p>
             <h1 className="ws-h1">
-              Stop Guessing.<br />Start Scaling.
+              Run Ads That Actually Make You Money. One Day.
             </h1>
             <p className="ws-hero-sub">
               A full-day hands-on workshop for business owners who want to run ads that convert, creatives that stop the scroll, and a system built to scale.
@@ -109,18 +109,18 @@ export default function WorkshopsClient() {
             <div className="ws-date-pills">
               {dates.map((d) => (
                 <span key={d.city} className={`ws-date-pill accent-${d.accent}`}>
-                  {d.city} — {d.date}
+                  {d.city}{d.date}
                 </span>
               ))}
             </div>
 
-            {/* Poster image */}
+            {/* Hero image */}
             <div className="ws-poster">
               <Image
-                src="/assets/workshop-poster.jpg"
+                src="/assets/workshop-hero.png"
                 alt="Meta & AI Intensive Workshop"
                 width={480}
-                height={600}
+                height={480}
                 className="ws-poster-img"
                 priority
               />
@@ -136,7 +136,7 @@ export default function WorkshopsClient() {
                 <span className="ws-price-tag">Early Bird</span>
               </div>
             </div>
-            <p className="ws-slots-hero">17 out of 20 slots filled across all cities — 3 left per city</p>
+            <p className="ws-slots-hero">Slots filling fast. Cebu: 8 left. Iloilo: 5 left. Bacolod: 11 left.</p>
             <p className="ws-trusted">Trusted by Business Owners & Marketers Nationwide</p>
           </section>
 

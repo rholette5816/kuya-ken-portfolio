@@ -126,9 +126,9 @@ export default function WorkshopBookingModal({ open, onClose, defaultCity = "" }
                   disabled={status === "loading"}
                 >
                   <option value="" disabled>Select a city</option>
-                  <option value="Cebu">Cebu — June 13</option>
-                  <option value="Iloilo">Iloilo — June 19</option>
-                  <option value="Bacolod">Bacolod — June 21</option>
+                  <option value="Cebu">Cebu: June 13</option>
+                  <option value="Iloilo">Iloilo: June 19</option>
+                  <option value="Bacolod">Bacolod: June 21</option>
                 </select>
               </label>
 
@@ -150,7 +150,7 @@ export default function WorkshopBookingModal({ open, onClose, defaultCity = "" }
             <div className="wb-success-icon">✓</div>
             <h2 className="wb-modal-title">You&apos;re almost in!</h2>
             <p className="wb-modal-sub">
-              Slot reserved for <strong style={{ color: "var(--soft)" }}>{city} — {cityDates[city]}</strong>.
+              Slot reserved for <strong style={{ color: "var(--soft)" }}>{city}: {cityDates[city]}</strong>.
               Secure it with a downpayment of:
             </p>
 
