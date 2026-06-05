@@ -6371,3 +6371,425 @@ body.cc-modal-open {
     text-align: left;
   }
 }
+
+/* Poster */
+.ws-poster {
+  margin: 1.5rem auto;
+  width: min(100%, 380px);
+}
+
+.ws-poster-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow);
+}
+
+/* Price hint in hero */
+.ws-price-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ws-price-was {
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: line-through;
+}
+
+.ws-price-now {
+  color: var(--soft);
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.ws-price-tag {
+  background: rgba(155,227,122,0.15);
+  border: 1px solid rgba(155,227,122,0.35);
+  color: var(--lime);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ws-slots-hero {
+  margin: 0.75rem 0 0.4rem;
+  color: var(--rose);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+/* Countdown section */
+.ws-countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.ws-countdown-card {
+  padding: 1.5rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+    rgba(18,24,36,0.72);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+.ws-countdown-card.accent-blue  { border-color: rgba(79,140,255,0.35); }
+.ws-countdown-card.accent-mint  { border-color: rgba(84,208,192,0.35); }
+.ws-countdown-card.accent-amber { border-color: rgba(255,191,109,0.35); }
+
+.ws-countdown-card-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ws-countdown-city {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--soft);
+}
+
+.ws-countdown-date {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.ws-countdown-card.accent-blue  .ws-countdown-date { color: var(--blue); }
+.ws-countdown-card.accent-mint  .ws-countdown-date { color: var(--mint); }
+.ws-countdown-card.accent-amber .ws-countdown-date { color: var(--amber); }
+
+.ws-countdown-slots {
+  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+/* Countdown timer */
+.ws-countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ws-countdown-label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ws-countdown-units {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ws-countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 50px;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.04);
+}
+
+.ws-countdown-num {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--soft);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.ws-countdown-unit-label {
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Speaker cards */
+.ws-speakers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.ws-speaker-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding: 1.5rem 1.4rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+    rgba(18,24,36,0.72);
+  backdrop-filter: blur(8px);
+}
+
+.ws-speaker-card.accent-blue  { border-color: rgba(79,140,255,0.3); }
+.ws-speaker-card.accent-amber { border-color: rgba(255,191,109,0.3); }
+
+.ws-speaker-photo-wrap {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--line-soft);
+  flex: 0 0 auto;
+}
+
+.ws-speaker-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.ws-speaker-name {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--soft);
+}
+
+.ws-speaker-title {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.ws-speaker-proof {
+  margin: 0.25rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* Price box updated */
+.ws-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 0.5rem 0 0.2rem;
+}
+
+.ws-price-crossed {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.ws-price-sub {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+/* FAQ */
+.ws-faq-section {
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.018)),
+    rgba(18,24,35,0.62);
+  backdrop-filter: blur(10px);
+  padding: clamp(3rem, 5vw, 4rem) clamp(1rem, 2.8vw, 2rem);
+  margin: 0;
+}
+
+.ws-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.ws-faq-item {
+  padding: 1.1rem;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.018)),
+    rgba(18,24,36,0.72);
+}
+
+.ws-faq-q {
+  margin: 0 0 0.55rem;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.3;
+  color: var(--soft);
+}
+
+.ws-faq-a {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* Final CTA */
+.ws-final-section {
+  text-align: center;
+  border-bottom: none;
+}
+
+.ws-final-sub {
+  max-width: 50ch;
+  margin: 0 auto 1.5rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.ws-final-btn {
+  min-width: 260px;
+  font-size: 1.05rem;
+}
+
+.ws-final-note {
+  margin: 0.9rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+/* Sticky bar */
+.ws-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  padding: 0.85rem clamp(1rem, 4vw, 3rem);
+  background: rgba(10, 15, 25, 0.96);
+  border-top: 1px solid var(--line-soft);
+  backdrop-filter: blur(16px) saturate(145%);
+}
+
+.ws-sticky-bar.ws-sticky-bar-show {
+  transform: translateY(0);
+}
+
+.ws-sticky-inner {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ws-sticky-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ws-sticky-slots {
+  color: var(--rose);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ws-sticky-price {
+  color: var(--soft);
+  font-size: 0.96rem;
+  font-weight: 800;
+}
+
+.ws-sticky-btn {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* Fake booking notifications */
+.ws-notif {
+  position: fixed;
+  bottom: 80px;
+  left: 1rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(16, 23, 35, 0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  max-width: 280px;
+  transform: translateX(-120%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.ws-notif.ws-notif-show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.ws-notif-icon {
+  font-size: 1.4rem;
+  flex: 0 0 auto;
+}
+
+.ws-notif-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.ws-notif-name {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--soft);
+}
+
+.ws-notif-detail {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.ws-notif-time {
+  margin: 0;
+  font-size: 0.7rem;
+  color: rgba(182,192,207,0.5);
+}

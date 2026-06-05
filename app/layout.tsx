@@ -14,12 +14,21 @@ export const metadata: Metadata = {
   keywords: [
     "Kuya Ken",
     "Kevin Rholette Allego",
+    "Kevin Rholette Tajale Allego",
+    "full funnel builder Philippines",
+    "Meta Ads specialist Philippines",
     "AI business systems builder Philippines",
     "POS system developer",
     "SaaS developer Philippines",
     "business automation developer",
+    "Meta Ads strategist",
+    "paid media Philippines",
+    "ecommerce Meta Ads Philippines",
     "AI reports",
-    "web app developer",
+    "web app developer Philippines",
+    "Hinilas Pro",
+    "Saiko Ramen and Sushi",
+    "KRA Digitals",
     "manual business automation"
   ],
   authors: [{ name: site.fullName }],
@@ -71,28 +80,44 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": "ProfessionalService",
     "@id": `${site.domain}/#business`,
     name: site.name,
-    alternateName: site.fullName,
+    alternateName: [site.fullName, "Kevin Rholette Tajale Allego", "KRA Digitals"],
     url: site.domain,
     image: `${site.domain}${site.socialImage}?v=20260428`,
     description: site.description,
+    sameAs: [
+      "https://www.linkedin.com/in/kevinrholette",
+      "https://www.facebook.com/kuyaken",
+      "https://www.hinilas.pro"
+    ],
     founder: {
       "@type": "Person",
       "@id": `${site.domain}/#kevin-rholette-allego`,
       name: site.fullName,
-      alternateName: site.name,
-      jobTitle: "AI Business Systems Builder",
+      alternateName: ["Kuya Ken", "Kevin Rholette Tajale Allego"],
+      jobTitle: "Full Funnel Builder — Meta Ads and AI Business Systems",
       knowsAbout: [
+        "Meta Ads",
+        "Paid media strategy",
+        "Full funnel marketing",
         "Manual business automation",
         "POS systems",
         "SaaS platform development",
         "Dashboard development",
         "AI business reports",
         "Restaurant systems",
-        "Business operations platforms"
+        "Business operations platforms",
+        "eCommerce Philippines"
+      ],
+      sameAs: [
+        "https://www.linkedin.com/in/kevinrholette",
+        "https://www.facebook.com/kuyaken"
       ]
     },
-    areaServed: "Philippines",
+    areaServed: ["Philippines", "International"],
     serviceType: [
+      "Meta Ads management",
+      "Paid media strategy",
+      "Full funnel building",
       "AI business systems",
       "POS system development",
       "SaaS platform development",

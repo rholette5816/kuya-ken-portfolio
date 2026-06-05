@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getPost, getAllPosts } from "@/lib/blog";
+import LeadMagnetBox from "@/app/components/LeadMagnetBox";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -72,11 +73,7 @@ export default async function BlogPost({ params }: Props) {
         />
 
         <footer className="blog-post-footer">
-          <div className="blog-cta-box">
-            <p className="blog-cta-headline">Want this built for your business?</p>
-            <p className="blog-cta-sub">Book a free funnel audit. No pitch, just clarity on where your biggest leak is.</p>
-            <a href="/#audit" className="btn-primary">Book Free Funnel Audit</a>
-          </div>
+          <LeadMagnetBox />
         </footer>
       </article>
     </main>
