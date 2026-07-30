@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "slug": "rminds",
+  "organizationName": "RMINDS BUSINESSES",
+  "dashboardTitle": "Growth & advertising operations",
+  "portfolioLabel": "Seven businesses",
+  "currency": "PHP",
+  "timezone": "Asia/Manila",
+  "metaAccountId": "act_1497567440403737",
+  "metaTokenEnv": "RALPH_META_ACCESS_TOKEN",
+  "storagePrefix": "ralph-cimeni",
+  "defaultTargetSpendPercent": 5,
+  "brands": [
+    { "name": "Patron Pub", "pageId": "101634825526374", "profile": "business-profiles/patron-pub.jpg", "campaignKeywords": ["patron"] },
+    { "name": "Awi Samgyupsal Buffet", "pageId": "369568076247945", "profile": "business-profiles/awi-samgyupsal.jpg", "campaignKeywords": ["awi", "samgyup"] },
+    { "name": "KapeHuan Takoma", "pageId": "718792157991170", "profile": "business-profiles/kapehuan-takoma.jpg", "campaignKeywords": ["takoma"] },
+    { "name": "Iwayan Beach Resort", "pageId": "894391050429181", "profile": "business-profiles/iwayan-beach-resort.jpg", "campaignKeywords": ["iwayan"] },
+    { "name": "AYO Fast Food - UB", "pageId": "197542973438888", "profile": "business-profiles/ayo-fast-food-ub.jpg", "campaignKeywords": ["ayo", "fast food"] },
+    { "name": "KapeHuan Alona", "pageId": "1042741198921390", "profile": "business-profiles/kapehuan-alona.jpg", "campaignKeywords": ["alona"] },
+    { "name": "Iwa Hotel", "profile": "business-profiles/iwa-hotel.jpg", "campaignKeywords": ["iwa hotel", "iwa "] }
+  ],
+  "modules": {
+    "historicalPlanning": true,
+    "agreement": true,
+    "billing": true,
+    "onboarding": true,
+    "creativeApprovals": true
+  }
+}
