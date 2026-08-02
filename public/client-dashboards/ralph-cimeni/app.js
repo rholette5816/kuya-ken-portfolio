@@ -78,7 +78,7 @@ function renderBudgets() {
 }
 
 function activateAdopsPanel(panelId = "structure") {
-  const panels = { structure: "#adopsStructure", inputs: "#adopsInputs", budget: "#adopsBudget", spending: "#adopsSpending", analysis: "#adopsAnalysis", creatives: "#adopsCreatives", approvals: "#adopsApprovals", changes: "#adopsChanges" };
+  const panels = { structure: "#adopsStructure", inputs: "#adopsInputs", budget: "#adopsBudget", spending: "#adopsSpending", analysis: "#adopsAnalysis", creatives: "#adopsCreatives", videoranking: "#adopsVideoRanking", approvals: "#adopsApprovals", changes: "#adopsChanges" };
   const selector = panels[panelId] || panels.structure;
   document.querySelectorAll(".adops-panel").forEach(item => item.classList.remove("active"));
   document.querySelector(selector)?.classList.add("active");
@@ -100,6 +100,7 @@ const routePaths = {
   "ad-operations-spending": `${routeBase}/spend`,
   "ad-operations-analysis": `${routeBase}/analyze`,
   "ad-operations-creatives": `${routeBase}/report`,
+  "ad-operations-videoranking": `${routeBase}/video-ranking`,
   "ad-operations-approvals": `${routeBase}/approve`,
   "ad-operations-changes": `${routeBase}/log`
 };

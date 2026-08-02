@@ -10,6 +10,7 @@ const sectionRoutes: Record<string, string> = {
   spend: "ad-operations-spending",
   analyze: "ad-operations-analysis",
   report: "ad-operations-creatives",
+  "video-ranking": "ad-operations-videoranking",
   approve: "ad-operations-approvals",
   log: "ad-operations-changes",
   onboarding: "onboarding",
