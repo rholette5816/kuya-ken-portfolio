@@ -114,12 +114,16 @@ function activateView(routeId, shouldScroll = true) {
     ? document.querySelector(`.nav-item[data-adops-nav="${adopsPanel}"]`) || document.querySelector('.nav-item[data-adops-nav="structure"]')
     : document.querySelector(`.nav-item[data-view="${viewId}"]`);
   const view = document.querySelector(`#${viewId}`);
-  if (!button || !view) return;
-  button.classList.add("active");
-  const group = button.closest(".nav-group");
-  if (group) {
-    group.classList.add("active");
-    group.open = true;
+  // In a shared view the sidebar is stripped server-side, so there is no nav
+  // button to activate. The panel must still open.
+  if (!view) return;
+  if (button) {
+    button.classList.add("active");
+    const group = button.closest(".nav-group");
+    if (group) {
+      group.classList.add("active");
+      group.open = true;
+    }
   }
   view.classList.add("active");
   if (isAdopsRoute) activateAdopsPanel(adopsPanel);
@@ -136,11 +140,15 @@ document.querySelectorAll(".nav-item").forEach(button => button.addEventListener
 const privateClientLink = window.__RMINDS_SIGN_TOKEN || new URLSearchParams(window.location.search).get("sign");
 const defaultView = window.__RMINDS_INITIAL_ROUTE || (privateClientLink ? "ad-operations-structure" : "overview");
 
-window.addEventListener("popstate", event => activateView(event.state?.routeId || window.__RMINDS_INITIAL_ROUTE || defaultView));
-window.addEventListener("hashchange", () => activateView(window.location.hash.slice(1) || defaultView));
+if (window.__SHARED_VIEW__) {
+  window.addEventListener("popstate", () => activateView(window.__RMINDS_INITIAL_ROUTE));
+} else {
+  window.addEventListener("popstate", event => activateView(event.state?.routeId || window.__RMINDS_INITIAL_ROUTE || defaultView));
+  window.addEventListener("hashchange", () => activateView(window.location.hash.slice(1) || defaultView));
+}
 
-document.querySelector("#printButton").addEventListener("click", () => window.print());
-document.querySelector("#presentButton").addEventListener("click", () => {
+document.querySelector("#printButton")?.addEventListener("click", () => window.print());
+document.querySelector("#presentButton")?.addEventListener("click", () => {
   document.body.classList.toggle("presentation");
   document.querySelector("#presentButton").textContent = document.body.classList.contains("presentation") ? "Exit presentation" : "Presentation mode";
 });

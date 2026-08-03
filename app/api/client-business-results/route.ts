@@ -1,6 +1,7 @@
 import { get, put } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 import { AdvertisingClientConfig, getAdvertisingClientConfig, validClientSession } from "@/lib/advertising-client-config";
+import { authorizeClientRequest } from "@/lib/client-auth";
 
 type BusinessResult = {
   id: string;
@@ -47,7 +48,7 @@ export async function GET(request: NextRequest) {
   const config = await requestConfig(request);
   if (!config) return NextResponse.json({ error: "Advertising client not found." }, { status: 404 });
   const token = request.nextUrl.searchParams.get("token") || "";
-  if (!(await validClientToken(token, config))) return NextResponse.json({ error: "A valid private client link is required." }, { status: 401 });
+  if (!(await authorizeClientRequest(token, config, "client-business-results"))) return NextResponse.json({ error: "A valid private client link is required." }, { status: 401 });
   return NextResponse.json({ results: await loadResults(config) }, { headers: { "Cache-Control": "no-store" } });
 }
 

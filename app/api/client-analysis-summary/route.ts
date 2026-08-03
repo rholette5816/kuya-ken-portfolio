@@ -2,6 +2,7 @@ import { get, put } from "@vercel/blob";
 import OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
 import { AdvertisingClientConfig, getAdvertisingClientConfig, validClientSession } from "@/lib/advertising-client-config";
+import { authorizeClientRequest } from "@/lib/client-auth";
 
 async function validClientToken(token: string, config: AdvertisingClientConfig) {
   if (validClientSession(token, config.slug)) return true;
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
   const config = await getAdvertisingClientConfig(request.nextUrl.searchParams.get("client") || "rminds");
   if (!config) return NextResponse.json({ error: "Advertising client not found." }, { status: 404 });
   const token = request.nextUrl.searchParams.get("token") || "";
-  if (!(await validClientToken(token, config))) return NextResponse.json({ error: "A valid private client link is required." }, { status: 401 });
+  if (!(await authorizeClientRequest(token, config, "client-analysis-summary"))) return NextResponse.json({ error: "A valid private client link is required." }, { status: 401 });
   return NextResponse.json({ report: await loadLatest(config) }, { headers: { "Cache-Control": "no-store" } });
 }
 

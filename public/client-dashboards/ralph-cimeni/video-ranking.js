@@ -14,7 +14,11 @@
 
   const num = new Intl.NumberFormat("en-PH");
   const peso = new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP", maximumFractionDigits: 0 });
-  const state = { brand: "", search: "", sort: "score" };
+  const state = { brand: "", search: "", sort: "score", from: "", to: "" };
+
+  const esc = value => String(value == null ? "" : value)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 
   const tierClass = tier => ({
     "Top attention": "vrank-tier-top",
@@ -49,14 +53,14 @@
       `<li><strong>Amplification, 15%</strong> — comments, shares, and saves divided by impressions. The hardest actions to earn.</li>` +
       `</ul>` +
       `<p>Hook rate (3-second plays) is shown for context but is not scored. In-feed autoplay pushes it to 80 to 98 percent on almost every post, so it does not separate good from bad.</p>` +
-      `<p>Posts under ${num.format(data.minImpressions)} lifetime impressions are listed separately rather than ranked. ` +
+      `<p>Posts under ${num.format(data.minImpressions)} impressions in the selected window are listed separately rather than ranked. ` +
       `Figures are lifetime and refresh automatically every day, so a newly published video appears here on the next sync. Last synced ${synced}.</p>` +
       `</div></details>`;
   }
 
   function renderTabs() {
     document.querySelector("#vrankBusinessTabs").innerHTML = data.brands.map(b =>
-      `<button type="button" data-vrank-brand="${b.brand}" class="${b.brand === state.brand ? "active" : ""}"><span>${b.brand}</span><b>${b.posts.length} video post${b.posts.length > 1 ? "s" : ""}</b></button>`
+      `<button type="button" data-vrank-brand="${esc(b.brand)}" class="${b.brand === state.brand ? "active" : ""}"><span>${esc(b.brand)}</span><b>${b.posts.length} video post${b.posts.length > 1 ? "s" : ""}</b></button>`
     ).join("");
   }
 
@@ -67,8 +71,17 @@
   function renderSummary() {
     const b = current();
     if (!b) return;
+    const note = document.querySelector("#vrankRangeNote");
+    if (note) {
+      if (data.range) {
+        note.hidden = false;
+        note.textContent = `Showing ${data.range.from} to ${data.range.to}. Scores are relative to posts that delivered in this window, so they differ from the all-time ranking.`;
+      } else {
+        note.hidden = true;
+      }
+    }
     document.querySelector("#vrankSummary").innerHTML =
-      `<h3>${b.brand}</h3><p>${b.summary}</p>`;
+      `<h3>${esc(b.brand)}</h3><p>${esc(b.summary)}</p>`;
   }
 
   function bar(pct, cap) {
@@ -84,13 +97,20 @@
     const key = { score: "score", hold: "holdRate", eng: "engRate", impressions: "impressions", spend: "spend" }[state.sort];
     posts = posts.slice().sort((x, y) => y[key] - x[key]);
 
+    const total = data.totalGraded || posts.length;
     document.querySelector("#vrankList").innerHTML = posts.map(p => `
       <article class="vrank-card ${tierClass(p.tier)}">
         <div class="vrank-card-head">
           <div class="vrank-rank">#${p.rank}</div>
+          <a class="vrank-thumb" href="${esc(p.link)}" target="_blank" rel="noopener" title="Open the original Facebook post">
+            ${p.thumbnailUrl
+              ? `<img src="${esc(p.thumbnailUrl)}" alt="Preview of ${esc(p.name)}" loading="lazy">`
+              : `<span class="vrank-thumb-empty">No preview</span>`}
+            <span class="vrank-thumb-play" aria-hidden="true">&#9654;</span>
+          </a>
           <div class="vrank-title">
-            <strong>${p.name}</strong>
-            <span>${p.status} &middot; created ${p.created} &middot; ${p.ads} ad${p.ads > 1 ? "s" : ""} &middot; overall #${p.overallRank} of 36</span>
+            <strong><a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.name)}</a></strong>
+            <span>${p.status} &middot; created ${p.created} &middot; ${p.ads} ad${p.ads > 1 ? "s" : ""} &middot; overall #${p.overallRank} of ${total}</span>
           </div>
           <div class="vrank-score">
             <strong>${p.score}</strong>
@@ -104,21 +124,22 @@
           <div><span>Amplification</span><strong>${p.ampRate}%</strong>${bar(p.ampRate, 0.15)}</div>
           <div><span>Hook (context)</span><strong>${p.hookRate}%</strong></div>
         </div>
-        <p class="vrank-verdict">${p.verdict}</p>
+        <p class="vrank-verdict">${esc(p.verdict)}</p>
         <div class="vrank-foot">
           <span>${num.format(p.impressions)} impressions</span>
           <span>${num.format(p.completions)} full views</span>
           <span>${num.format(p.engagements)} engagements</span>
           <span>${num.format(p.comments)} comments</span>
           <span>${peso.format(p.spend)} spent</span>
-          <a href="${p.link}" target="_blank" rel="noopener">Open post</a>
+          <a class="vrank-open" href="${esc(p.link)}" target="_blank" rel="noopener">Open original post &#8599;</a>
+          ${p.videoLink ? `<a class="vrank-open" href="${esc(p.videoLink)}" target="_blank" rel="noopener">Open video &#8599;</a>` : ""}
         </div>
       </article>`).join("") || `<p class="empty-branch">No video posts match that search.</p>`;
   }
 
   function renderExcluded() {
     const rows = data.excluded.map(e =>
-      `<tr><td>${e.brand}</td><td>${e.name}</td><td>${num.format(e.impressions)}</td><td>${peso.format(e.spend)}</td><td>${e.status}</td></tr>`
+      `<tr><td>${esc(e.brand)}</td><td><a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.name)}</a></td><td>${num.format(e.impressions)}</td><td>${peso.format(e.spend)}</td><td>${esc(e.status)}</td></tr>`
     ).join("");
     document.querySelector("#vrankExcluded").innerHTML =
       `<details><summary>${data.excluded.length} posts not ranked, under ${num.format(data.minImpressions)} impressions</summary>` +
@@ -147,7 +168,12 @@
   async function load(force) {
     document.querySelector("#vrankList").innerHTML = `<p class="empty-branch">Loading video ranking…</p>`;
     try {
-      const response = await fetch(apiUrl("/api/client-video-ranking", { token, ...(force ? { refresh: "1" } : {}) }), { cache: "no-store" });
+      const response = await fetch(apiUrl("/api/client-video-ranking", {
+        token,
+        ...(state.from ? { from: state.from } : {}),
+        ...(state.to ? { to: state.to } : {}),
+        ...(force ? { refresh: "1" } : {})
+      }), { cache: "no-store" });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error || "Video ranking is unavailable.");
       data = body;
@@ -184,7 +210,41 @@
     if (event.target.id === "vrankSort") {
       state.sort = event.target.value;
       renderList();
+      return;
     }
+    if (event.target.id === "vrankFrom" || event.target.id === "vrankTo") {
+      state.from = document.querySelector("#vrankFrom").value || "";
+      state.to = document.querySelector("#vrankTo").value || "";
+      markPreset(null);
+      load(false);
+    }
+  });
+
+  function isoDay(offsetDays) {
+    return new Date(Date.now() - offsetDays * 86400000).toISOString().slice(0, 10);
+  }
+
+  function markPreset(value) {
+    panel.querySelectorAll("[data-vrank-range]").forEach(button =>
+      button.classList.toggle("active", button.dataset.vrankRange === value));
+  }
+
+  panel.addEventListener("click", event => {
+    const preset = event.target.closest("[data-vrank-range]");
+    if (!preset) return;
+    const value = preset.dataset.vrankRange;
+    if (value === "all") { state.from = ""; state.to = ""; }
+    else if (value === "month") {
+      const now = new Date();
+      state.from = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-01`;
+      state.to = isoDay(0);
+    } else { state.from = isoDay(Number(value) - 1); state.to = isoDay(0); }
+    const fromInput = document.querySelector("#vrankFrom");
+    const toInput = document.querySelector("#vrankTo");
+    if (fromInput) fromInput.value = state.from;
+    if (toInput) toInput.value = state.to;
+    markPreset(value);
+    load(false);
   });
 
   panel.addEventListener("click", event => {

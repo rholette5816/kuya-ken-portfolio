@@ -5,7 +5,8 @@ const API_VERSION = "v23.0";
 export const COOKIE_NAME = "kra_os_access";
 export const REFRESH_MS = 12 * 60 * 60 * 1000;
 export const MANUAL_REFRESH_MS = 5 * 60 * 1000;
-export const DATA_VERSION = 1;
+export const DATA_VERSION = 3;
+const HISTORY_DAYS = 365;
 const MIN_IMPRESSIONS = 5000;
 const WEIGHTS = { hold: 0.35, thru: 0.25, eng: 0.25, amp: 0.15 };
 const UNMAPPED = "Unmapped pages";
@@ -56,6 +57,15 @@ async function graphAll(config: AdvertisingClientConfig, pathname: string, param
   return rows;
 }
 
+function todayDate(config: AdvertisingClientConfig) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: config.timezone, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+}
+
+function sinceDate(config: AdvertisingClientConfig, days: number) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: config.timezone, year: "numeric", month: "2-digit", day: "2-digit" })
+    .format(new Date(Date.now() - days * 86400000));
+}
+
 function sumValues(row: MetaRow, field: string) {
   return (row[field] || []).reduce((total: number, item: MetaRow) => total + Number(item.value || 0), 0);
 }
@@ -72,6 +82,15 @@ function videoIdOf(creative: MetaRow) {
 
 function isVideoAd(creative: MetaRow) {
   return Boolean(videoIdOf(creative)) || creative.object_type === "VIDEO";
+}
+
+function thumbnailOf(creative: MetaRow) {
+  const story = creative.object_story_spec || {};
+  return creative.thumbnail_url
+    || story.video_data?.image_url
+    || creative.image_url
+    || (creative.asset_feed_spec?.videos || [])[0]?.thumbnail_url
+    || "";
 }
 
 function cleanName(name: string) {
@@ -114,21 +133,83 @@ function brandForPage(config: AdvertisingClientConfig, pageId: string) {
   return config.brands.find(brand => brand.pageId && brand.pageId === pageId)?.name || "";
 }
 
+/**
+ * Narrows a report to a single brand. Used for shared links so a recipient
+ * never receives another brand's rows, not even in the raw JSON.
+ */
+export function scopeReport(report: any, brand: string | null) {
+  if (!report || !brand) return report;
+  const brands = (report.brands || []).filter((item: any) => item.brand === brand);
+  return {
+    ...report,
+    brands,
+    excluded: (report.excluded || []).filter((item: any) => item.brand === brand),
+    totalGraded: brands.reduce((sum: number, item: any) => sum + item.posts.length, 0),
+    scopedToBrand: brand
+  };
+}
+
+const DAILY_FIELDS = "ad_id,date_start,impressions,reach,spend,clicks,actions,video_play_actions,video_thruplay_watched_actions,video_p100_watched_actions";
+const CHUNK_DAYS = 90;
+
+function dayString(offsetDays: number, config: AdvertisingClientConfig) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: config.timezone, year: "numeric", month: "2-digit", day: "2-digit" })
+    .format(new Date(Date.now() - offsetDays * 86400000));
+}
+
+/**
+ * Meta returns a 500 on a full-year daily pull for this account, and even a
+ * 90-day unfiltered pull takes ~51s. Restricting to the video ad ids and
+ * splitting the year into parallel 90-day windows keeps the whole build well
+ * inside the function timeout.
+ */
+async function pullDaily(config: AdvertisingClientConfig, accountId: string, adIds: string[]) {
+  if (!adIds.length) return [];
+  const filtering = JSON.stringify([{ field: "ad.id", operator: "IN", value: adIds }]);
+  const windows: Array<{ since: string; until: string }> = [];
+  for (let offset = 0; offset < HISTORY_DAYS; offset += CHUNK_DAYS) {
+    windows.push({
+      since: dayString(Math.min(offset + CHUNK_DAYS, HISTORY_DAYS), config),
+      until: dayString(offset === 0 ? 0 : offset + 1, config)
+    });
+  }
+  const chunks = await Promise.all(windows.map(window =>
+    graphAll(config, `${accountId}/insights`, {
+      level: "ad", time_increment: "1", limit: "500", filtering,
+      time_range: JSON.stringify(window), fields: DAILY_FIELDS
+    }).catch(() => [] as MetaRow[])
+  ));
+  return chunks.flat();
+}
+
 export async function buildReport(config: AdvertisingClientConfig) {
   const accountId = config.metaAccountId;
-  const [adsRaw, insightRows] = await Promise.all([
-    graphAll(config, `${accountId}/ads`, {
-      fields: "id,name,status,effective_status,created_time,campaign{id,name},creative{id,object_type,effective_object_story_id,object_story_id,video_id,object_story_spec,asset_feed_spec}"
-    }),
+  const adsRaw = await graphAll(config, `${accountId}/ads`, {
+    fields: "id,name,status,effective_status,created_time,campaign{id,name},creative{id,object_type,thumbnail_url,image_url,effective_object_story_id,object_story_id,video_id,object_story_spec,asset_feed_spec}"
+  });
+  const videoAdIds = adsRaw.filter(ad => isVideoAd(ad.creative || {})).map(ad => ad.id);
+
+  const [insightRows, dailyRows] = await Promise.all([
     graphAll(config, `${accountId}/insights`, {
       level: "ad",
       date_preset: "maximum",
       limit: "500",
       fields: "ad_id,impressions,reach,spend,clicks,actions,video_play_actions,video_thruplay_watched_actions,video_p100_watched_actions"
-    })
+    }),
+    pullDaily(config, accountId, videoAdIds)
   ]);
 
   const metrics = new Map<string, MetaRow>(insightRows.map(row => [row.ad_id, row]));
+  const dailyByAd = new Map<string, MetaRow[]>();
+  const seenDay = new Set<string>();
+  for (const row of dailyRows) {
+    const fingerprint = `${row.ad_id}|${row.date_start}`;
+    if (seenDay.has(fingerprint)) continue;
+    seenDay.add(fingerprint);
+    const list = dailyByAd.get(row.ad_id) || [];
+    list.push(row);
+    dailyByAd.set(row.ad_id, list);
+  }
   const posts = new Map<string, any>();
 
   for (const ad of adsRaw) {
@@ -142,12 +223,15 @@ export async function buildReport(config: AdvertisingClientConfig) {
     const entry = posts.get(link) || {
       link, pageId, videoId: videoIdOf(creative),
       videoLink: videoIdOf(creative) ? `https://www.facebook.com/${pageId}/videos/${videoIdOf(creative)}` : "",
+      thumbnailUrl: thumbnailOf(creative),
       names: [] as string[], statuses: [] as string[], created: ad.created_time,
       ads: 0, impressions: 0, reach: 0, spend: 0, clicks: 0,
       plays3s: 0, thruplays: 0, completions: 0,
-      engagements: 0, comments: 0, shares: 0, saves: 0, messages: 0
+      engagements: 0, comments: 0, shares: 0, saves: 0, messages: 0,
+      daily: new Map<string, any>()
     };
     entry.ads += 1;
+    if (!entry.thumbnailUrl) entry.thumbnailUrl = thumbnailOf(creative);
     entry.names.push(cleanName(ad.name));
     entry.statuses.push(ad.effective_status);
     if (ad.created_time < entry.created) entry.created = ad.created_time;
@@ -163,6 +247,22 @@ export async function buildReport(config: AdvertisingClientConfig) {
     entry.shares += actionValue(row, "post");
     entry.saves += actionValue(row, "onsite_conversion.post_save");
     entry.messages += actionValue(row, "onsite_conversion.messaging_conversation_started_7d");
+    for (const day of dailyByAd.get(ad.id) || []) {
+      const bucket = entry.daily.get(day.date_start) || { d: day.date_start, imp: 0, reach: 0, spend: 0, clicks: 0, plays: 0, thru: 0, done: 0, eng: 0, cmt: 0, shr: 0, sav: 0, msg: 0 };
+      bucket.imp += Number(day.impressions || 0);
+      bucket.reach += Number(day.reach || 0);
+      bucket.spend += Number(day.spend || 0);
+      bucket.clicks += Number(day.clicks || 0);
+      bucket.plays += sumValues(day, "video_play_actions");
+      bucket.thru += sumValues(day, "video_thruplay_watched_actions");
+      bucket.done += sumValues(day, "video_p100_watched_actions");
+      bucket.eng += actionValue(day, "post_engagement");
+      bucket.cmt += actionValue(day, "comment");
+      bucket.shr += actionValue(day, "post");
+      bucket.sav += actionValue(day, "onsite_conversion.post_save");
+      bucket.msg += actionValue(day, "onsite_conversion.messaging_conversation_started_7d");
+      entry.daily.set(day.date_start, bucket);
+    }
     posts.set(link, entry);
   }
 
@@ -170,6 +270,7 @@ export async function buildReport(config: AdvertisingClientConfig) {
     const impressions = entry.impressions;
     return {
       ...entry,
+      dailySeries: [...entry.daily.values()].sort((a: any, b: any) => (a.d < b.d ? -1 : 1)),
       name: entry.names.slice().sort((a: string, b: string) => a.length - b.length)[0],
       status: entry.statuses.includes("ACTIVE") ? "ACTIVE" : "Paused",
       created: String(entry.created).slice(0, 10),
@@ -235,7 +336,8 @@ export async function buildReport(config: AdvertisingClientConfig) {
         totalSpend: Math.round(totalSpend * 100) / 100,
         posts: list.map(post => ({
           rank: post.rank, overallRank: post.overallRank, name: post.name, link: post.link,
-          videoLink: post.videoLink, status: post.status, created: post.created, ads: post.ads,
+          videoLink: post.videoLink, thumbnailUrl: post.thumbnailUrl,
+          status: post.status, created: post.created, ads: post.ads,
           score: post.score, tier: post.tier,
           impressions: post.impressions, spend: Math.round(post.spend * 100) / 100,
           hookRate: Math.round(post.hookRate * 10) / 10, holdRate: Math.round(post.holdRate * 10) / 10,
@@ -243,7 +345,7 @@ export async function buildReport(config: AdvertisingClientConfig) {
           ampRate: Math.round(post.ampRate * 1000) / 1000, ctr: Math.round(post.ctr * 100) / 100,
           completions: post.completions, plays3s: post.plays3s, engagements: post.engagements,
           comments: post.comments, shares: post.shares, messages: post.messages,
-          verdict: post.verdict
+          verdict: post.verdict, daily: post.dailySeries
         }))
       };
     });
@@ -254,14 +356,147 @@ export async function buildReport(config: AdvertisingClientConfig) {
     generated: new Date().toISOString().slice(0, 10),
     accountId,
     minImpressions: MIN_IMPRESSIONS,
+    historyDays: HISTORY_DAYS,
+    historyFrom: sinceDate(config, HISTORY_DAYS),
+    historyTo: todayDate(config),
     weights: WEIGHTS,
     totalGraded: graded.length,
     brands,
     excluded: excluded.map(post => ({
       brand: brandForPage(config, post.pageId) || UNMAPPED,
       name: post.name, link: post.link, impressions: post.impressions,
-      spend: Math.round(post.spend * 100) / 100, status: post.status
+      spend: Math.round(post.spend * 100) / 100, status: post.status,
+      videoLink: post.videoLink, thumbnailUrl: post.thumbnailUrl,
+      created: post.created, ads: post.ads, daily: post.dailySeries
     }))
   };
 }
 
+
+/**
+ * Recomputes the whole ranking for a custom date range using the daily buckets
+ * stored on each post. No Meta call is made, so any range inside the stored
+ * history is instant.
+ *
+ * Scores are always relative to the posts that actually delivered in the
+ * window, which is the point: "best in July" is a different question from
+ * "best ever".
+ */
+export function reportForRange(report: any, from: string | null, to: string | null) {
+  if (!report || (!from && !to)) return report;
+  const start = from || "0000-00-00";
+  const end = to || "9999-99-99";
+
+  const source = [
+    ...(report.brands || []).flatMap((group: any) => group.posts.map((post: any) => ({ ...post, brand: group.brand }))),
+    ...(report.excluded || []).map((post: any) => ({ ...post }))
+  ];
+
+  const rebuilt = source.map(post => {
+    const days = (post.daily || []).filter((day: any) => day.d >= start && day.d <= end);
+    const sum = days.reduce((total: any, day: any) => {
+      for (const field of ["imp", "reach", "spend", "clicks", "plays", "thru", "done", "eng", "cmt", "shr", "sav", "msg"]) {
+        total[field] += Number(day[field] || 0);
+      }
+      return total;
+    }, { imp: 0, reach: 0, spend: 0, clicks: 0, plays: 0, thru: 0, done: 0, eng: 0, cmt: 0, shr: 0, sav: 0, msg: 0 });
+
+    return {
+      ...post,
+      impressions: sum.imp,
+      spend: Math.round(sum.spend * 100) / 100,
+      completions: sum.done,
+      plays3s: sum.plays,
+      engagements: sum.eng,
+      comments: sum.cmt,
+      shares: sum.shr,
+      messages: sum.msg,
+      hookRate: sum.imp ? (sum.plays / sum.imp) * 100 : 0,
+      holdRate: sum.plays ? (sum.done / sum.plays) * 100 : 0,
+      thruRate: sum.imp ? (sum.thru / sum.imp) * 100 : 0,
+      engRate: sum.imp ? (sum.eng / sum.imp) * 100 : 0,
+      ampRate: sum.imp ? ((sum.cmt + sum.shr + sum.sav) / sum.imp) * 100 : 0,
+      ctr: sum.imp ? (sum.clicks / sum.imp) * 100 : 0
+    };
+  });
+
+  // A range needs a lower bar than lifetime, or a one-week window grades
+  // nothing. 1,000 is still enough of a sample that a rate is not noise.
+  const floor = 1000;
+  const graded = rebuilt.filter(post => post.impressions >= floor);
+  const excluded = rebuilt.filter(post => post.impressions < floor).sort((a, b) => b.impressions - a.impressions);
+
+  const pools = {
+    hold: graded.map(p => p.holdRate), thru: graded.map(p => p.thruRate),
+    eng: graded.map(p => p.engRate), amp: graded.map(p => p.ampRate)
+  };
+  for (const post of graded) {
+    const score = graded.length
+      ? percentileRank(pools.hold, post.holdRate) * WEIGHTS.hold
+        + percentileRank(pools.thru, post.thruRate) * WEIGHTS.thru
+        + percentileRank(pools.eng, post.engRate) * WEIGHTS.eng
+        + percentileRank(pools.amp, post.ampRate) * WEIGHTS.amp
+      : 0;
+    post.score = Math.round(score * 10) / 10;
+    post.tier = tierOf(score);
+    post.verdict = verdictOf(post);
+  }
+  graded.sort((a, b) => b.score - a.score);
+  graded.forEach((post, index) => { post.overallRank = index + 1; });
+
+  const grouped = new Map<string, any[]>();
+  for (const post of graded) {
+    if (!grouped.has(post.brand)) grouped.set(post.brand, []);
+    grouped.get(post.brand)!.push(post);
+  }
+
+  const order = (report.brands || []).map((group: any) => group.brand);
+  for (const brand of grouped.keys()) if (!order.includes(brand)) order.push(brand);
+
+  const brands = order.filter((brand: string) => grouped.has(brand)).map((brand: string) => {
+    const list = grouped.get(brand)!;
+    list.forEach((post, index) => { post.rank = index + 1; });
+    const totalImpressions = list.reduce((sum, post) => sum + post.impressions, 0);
+    const totalSpend = list.reduce((sum, post) => sum + post.spend, 0);
+    const best = list[0];
+    const worst = list[list.length - 1];
+    const window = `${from || report.historyFrom} to ${to || report.historyTo}`;
+    let summary = `${list.length} video post${list.length > 1 ? "s" : ""} delivered between ${window}, `
+      + `${totalImpressions.toLocaleString("en-PH")} impressions on PHP ${Math.round(totalSpend).toLocaleString("en-PH")}. `
+      + `Best attention is "${best.name}" at score ${best.score} (${best.holdRate.toFixed(0)}% completion, ${best.engRate.toFixed(0)}% engagement rate).`;
+    if (list.length > 1) {
+      summary += ` Weakest is "${worst.name}" at ${worst.score} (${worst.holdRate.toFixed(1)}% completion). `
+        + `Gap between best and worst is ${(best.score - worst.score).toFixed(0)} points.`;
+    }
+    return {
+      brand, summary, totalImpressions,
+      totalSpend: Math.round(totalSpend * 100) / 100,
+      posts: list.map(post => ({ ...post, daily: undefined }))
+    };
+  });
+
+  return {
+    ...report,
+    range: { from: from || report.historyFrom, to: to || report.historyTo },
+    minImpressions: floor,
+    totalGraded: graded.length,
+    brands,
+    excluded: excluded.map(post => ({
+      brand: post.brand, name: post.name, link: post.link,
+      impressions: post.impressions, spend: post.spend, status: post.status
+    }))
+  };
+}
+
+/** Strips the daily series from a lifetime report before sending it to a browser. */
+export function withoutDaily(report: any) {
+  if (!report) return report;
+  return {
+    ...report,
+    brands: (report.brands || []).map((group: any) => ({
+      ...group,
+      posts: group.posts.map((post: any) => ({ ...post, daily: undefined }))
+    })),
+    excluded: (report.excluded || []).map((post: any) => ({ ...post, daily: undefined }))
+  };
+}

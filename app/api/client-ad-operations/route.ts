@@ -1,6 +1,7 @@
 import { get, put } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 import { AdvertisingClientConfig, getAdvertisingClientConfig, validClientSession } from "@/lib/advertising-client-config";
+import { authorizeClientRequest, scopedBrand } from "@/lib/client-auth";
 
 const API_VERSION = "v23.0";
 const COOKIE_NAME = "kra_os_access";
@@ -183,27 +184,47 @@ async function refresh(config: AdvertisingClientConfig, previous: any) {
   return { account, syncedAt: new Date().toISOString(), dataVersion: DATA_VERSION, historyDays: 90, campaigns, adsets, ads };
 }
 
+/**
+ * Narrows a snapshot to one business. Shared links must not leak other
+ * brands' campaigns, ad sets, ads, or spend in the raw response.
+ */
+function scopeSnapshot(record: SnapshotRecord, brand: string | null): SnapshotRecord {
+  if (!brand || !record.snapshot) return record;
+  const snapshot = record.snapshot;
+  const campaigns = (snapshot.campaigns || []).filter((item: any) => item.business === brand);
+  const campaignIds = new Set(campaigns.map((item: any) => item.id));
+  const adsets = (snapshot.adsets || []).filter((item: any) => item.business === brand || campaignIds.has(item.campaignId));
+  const ads = (snapshot.ads || []).filter((item: any) => item.business === brand || campaignIds.has(item.campaignId));
+  return {
+    snapshot: { ...snapshot, campaigns, adsets, ads, scopedToBrand: brand },
+    changes: (record.changes || []).filter((item: any) => item.business === brand)
+  };
+}
+
 export async function GET(request: NextRequest) {
   const config = await getAdvertisingClientConfig(request.nextUrl.searchParams.get("client") || "rminds");
   if (!config) return NextResponse.json({ error: "Advertising client not found." }, { status: 404 });
   const token = request.nextUrl.searchParams.get("token") || "";
-  if (!(await validClientToken(token, config))) return NextResponse.json({ error: "A valid private client link is required." }, { status: 401 });
+  const access = await authorizeClientRequest(token, config, "client-ad-operations");
+  if (!access) return NextResponse.json({ error: "A valid private client link is required." }, { status: 401 });
+  const brand = scopedBrand(access);
   const record = await loadRecord(config);
   const isAdmin = Boolean(process.env.KRA_OS_ACCESS_TOKEN && request.cookies.get(COOKIE_NAME)?.value === process.env.KRA_OS_ACCESS_TOKEN);
   const stale = !record.snapshot || record.snapshot.dataVersion !== DATA_VERSION || Date.now() - new Date(record.snapshot.syncedAt).getTime() > REFRESH_MS;
   const snapshotAge = record.snapshot ? Date.now() - new Date(record.snapshot.syncedAt).getTime() : Infinity;
   const requestedRefresh = request.nextUrl.searchParams.get("refresh") === "1";
-  const force = requestedRefresh && (isAdmin || snapshotAge >= MANUAL_REFRESH_MS);
+  const force = access.kind !== "share" && requestedRefresh && (isAdmin || snapshotAge >= MANUAL_REFRESH_MS);
   try {
     if (stale || force) {
       const snapshot = await refresh(config, record.snapshot);
       const changes = [...detectChanges(record.snapshot, snapshot), ...record.changes].slice(0, 1000);
       await saveRecord(config, { snapshot, changes });
-      return NextResponse.json({ snapshot, changes, canRefresh: true, refreshCooldownMinutes: 2 }, { headers: { "Cache-Control": "no-store" } });
+      const scoped = scopeSnapshot({ snapshot, changes }, brand);
+      return NextResponse.json({ ...scoped, canRefresh: access.kind !== "share", refreshCooldownMinutes: 2 }, { headers: { "Cache-Control": "no-store" } });
     }
-    return NextResponse.json({ ...record, canRefresh: true, refreshCooldownMinutes: 2, refreshDeferred: requestedRefresh && !force }, { headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json({ ...scopeSnapshot(record, brand), canRefresh: access.kind !== "share", refreshCooldownMinutes: 2, refreshDeferred: requestedRefresh && !force }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
-    if (record.snapshot) return NextResponse.json({ ...record, canRefresh: true, syncError: error instanceof Error ? error.message : "Meta synchronization failed." }, { headers: { "Cache-Control": "no-store" } });
+    if (record.snapshot) return NextResponse.json({ ...scopeSnapshot(record, brand), canRefresh: access.kind !== "share", syncError: error instanceof Error ? error.message : "Meta synchronization failed." }, { headers: { "Cache-Control": "no-store" } });
     return NextResponse.json({ error: error instanceof Error ? error.message : "Meta synchronization failed." }, { status: 502 });
   }
 }
