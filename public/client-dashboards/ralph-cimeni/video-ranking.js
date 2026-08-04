@@ -14,7 +14,14 @@
 
   const num = new Intl.NumberFormat("en-PH");
   const peso = new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP", maximumFractionDigits: 0 });
-  const state = { brand: "", search: "", sort: "score", from: "", to: "" };
+  // A shared link fixes the window server-side; mirror it so the controls and
+  // the range note agree with the numbers being shown.
+  const sharedView = window.__SHARED_VIEW__ || null;
+  const state = {
+    brand: "", search: "", sort: "score",
+    from: sharedView && sharedView.from ? sharedView.from : "",
+    to: sharedView && sharedView.to ? sharedView.to : ""
+  };
 
   const esc = value => String(value == null ? "" : value)
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -58,10 +65,28 @@
       `</div></details>`;
   }
 
+  // The .business-tabs grid reserves its first column for a 36px profile image.
+  // Without one the label is squeezed into that column and wraps, so every tab
+  // gets either its brand photo or an initials chip.
+  const profiles = Object.fromEntries(
+    ((bootstrap.config && bootstrap.config.brands) || []).map(brand => [brand.name, brand.profile])
+  );
+
+  function initials(name) {
+    return String(name).split(/\s+/).map(word => word[0]).join("").slice(0, 2).toUpperCase();
+  }
+
   function renderTabs() {
-    document.querySelector("#vrankBusinessTabs").innerHTML = data.brands.map(b =>
-      `<button type="button" data-vrank-brand="${esc(b.brand)}" class="${b.brand === state.brand ? "active" : ""}"><span>${esc(b.brand)}</span><b>${b.posts.length} video post${b.posts.length > 1 ? "s" : ""}</b></button>`
-    ).join("");
+    document.querySelector("#vrankBusinessTabs").innerHTML = data.brands.map(b => {
+      const profile = profiles[b.brand];
+      const avatar = profile
+        ? `<img src="${esc(profile)}" alt="" loading="lazy">`
+        : `<span class="tab-initials" aria-hidden="true">${esc(initials(b.brand))}</span>`;
+      return `<button type="button" data-vrank-brand="${esc(b.brand)}" class="${b.brand === state.brand ? "active" : ""}">`
+        + avatar
+        + `<span class="business-tab-copy"><strong>${esc(b.brand)}</strong>`
+        + `<small>${b.posts.length} video post${b.posts.length > 1 ? "s" : ""}</small></span></button>`;
+    }).join("");
   }
 
   function current() {
@@ -251,6 +276,11 @@
     if (event.target.closest("[data-vrank-refresh]")) load(true);
   });
 
-  if (document.querySelector("#adopsVideoRanking.active")) load(false);
+  if (sharedView) {
+    panel.querySelectorAll("[data-vrank-refresh]").forEach(node => node.remove());
+    panel.querySelectorAll("#vrankDatePresets").forEach(node => node.setAttribute("hidden", "hidden"));
+  }
+
+  if (sharedView || document.querySelector("#adopsVideoRanking.active")) load(false);
   else if (data) renderAll();
 })();

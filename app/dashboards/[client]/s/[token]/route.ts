@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { NextRequest, NextResponse } from "next/server";
 import { getAdvertisingClientConfig, publicClientConfig } from "@/lib/advertising-client-config";
-import { SHAREABLE_PANELS, resolveShare } from "@/lib/client-shares";
+import { PANEL_TABS, SHAREABLE_PANELS, resolveShare } from "@/lib/client-shares";
 
 export const dynamic = "force-dynamic";
 
@@ -61,6 +61,9 @@ export async function GET(_request: NextRequest, context: { params: Promise<{ cl
       from: share.from,
       to: share.to,
       label: share.label,
+      view: share.view || {},
+      tab: share.tab || null,
+      tabAttribute: PANEL_TABS[share.panel],
       organization: config.organizationName
     }
   };

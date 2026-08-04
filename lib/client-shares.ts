@@ -24,6 +24,34 @@ export function isSharePanel(value: string): value is SharePanel {
   return Object.prototype.hasOwnProperty.call(SHAREABLE_PANELS, value);
 }
 
+/**
+ * Control ids whose value may be frozen into a share link, per panel. A strict
+ * allowlist: the shared page replays these into `document.querySelector("#id")`,
+ * so an arbitrary key must never reach it.
+ */
+export const PANEL_CONTROLS: Record<SharePanel, string[]> = {
+  structure: ["adopsFrom", "adopsTo", "adopsSearch"],
+  inputs: ["revenueMonth"],
+  budget: ["budgetPlanMonth", "revenueTargetPercent", "budgetRowSort", "budgetSortDirection", "budgetColumnOrder"],
+  spending: ["spendFrom", "spendTo", "spendBusiness", "spendCompare"],
+  analysis: ["analysisFrom", "analysisTo", "analysisBusiness"],
+  creatives: ["creativeFrom", "creativeTo", "creativeSearch"],
+  videoranking: ["vrankFrom", "vrankTo", "vrankSearch", "vrankSort"],
+  changes: ["changeBusiness", "changeSearch"]
+};
+
+/** Business-tab selectors that may be frozen, per panel. */
+export const PANEL_TABS: Record<SharePanel, string | null> = {
+  structure: "data-business",
+  inputs: null,
+  budget: null,
+  spending: null,
+  analysis: null,
+  creatives: "data-creative-business",
+  videoranking: "data-vrank-brand",
+  changes: null
+};
+
 export type ShareRecord = {
   token: string;
   client: string;
@@ -32,6 +60,10 @@ export type ShareRecord = {
   from: string | null;
   to: string | null;
   label: string;
+  /** Frozen control values, keyed by element id. Allowlisted per panel. */
+  view: Record<string, string>;
+  /** Frozen business-tab selection, when the panel has tabs. */
+  tab: string | null;
   createdAt: string;
   expiresAt: string | null;
   revokedAt: string | null;
@@ -75,7 +107,11 @@ export async function listShares(config: AdvertisingClientConfig): Promise<Share
 
 export async function createShare(
   config: AdvertisingClientConfig,
-  input: { panel: string; brand?: string | null; from?: string | null; to?: string | null; label?: string; expiresInDays?: number | null }
+  input: {
+    panel: string; brand?: string | null; from?: string | null; to?: string | null;
+    label?: string; expiresInDays?: number | null;
+    view?: Record<string, unknown> | null; tab?: string | null;
+  }
 ): Promise<ShareRecord> {
   if (!isSharePanel(input.panel)) throw new Error("That panel cannot be shared.");
   const brands = config.brands.map(brand => brand.name);
@@ -83,6 +119,19 @@ export async function createShare(
   const from = isoDate(input.from);
   const to = isoDate(input.to);
   if (from && to && from > to) throw new Error("The start date must be on or before the end date.");
+
+  // Only allowlisted control ids survive, and values are clamped, so a crafted
+  // payload cannot smuggle a selector or an oversized blob into the share page.
+  const allowed = new Set(PANEL_CONTROLS[input.panel]);
+  const view: Record<string, string> = {};
+  for (const [id, value] of Object.entries(input.view || {})) {
+    if (!allowed.has(id)) continue;
+    if (value === null || value === undefined) continue;
+    const text = String(value);
+    if (text.length > 200) continue;
+    view[id] = text;
+  }
+  const tab = PANEL_TABS[input.panel] && typeof input.tab === "string" ? input.tab.slice(0, 120) : null;
 
   const days = Number(input.expiresInDays);
   const record: ShareRecord = {
@@ -93,6 +142,8 @@ export async function createShare(
     from,
     to,
     label: String(input.label || SHAREABLE_PANELS[input.panel]).slice(0, 80),
+    view,
+    tab,
     createdAt: new Date().toISOString(),
     expiresAt: Number.isFinite(days) && days > 0 ? new Date(Date.now() + days * 86400000).toISOString() : null,
     revokedAt: null

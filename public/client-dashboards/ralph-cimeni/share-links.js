@@ -21,19 +21,67 @@
     document.querySelector("main")?.prepend(banner);
 
     // Pin the date inputs to the shared range and stop anyone changing them.
+    //
+    // The panels listen on "input", not "change". Dispatching the wrong event
+    // silently left every panel on its own default range while this banner
+    // announced the shared one, which is exactly the mismatch this fixes.
+    const DATE_PAIRS = [
+      ["adopsFrom", "adopsTo"], ["creativeFrom", "creativeTo"],
+      ["spendFrom", "spendTo"], ["analysisFrom", "analysisTo"],
+      ["vrankFrom", "vrankTo"]
+    ];
+
     const apply = () => {
-      const pairs = [["adopsFrom", "adopsTo"], ["creativeFrom", "creativeTo"], ["spendFrom", "spendTo"], ["analysisFrom", "analysisTo"]];
-      for (const [fromId, toId] of pairs) {
-        const from = document.querySelector(`#${fromId}`);
-        const to = document.querySelector(`#${toId}`);
-        if (from && shared.from) { from.value = shared.from; from.dispatchEvent(new Event("change", { bubbles: true })); }
-        if (to && shared.to) { to.value = shared.to; to.dispatchEvent(new Event("change", { bubbles: true })); }
-        [from, to].forEach(input => { if (input) { input.readOnly = true; input.disabled = true; } });
+      for (const [fromId, toId] of DATE_PAIRS) {
+        for (const [id, value] of [[fromId, shared.from], [toId, shared.to]]) {
+          const input = document.querySelector(`#${id}`);
+          if (!input || !value) continue;
+          // The panels clamp to the last 90 days; widen so a shared range sticks.
+          if (input.min && value < input.min) input.min = value;
+          if (input.max && value > input.max) input.max = value;
+          if (input.value !== value) {
+            input.disabled = false;
+            input.value = value;
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+          input.readOnly = true;
+          input.disabled = true;
+          input.title = "Fixed by the person who shared this report";
+        }
       }
+      // Replay every other frozen control: search text, sort, month, business
+      // selectors. Same "input" event the panels actually listen for.
+      for (const [id, value] of Object.entries(shared.view || {})) {
+        if (!/^[A-Za-z][A-Za-z0-9]*$/.test(id)) continue;
+        const control = document.querySelector(`#${id}`);
+        if (!control || control.value === value) continue;
+        control.disabled = false;
+        control.value = value;
+        control.dispatchEvent(new Event("input", { bubbles: true }));
+        control.dispatchEvent(new Event("change", { bubbles: true }));
+        control.readOnly = true;
+        control.disabled = true;
+      }
+
+      // Restore the selected business tab by clicking it, so the panel runs its
+      // own selection logic rather than us faking the highlight.
+      if (shared.tab && shared.tabAttribute) {
+        const selector = `[${shared.tabAttribute}="${String(shared.tab).replace(/"/g, '\\"')}"]`;
+        const tab = document.querySelector(selector);
+        if (tab && !tab.classList.contains("active")) tab.click();
+      }
+
+      // Presets would silently override the shared range if clicked.
       document.querySelectorAll(".date-presets").forEach(node => node.setAttribute("hidden", "hidden"));
     };
-    setTimeout(apply, 350);
-    setTimeout(apply, 1500);
+
+    // Panels initialise asynchronously and set their own default range, so
+    // re-apply until the values stop being overwritten.
+    apply();
+    const ticker = setInterval(apply, 400);
+    setTimeout(() => clearInterval(ticker), 12000);
+    document.addEventListener("adops:panel", () => setTimeout(apply, 120));
     return;
   }
 
@@ -61,6 +109,38 @@
 
   let currentPanel = "structure";
 
+  // Everything that makes up "how I set it up", captured at share time.
+  const PANEL_CONTROLS = {
+    structure: ["adopsFrom", "adopsTo", "adopsSearch"],
+    inputs: ["revenueMonth"],
+    budget: ["budgetPlanMonth", "revenueTargetPercent", "budgetRowSort", "budgetSortDirection", "budgetColumnOrder"],
+    spending: ["spendFrom", "spendTo", "spendBusiness", "spendCompare"],
+    analysis: ["analysisFrom", "analysisTo", "analysisBusiness"],
+    creatives: ["creativeFrom", "creativeTo", "creativeSearch"],
+    videoranking: ["vrankFrom", "vrankTo", "vrankSearch", "vrankSort"],
+    changes: ["changeBusiness", "changeSearch"]
+  };
+  const PANEL_TABS = {
+    structure: "data-business",
+    creatives: "data-creative-business",
+    videoranking: "data-vrank-brand"
+  };
+
+  function captureView(panel) {
+    const view = {};
+    for (const id of PANEL_CONTROLS[panel] || []) {
+      const control = document.querySelector(`#${id}`);
+      if (control && control.value !== "" && control.value != null) view[id] = control.value;
+    }
+    let tab = null;
+    const attribute = PANEL_TABS[panel];
+    if (attribute) {
+      const active = document.querySelector(`[${attribute}].active`);
+      if (active) tab = active.getAttribute(attribute);
+    }
+    return { view, tab };
+  }
+
   const modal = document.createElement("div");
   modal.className = "share-modal";
   modal.hidden = true;
@@ -73,6 +153,8 @@
         <label>Business<select data-share-brand><option value="">All businesses</option></select></label>
         <label>From<input type="date" data-share-from></label>
         <label>To<input type="date" data-share-to></label>
+        <label class="share-history-note"><span data-share-history></span></label>
+        <label class="share-history-note"><span data-share-frozen></span></label>
         <label>Link expires<select data-share-expiry>
           <option value="">Never</option><option value="7">7 days</option>
           <option value="30" selected>30 days</option><option value="90">90 days</option>
@@ -110,12 +192,39 @@
     loadExisting();
   }
 
+  // How far back each panel actually holds data. Offering a wider range would
+  // produce a link that opens to an empty report.
+  const PANEL_HISTORY_DAYS = { videoranking: 365, structure: 90, spending: 90, analysis: 90, creatives: 90 };
+
   function prefillDates(panel) {
     const ids = PANEL_DATES[panel];
     const from = ids && document.querySelector(`#${ids[0]}`);
     const to = ids && document.querySelector(`#${ids[1]}`);
-    q("[data-share-from]").value = from && from.value ? from.value : "";
-    q("[data-share-to]").value = to && to.value ? to.value : "";
+    const fromField = q("[data-share-from]");
+    const toField = q("[data-share-to]");
+    fromField.value = from && from.value ? from.value : "";
+    toField.value = to && to.value ? to.value : "";
+
+    const days = PANEL_HISTORY_DAYS[panel];
+    const today = new Date().toISOString().slice(0, 10);
+    const earliest = days ? new Date(Date.now() - (days - 1) * 86400000).toISOString().slice(0, 10) : "";
+    for (const field of [fromField, toField]) {
+      field.min = earliest;
+      field.max = today;
+      field.disabled = !days;
+    }
+    const captured = captureView(panel);
+    const frozen = Object.keys(captured.view).filter(id => !/(From|To)$/.test(id)).length + (captured.tab ? 1 : 0);
+    const summary = q("[data-share-frozen]");
+    if (summary) {
+      summary.textContent = frozen
+        ? `Your current view is frozen into the link: ${captured.tab ? `business "${captured.tab}", ` : ""}plus ${frozen - (captured.tab ? 1 : 0)} other filter${frozen - (captured.tab ? 1 : 0) === 1 ? "" : "s"}. The recipient cannot change any of it.`
+        : "Your current view is frozen into the link. The recipient cannot change it.";
+    }
+    const note = q("[data-share-history]");
+    note.textContent = days
+      ? `This report holds ${days} days of history. Dates before ${earliest} are not available.`
+      : "This report has no date range. The link will always show current data.";
   }
 
   async function loadExisting() {
@@ -170,7 +279,8 @@
             brand: q("[data-share-brand]").value || null,
             from: q("[data-share-from]").value || null,
             to: q("[data-share-to]").value || null,
-            expiresInDays: q("[data-share-expiry]").value ? Number(q("[data-share-expiry]").value) : null
+            expiresInDays: q("[data-share-expiry]").value ? Number(q("[data-share-expiry]").value) : null,
+            ...captureView(q("[data-share-panel]").value)
           })
         });
         const body = await response.json();

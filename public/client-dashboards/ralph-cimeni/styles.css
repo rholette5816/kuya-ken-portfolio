@@ -242,3 +242,12 @@ body.shared-view .view{padding-top:22px}
 .vrank-date input{height:36px;width:100%;border:1px solid var(--line);border-radius:3px;background:#fff;padding:0 8px;font-size:11px}
 .vrank-range-note{margin:0;padding:10px 18px;border:1px solid var(--line);border-top:0;background:#fff9ec;color:#785315;font-size:10px}
 @media(max-width:980px){.vrank-tools{grid-template-columns:1fr 1fr}}
+.share-history-note{grid-column:1/-1;color:var(--muted)!important;font-size:10px!important;font-weight:600!important;text-transform:none!important;line-height:1.5}
+.business-tabs button .tab-initials{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:#eef1f3;color:#68747f;font:800 12px Manrope}
+.business-tabs button.active .tab-initials{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+#vrankBusinessTabs button{flex:1 0 168px}
+/* Campaign rows collapse by default, so they need a visible expand affordance */
+.campaign-branch>summary .lineage-name::before,.adset-branch>summary .lineage-name::before{content:"";width:6px;height:6px;flex:0 0 auto;margin-right:-2px;border-right:1.5px solid #8a969d;border-bottom:1.5px solid #8a969d;transform:rotate(-45deg);transition:transform .18s}
+.campaign-branch[open]>summary .lineage-name::before,.adset-branch[open]>summary .lineage-name::before{transform:rotate(45deg)}
+.campaign-branch>summary:hover{background:#f7f9fa}
+.campaign-branch>summary:hover .lineage-name::before,.adset-branch>summary:hover .lineage-name::before{border-color:var(--ink)}
