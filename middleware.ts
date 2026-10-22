@@ -6,8 +6,6 @@ const OS_LOGIN_PATH = "/system/login";
 const OS_LOGIN_SUBMIT_PATH = "/system/login/submit";
 const VXS_COOKIE_NAME = "vision_x_saha_access";
 const VXS_LOGIN_PATH = "/vision-x-saha/login";
-const CONFIDENTIAL_COOKIE = "rminds_confidential_access";
-const RMINDS_SECTIONS = new Set(["audit", "evidence", "plan", "agreement", "billing", "onboarding", "live", "inputs", "budget", "spend", "analyze", "pages", "report", "approve", "log"]);
 
 function safeDecode(value: string): string {
   try {
@@ -39,22 +37,9 @@ export function middleware(request: NextRequest) {
     process.env.VISION_X_SAHA_DASHBOARD_ACCESS_TOKEN,
     process.env.VISION_X_SAHA_RUSTAN_ACCESS_TOKEN
   ].filter((token): token is string => Boolean(token));
-  const confidentialPin = process.env.RMINDS_CONFIDENTIAL_PIN;
   const isAuthorizedSmsMonitor = pathname === "/api/vision-x-saha/sms-monitor"
     && Boolean(process.env.CRON_SECRET)
     && headers.get("authorization") === `Bearer ${process.env.CRON_SECRET}`;
-
-  const rmindsSection = pathname.match(/^\/rminds\/([^/]+)\/?$/)?.[1];
-  if (rmindsSection && RMINDS_SECTIONS.has(rmindsSection)) {
-    const url = nextUrl.clone();
-    url.pathname = "/rminds";
-    url.searchParams.set("section", rmindsSection);
-    return NextResponse.rewrite(url);
-  }
-
-  if (pathname === "/client-dashboards/ralph-cimeni/agreement.html" && (!confidentialPin || request.cookies.get(CONFIDENTIAL_COOKIE)?.value !== confidentialPin)) {
-    return new NextResponse("Access denied.", { status: 401, headers: { "Cache-Control": "no-store" } });
-  }
 
   const isProtectedCommandApi = pathname === "/api/vision-x-saha/live"
     || pathname === "/api/vision-x-saha/orders"
